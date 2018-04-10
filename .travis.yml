@@ -21,4 +21,4 @@ notifications:
 deploy:
   provider: heroku
   api_key: c95463ef-1413-4962-b587-b49bbf25b8d2
-  app: desapp-unq-grupo-D-frontend
+  app: desapp-unq-grupo-d-frontend
