@@ -1,7 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AgmCoreModule, MapsAPILoader } from "@agm/core/";
-//import { google } from "@agm/core/services/google-maps-types";
+import { google } from "@agm/core/services/google-maps-types";
 @Component({
   selector: "map",
   templateUrl: "map.component.html",
@@ -65,7 +65,6 @@ export class MapComponent implements OnInit {
       measure: "minutes"
     }
 
-    this.searchControl = new FormControl();
 
     this.setCurrentPosition();
 
