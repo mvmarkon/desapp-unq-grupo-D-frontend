@@ -19,7 +19,7 @@ notifications:
     on_success: change
 
 deploy:
-  skip_cleanup: true
   provider: heroku
-  api_key: c95463ef-1413-4962-b587-b49bbf25b8d2
+  skip_cleanup: true
+  api_key: 670d4a76-9dab-4047-906e-91e54012e73f
   app: desapp-unq-grupo-d-frontend
