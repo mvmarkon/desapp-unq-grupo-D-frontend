@@ -6,10 +6,19 @@ node_js:
 before_script: # commands to run before the build step
    - npm install -g --silent @angular/cli
 
+cache:
+  directories:
+    - "node_modules"
+
 script: # the build step
    - ng build --prod
 
 notifications:
   email: # only receive email when the build status changes (someone broke the build!) 
     on_failure: change
-    on_success: change  
+    on_success: change
+
+deploy:
+  provider: heroku
+  api_key: c95463ef-1413-4962-b587-b49bbf25b8d2
+  app: desapp-unq-grupo-D-frontend
