@@ -11,7 +11,9 @@ import { RentalsComponent } from './rentals/rentals.component';
 import { ScoreComponent } from './score/score.component';
 
 import { FormsModule } from '@angular/forms';
-
+import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from "@agm/core";
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,11 +22,17 @@ import { FormsModule } from '@angular/forms';
     TransactionsComponent,
     OrchestratorComponent,
     RentalsComponent,
-    ScoreComponent
+    ScoreComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyCMOl4awvlwM_nCyrYOnQZGPr-vAkO3hIY",
+      libraries: ["places"]
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
