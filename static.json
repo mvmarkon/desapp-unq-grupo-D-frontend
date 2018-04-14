@@ -1,5 +1,5 @@
 {
-  "root": "desapp-grupo-d-frontend",
+  "root": "desapp-grupo-d-frontend/dist",
   "clean_urls": true,
   "routes": {
     "/**": "index.html"
