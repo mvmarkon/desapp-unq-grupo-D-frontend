@@ -14,12 +14,12 @@ cache:
 #    - ng build --prod
 
 notifications:
-  email: # only receive email when the build status changes (someone broke the build!) 
+  email: # only receive email when the build status changes (someone broke the build!)
     on_failure: change
     on_success: change
 
 deploy:
   provider: heroku
   skip_cleanup: true
-  api_key: 43cc2426-44ab-47b3-8d64-0d965715b127
+  api_key: 01354ca2-e68b-4770-a764-aa67b46ac6d9
   app: desapp-grupo-d-frontend
