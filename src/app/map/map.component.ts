@@ -1,11 +1,11 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AgmCoreModule, MapsAPILoader } from "@agm/core/";
-import { google } from "@agm/core/services/google-maps-types";
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule, MapsAPILoader } from '@agm/core/';
+import { google } from '@agm/core/services/google-maps-types';
 @Component({
-  selector: "map",
-  templateUrl: "map.component.html",
-  styleUrls: ["map.component.css"],
+  selector: 'map',
+  templateUrl: 'map.component.html',
+  styleUrls: ['map.component.css'],
 })
 export class MapComponent implements OnInit {
 
@@ -14,12 +14,12 @@ export class MapComponent implements OnInit {
   public longitude: number;
   public map;
   public addressTarget;
-  public markers: Array<marker>;
+  public markers: Array<Marker>;
   public searchControl: FormControl;
   public distanceBetweenPoints: Distance;
   public estimatedTravelTime: TravelTime;
 
-  @ViewChild("search")
+  @ViewChild('search')
   public searchElementRef: ElementRef;
 
   constructor(
@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
    */
   ngOnInit() {
 
-    this.title = "Mapa";
+    this.title = 'Mapa';
 
     // Default UNQ coordinates
     this.latitude  = -34.706556;
@@ -47,8 +47,8 @@ export class MapComponent implements OnInit {
     this.addressTarget = {
       latitude: -34.706556,
       longitude: -58.2807111,
-      label: "Direccion de retiro"
-    }
+      label: 'Direccion de retiro'
+    };
 
     // Markers
     this.markers = [];
@@ -56,28 +56,28 @@ export class MapComponent implements OnInit {
     // Default Distance between points
     this.distanceBetweenPoints = {
       value: 0,
-      measure: "meters"
-    }
+      measure: 'meters'
+    };
 
     // Default Estimated Travel Time
     this.estimatedTravelTime = {
       value: 0,
-      measure: "minutes"
-    }
+      measure: 'minutes'
+    };
 
 
     this.setCurrentPosition();
 
-    //Loads the google maps API to retrieve the current position
+    // Loads the google maps API to retrieve the current position
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ['address']
       });
-      autocomplete.addListener("place_changed", () => {
+      autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          console.log(this.ngZone)
+          console.log(this.ngZone);
           // Gets the place result
-          let place = autocomplete.getPlace();
+          const place = autocomplete.getPlace();
 
           // Verifies result
           if (place.geometry === undefined || place.geometry === null) {
@@ -85,8 +85,8 @@ export class MapComponent implements OnInit {
           }
 
           // Sets current position on the map
-          let latitude = place.geometry.location.lat();
-          let longitude = place.geometry.location.lng();
+          const latitude = place.geometry.location.lat();
+          const longitude = place.geometry.location.lng();
           this.setSelectedPosition(latitude, longitude);
           this.getDistanceTo(latitude, longitude);
           this.setTravelTimeTo(latitude, longitude);
@@ -102,7 +102,7 @@ export class MapComponent implements OnInit {
     this.markers.push({
       lat: latitude,
       lng: longitude,
-      label: "Direccion de entrega "
+      label: 'Direccion de entrega '
     });
     this.getDistanceTo(latitude, longitude);
     this.setTravelTimeTo(latitude, longitude);
@@ -114,18 +114,18 @@ export class MapComponent implements OnInit {
   }
 
   onMapClicked($event) {
-    let coordinates = $event.coords;
-    let latitude = coordinates.lat;
-    let longitude = coordinates.lng;
+    const coordinates = $event.coords;
+    const latitude = coordinates.lat;
+    const longitude = coordinates.lng;
     this.setMarkerAt(latitude, longitude);
   }
 
-  markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log("dragEnd", m, $event);
+  markerDragEnd(m: Marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
   }
 
   private setCurrentPosition() {
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
@@ -151,15 +151,15 @@ export class MapComponent implements OnInit {
   * @param {number} latitude
   * @param {number} longitude
   */
-  getDistanceTo(latitude, longitude){
+  getDistanceTo(latitude, longitude) {
     this.mapsAPILoader.load().then(() => {
-      console.log(this.mapsAPILoader)
-      let pointA = new google.maps.LatLng(this.addressTarget.latitude, this.addressTarget.longitude);
-      let pointB = new google.maps.LatLng(latitude, longitude);
-      console.log(pointB)
-      let distance = google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB);
-      this.distanceBetweenPoints = this.parseDistanceTo("meters", distance);
-    })
+      console.log(this.mapsAPILoader);
+      const pointA = new google.maps.LatLng(this.addressTarget.latitude, this.addressTarget.longitude);
+      const pointB = new google.maps.LatLng(latitude, longitude);
+      console.log(pointB);
+      const distance = google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB);
+      this.distanceBetweenPoints = this.parseDistanceTo('meters', distance);
+    });
   }
 
   /**
@@ -169,15 +169,15 @@ export class MapComponent implements OnInit {
    */
   parseDistanceTo(measure, distance) {
 
-    let distanceMeasures = {
+    const distanceMeasures = {
       meters: function(distance) {
-        let distanceBetweenPoints = {
+        const distanceBetweenPoints = {
           value: Math.round(distance),
-          measure: "meters"
+          measure: 'meters'
         };
         return distanceBetweenPoints;
       }
-    }
+    };
 
     return distanceMeasures[measure](distance);
   }
@@ -188,8 +188,8 @@ export class MapComponent implements OnInit {
    */
   setTravelTimeTo(latitude, longitude) {
     this.mapsAPILoader.load().then( () => {
-      var directionsService = new google.maps.DirectionsService();
-      var request = {
+      const directionsService = new google.maps.DirectionsService();
+      const request = {
         origin: new google.maps.LatLng(this.addressTarget.latitude, this.addressTarget.longitude),
         destination: new google.maps.LatLng(latitude, longitude),
 
@@ -197,9 +197,9 @@ export class MapComponent implements OnInit {
       };
 
       directionsService.route(request, (response, status) => {
-        if(status === "OK") {
-          var result = response.routes[0].legs[0];
-          this.estimatedTravelTime = this.parseTravelTime("minutes", result);
+        if (status === 'OK') {
+          const result = response.routes[0].legs[0];
+          this.estimatedTravelTime = this.parseTravelTime('minutes', result);
         }
       });
     });
@@ -207,10 +207,10 @@ export class MapComponent implements OnInit {
 
 
   parseTravelTime(measure, travelTime) {
-    let result = {
+    const result = {
       value: travelTime.duration.text,
-      measure: ""
-    }
+      measure: ''
+    };
     return result;
   }
 
@@ -236,11 +236,11 @@ export class MapComponent implements OnInit {
 //
 //   }
 
-interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-	draggable?: boolean;
+interface Marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable?: boolean;
 }
 
 interface Distance {

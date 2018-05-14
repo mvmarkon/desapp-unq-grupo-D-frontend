@@ -12,8 +12,17 @@ import { ScoreComponent } from './score/score.component';
 
 import { FormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
-import { AgmCoreModule } from "@agm/core";
+import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
+import { MessagesComponent } from './messages/messages.component';
+import { UserService } from './user.service';
+import { VehicleService } from './vehicle.service';
+import { MessageService } from './message.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,17 +33,26 @@ import { AppRoutingModule } from './app-routing.module';
     RentalsComponent,
     ScoreComponent,
     MapComponent,
+    UserDetailComponent,
+    VehicleDetailComponent,
+    MessagesComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyCMOl4awvlwM_nCyrYOnQZGPr-vAkO3hIY",
-      libraries: ["places"]
-    })
+      apiKey: 'AIzaSyCMOl4awvlwM_nCyrYOnQZGPr-vAkO3hIY',
+      libraries: ['places']
+    }),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    MessageService,
+    UserService,
+    VehicleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
