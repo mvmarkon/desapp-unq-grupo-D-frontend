@@ -1,8 +1,29 @@
 <h2>Usuarios</h2>
 <ul class="users">
   <li *ngFor="let user of users">
-    <a routerLink="/detail/{{user.id}}">
-      <span class="badge">{{user.id}}</span> {{user.name}}
+    <a routerLink="/detail/{{user.cuil}}">
+      <span class="badge">{{user.cuil}}</span> {{user.name}}
     </a>
   </li>
 </ul>
+<div>
+  <label>Nombre de Usuario:
+    <input [(ngModel)]='newUsr.name' />
+  </label>
+  <label>Segundo nombre:
+    <input [(ngModel)]='newUsr.surname' />
+  </label>
+  <label>CUIL:
+    <input [(ngModel)]='newUsr.cuil' />
+  </label>
+  <label>Mail:
+    <input [(ngModel)]='newUsr.email' />
+  </label>
+  <label>Direccion:
+    <input [(ngModel)]='newUsr.address' />
+  </label>
+  <button (click)="add() ; newUsr.name=''; newUsr.surname=''; newUsr.cuil=''; newUsr.email=''; newUsr.address='' ">
+    Crear
+  </button>
+  <!--  -->
+</div>

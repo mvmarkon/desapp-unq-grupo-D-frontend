@@ -1,13 +1,23 @@
 <div *ngIf="user">
 
   <h2> Detalles de {{ user.name | uppercase }}</h2>
-  <div><span>id: </span>{{user.id}}</div>
+  <div><span>cuil: </span>{{user.cuil}}</div>
   <div>
     <label>nombre:
-      <input [(ngModel)]="user.name" placeholder="nombre">
+      <input [(ngModel)]="user.name" placeholder="Nombre">
+    </label>
+    <label>email:
+      <input [(ngModel)]="user.email" placeholder="E-mail">
+    </label>
+    <label>surname:
+      <input [(ngModel)]="user.surname" placeholder="Segundo nombre">
+    </label>
+    <label>Direccion:
+      <input [(ngModel)]="user.address" placeholder="Direccion">
     </label>
     <app-vehicles></app-vehicles>
   </div>
-  <button (click)="goBack()">go back</button>
+  <button (click)="save()">Salvar</button>
+  <button (click)="goBack()">Volver</button>
 
 </div>

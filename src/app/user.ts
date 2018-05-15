@@ -1,4 +1,9 @@
+import { Vehicle } from './vehicle'
 export class User {
-  id: number;
   name: string;
+  cuil: string;
+  email: string;
+  surname: string;
+  address: string;
+  // vehicles: Array<Vehicle>;
 }

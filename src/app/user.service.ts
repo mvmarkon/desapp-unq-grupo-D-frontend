@@ -2,19 +2,20 @@ import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { USERS } from './mock-users';
+// import { USERS } from './mock-users';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
 };
 
 @Injectable()
 export class UserService {
-
 
   private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
 
@@ -39,6 +40,19 @@ export class UserService {
     );
   }
 
+  updateUser (user: User): Observable<any> {
+    return this.http.put(this.usersUrl + '/save', User, httpOptions).pipe(
+      tap(_ => this.log(`updated User id=${user.cuil}`)),
+      catchError(this.handleError<any>('updateUser'))
+    );
+  }
+
+  addUser (user: User): Observable<User> {
+    return this.http.post<User>(this.usersUrl + '/save', user, httpOptions).pipe(
+      tap((user: User) => this.log(`added user w/ id=${user.cuil}`)),
+      catchError(this.handleError<User>('addUser'))
+    );
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
