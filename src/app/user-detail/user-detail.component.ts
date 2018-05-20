@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { UserService } from '../user.service';
-import { VehicleService } from '../vehicle.service';
+import { UserService } from '../services/user.service';
+import { VehicleService } from '../services/vehicle.service';
 
-import { User } from '../user';
-import { Vehicle } from '../vehicle';
+import { User } from '../models/user';
+import { Vehicle } from '../models/vehicle';
 
 @Component({
   selector: 'app-user-detail',

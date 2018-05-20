@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Vehicle } from '../vehicle';
-import { ActivatedRoute } from '@angular/router';
-import { VehicleService } from '../vehicle.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+
+import { Vehicle } from '../models/vehicle';
+
+import { VehicleService } from '../services/vehicle.service';
 
 @Component({
   selector: 'app-vehicle-detail',

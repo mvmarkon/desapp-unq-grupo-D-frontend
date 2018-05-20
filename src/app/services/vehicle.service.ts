@@ -1,13 +1,13 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Vehicle } from './vehicle';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+
+import { Vehicle } from '../models/vehicle';
 // import { VEHICLES } from './mock-vehicles';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { MessageService } from './message.service';
+import { MessageService } from '../services/message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({

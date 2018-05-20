@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { User } from './user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-// import { USERS } from './mock-users';
-
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+
+// import { USERS } from './mock-users';
+import { User } from '../models/user';
+
 import { MessageService } from './message.service';
 
 const httpOptions = {
