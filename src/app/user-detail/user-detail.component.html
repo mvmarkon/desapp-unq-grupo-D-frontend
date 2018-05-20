@@ -1,23 +1,45 @@
-<div *ngIf="user">
+<div *ngIf="user" class="container-fluid">
 
   <h2> Detalles de {{ user.name | uppercase }}</h2>
-  <div><span>cuil: </span>{{user.cuil}}</div>
   <div>
-    <label>nombre:
-      <input [(ngModel)]="user.name" placeholder="Nombre">
-    </label>
-    <label>email:
-      <input [(ngModel)]="user.email" placeholder="E-mail">
-    </label>
-    <label>surname:
-      <input [(ngModel)]="user.surname" placeholder="Segundo nombre">
-    </label>
-    <label>Direccion:
-      <input [(ngModel)]="user.address" placeholder="Direccion">
-    </label>
-    <app-vehicles></app-vehicles>
+    <span>cuil: </span>{{user.cuil}}
   </div>
-  <button (click)="save()">Salvar</button>
-  <button (click)="goBack()">Volver</button>
+  <div>
+    <div class="row">
+      <label>nombre:
+        <input [(ngModel)]="user.name" placeholder="Nombre">
+      </label>
+    </div>
+    <div class="row">
+      <label>email:
+        <input [(ngModel)]="user.email" placeholder="E-mail">
+      </label>
+    </div>
+    <div class="row">
+      <label>surname:
+        <input [(ngModel)]="user.surname" placeholder="Segundo nombre">
+      </label>
+    </div>
+    <div class="row">
+      <label>Direccion:
+        <input [(ngModel)]="user.address" placeholder="Direccion">
+      </label>
+    </div>
+    <div>
+      <button (click)="update()">Modificar</button>
+      <button (click)="goBack()">Volver</button>
+    </div>
+    <div *ngIf="user.vehicles">
+      <h3>
+        Vehiculos de: {{ user.name | uppercase }}
+      </h3>
+      <ul class="vehicles">
+        <li *ngFor="let vehicle of user.vehicles">
+          <span class="badge">{{vehicle.id}}</span> {{vehicle.type}}
+        </li>
+      </ul>
+    </div>
+    <!-- <app-vehicles></app-vehicles> -->
+  </div>
 
 </div>

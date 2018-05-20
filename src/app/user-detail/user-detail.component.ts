@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { UserService } from '../user.service';
+import { VehicleService } from '../vehicle.service';
 
 import { User } from '../user';
+import { Vehicle } from '../vehicle';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,9 +17,12 @@ import { User } from '../user';
 export class UserDetailComponent implements OnInit {
   @Input() user: User;
 
+  vehicles: Vehicle[];
+
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private vehicleService: VehicleService,
     private location: Location
   ) { }
 
@@ -31,10 +36,17 @@ export class UserDetailComponent implements OnInit {
       .subscribe(user => this.user = user);
   }
 
-  save(): void {
+  update(): void {
+    this.user.vehicles = [];
     this.userService.updateUser(this.user)
       .subscribe(() => this.goBack());
   }
+
+  // save(): void {
+  //   this.vehicleService.updateVehicle(this.selectedVehicle)
+  //     .subscribe(() => this.goBack());
+  // }
+
   goBack(): void {
     this.location.back();
   }

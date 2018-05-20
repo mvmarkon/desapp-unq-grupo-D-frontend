@@ -1,29 +1,41 @@
+<!-- LISTA DE USUARIOS -->
 <h2>Usuarios</h2>
 <ul class="users">
   <li *ngFor="let user of users">
-    <a routerLink="/detail/{{user.cuil}}">
+    <a routerLink="/userdetail/{{user.cuil}}">
       <span class="badge">{{user.cuil}}</span> {{user.name}}
     </a>
   </li>
 </ul>
+<!-- EDICION DE NUEVO USUSARIO -->
 <div>
-  <label>Nombre de Usuario:
-    <input [(ngModel)]='newUsr.name' />
-  </label>
-  <label>Segundo nombre:
-    <input [(ngModel)]='newUsr.surname' />
-  </label>
-  <label>CUIL:
-    <input [(ngModel)]='newUsr.cuil' />
-  </label>
-  <label>Mail:
-    <input [(ngModel)]='newUsr.email' />
-  </label>
-  <label>Direccion:
-    <input [(ngModel)]='newUsr.address' />
-  </label>
+  <div>
+    <label>CUIL:
+      <input [(ngModel)]='newUsr.cuil' />
+    </label>
+  </div>
+  <div>
+    <label>Nombre de Usuario:
+      <input [(ngModel)]='newUsr.name' />
+    </label>
+  </div>
+  <div>
+    <label>Segundo nombre:
+      <input [(ngModel)]='newUsr.surname' />
+    </label>
+  </div>
+  <div>
+    <label>Mail:
+      <input [(ngModel)]='newUsr.email' />
+    </label>
+  </div>
+  <div>
+    <label>Direccion:
+      <input [(ngModel)]='newUsr.address' />
+    </label>
+  </div>
   <button (click)="add() ; newUsr.name=''; newUsr.surname=''; newUsr.cuil=''; newUsr.email=''; newUsr.address='' ">
-    Crear
+    Crear Usuario
   </button>
   <!--  -->
 </div>

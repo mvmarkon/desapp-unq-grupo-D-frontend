@@ -27,7 +27,7 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl + '/all')
     .pipe(
-      tap(heroes => this.log(`fetched users`)),
+      tap(users => this.log(`fetched users`)),
       catchError(this.handleError('getUsers', []))
     );
   }
@@ -36,19 +36,21 @@ export class UserService {
     const url = `${this.usersUrl}/${id}`;
     return this.http.get<User>(url).pipe(
       tap(_ => this.log(`fetched user id=${id}`)),
-      catchError(this.handleError<User>(`getHero id=${id}`))
+      catchError(this.handleError<User>(`getUser id=${id}`))
     );
   }
 
-  updateUser (user: User): Observable<any> {
-    return this.http.put(this.usersUrl + '/save', User, httpOptions).pipe(
+  updateUser(user: User): Observable<any> {
+    const url = `${this.usersUrl}/update`;
+    return this.http.put(url, user, httpOptions).pipe(
       tap(_ => this.log(`updated User id=${user.cuil}`)),
       catchError(this.handleError<any>('updateUser'))
     );
   }
 
-  addUser (user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl + '/save', user, httpOptions).pipe(
+  addUser(user: User): Observable<User> {
+    const url = `${this.usersUrl}/save`;
+    return this.http.post<User>(url, user, httpOptions).pipe(
       tap((user: User) => this.log(`added user w/ id=${user.cuil}`)),
       catchError(this.handleError<User>('addUser'))
     );

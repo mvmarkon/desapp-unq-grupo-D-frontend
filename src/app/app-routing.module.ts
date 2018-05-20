@@ -6,6 +6,7 @@ import { UsersComponent } from './users/users.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
 const routes: Routes = [
   {
@@ -30,8 +31,12 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'detail/:id',
+    path: 'userdetail/:id',
     component: UserDetailComponent
+  },
+  {
+    path: 'vehicledetail/:id',
+    component: VehicleDetailComponent
   }
 ];
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { User } from '../user';
+import { Vehicle } from '../vehicle';
 
 import { UserService } from '../user.service';
 
@@ -11,14 +13,15 @@ import { UserService } from '../user.service';
 export class UsersComponent implements OnInit {
   users: User[];
 
-  newUsr:User = {
+  newUsr: User = {
     name: '',
     cuil: '',
+    currentAccount: null,
     email: '',
     surname: '',
-    address: ''
-    // vehicles: []
-  }
+    address: '',
+    vehicles: []
+  };
 
   constructor(private userService: UserService) { }
 
@@ -31,7 +34,11 @@ export class UsersComponent implements OnInit {
   }
 
   add(): void {
-    // if (this.newUsr.name == '' || this.newUsr.cuil == ''|| this.newUsr.email == '' || this.newUsr.surname == '' || this.newUsr.address == '' ) { return; }
+    // if (this.newUsr.name == ''
+    // || this.newUsr.cuil == ''
+    // || this.newUsr.email == ''
+    // || this.newUsr.surname == ''
+    // || this.newUsr.address == '' ) { return; }
     this.userService.addUser(this.newUsr)
       .subscribe(user => {
         this.users.push(user);

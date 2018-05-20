@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Vehicle } from '../vehicle';
+import { Location } from '@angular/common';
 
 import { VehicleService } from '../vehicle.service';
 
@@ -10,19 +12,55 @@ import { VehicleService } from '../vehicle.service';
 })
 export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[];
-  selectedVehicle: Vehicle;
 
-  onSelect(vehicle: Vehicle): void {
-    this.selectedVehicle = vehicle;
-  }
+  newVehicle: Vehicle = {
+    id: '',
+    type: '',
+    typeName: '',
+    capacity: null,
+    location: '',
+    retirementAddress: '',
+    returnAddress: '',
+    description: '',
+    phone: '',
+    cost: null,
+  };
 
-  constructor( private vehicleService: VehicleService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private vehicleService: VehicleService
+  ) { }
 
   ngOnInit() {
     this.getVehicles();
   }
 
   getVehicles(): void {
-    this.vehicleService.getVehicles().subscribe(vehicles => this.vehicles = vehicles);
+    this.vehicleService.getVehicles()
+      .subscribe(fetchedVs => this.vehicles = fetchedVs);
+  }
+
+  add(): void {
+    delete this.newVehicle.typeName;
+    this.vehicleService.addVehicle(this.newVehicle)
+      .subscribe(vehicle => {
+        this.vehicles.push(vehicle);
+      } );
+  }
+
+  delete(vehicle): void {
+    this.vehicleService.deleteVehicle(vehicle.id)
+      .subscribe(_ => this.vehicles = this.eliminarVehiculo(vehicle.id));
+  }
+
+  eliminarVehiculo(id): Vehicle[] {
+    return this.vehicles.filter(function(v) {
+      return id !== v.id;
+    });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

@@ -1,7 +1,40 @@
+<!-- LISTADO DE VEHICULOS -->
 <h2>Vehiculos</h2>
-<ul class="vehicles">
-  <li *ngFor="let vehicle of vehicles" [class.selected]="vehicle === selectedVehicle" (click)="onSelect(vehicle)">
-    <span class="badge">{{vehicle.id}}</span> {{vehicle.type}} {{vehicle.brand}}
-  </li>
-</ul>
-<app-vehicle-detail [vehicle]="selectedVehicle"></app-vehicle-detail>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <ul class="vehicles">
+        <li *ngFor="let vehicle of vehicles">
+          <!-- <div class="display: block; text-align: center!important;"> -->
+            <span class="col">
+              <a routerLink="/vehicledetail/{{vehicle.id}}">
+                <span class="badge">{{vehicle.id}}</span> {{vehicle.type}}
+                <!--{{vehicle.brand}}-->
+              </a>
+              <span class="col">
+                <button (click)="delete(vehicle)">ELIMINAR </button>
+              </span>
+            </span>
+          <!-- </div> -->
+        </li>
+      </ul>
+      <!-- EDICION DE VEHICULO -->
+    </div>
+
+    <div class="col-6">
+        <div><span>id: </span><input [(ngModel)]="newVehicle.id"></div>
+        <div><span>type: </span><input [(ngModel)]="newVehicle.type"></div>
+        <div><span>capacity: </span><input [(ngModel)]="newVehicle.capacity"></div>
+        <div><span>location: </span><input [(ngModel)]="newVehicle.location"></div>
+        <div><span>retirementAddress: </span><input [(ngModel)]="newVehicle.retirementAddress"></div>
+        <div><span>returnAddress: </span><input [(ngModel)]="newVehicle.returnAddress"></div>
+        <div><span>description: </span><input [(ngModel)]="newVehicle.description"></div>
+        <div><span>phone: </span><input [(ngModel)]="newVehicle.phone"></div>
+        <div><span>cost: </span><input [(ngModel)]="newVehicle.cost"></div>
+      <div>
+        <button (click)="add()">Salvar</button>
+      </div>
+    </div>
+    <button (click)="goBack()">Volver</button>
+  </div>
+</div>
