@@ -7,35 +7,9 @@
     </a>
   </li>
 </ul>
-<!-- EDICION DE NUEVO USUSARIO -->
+
 <div>
-  <div>
-    <label>CUIL:
-      <input [(ngModel)]='newUsr.cuil' />
-    </label>
-  </div>
-  <div>
-    <label>Nombre de Usuario:
-      <input [(ngModel)]='newUsr.name' />
-    </label>
-  </div>
-  <div>
-    <label>Segundo nombre:
-      <input [(ngModel)]='newUsr.surname' />
-    </label>
-  </div>
-  <div>
-    <label>Mail:
-      <input [(ngModel)]='newUsr.email' />
-    </label>
-  </div>
-  <div>
-    <label>Direccion:
-      <input [(ngModel)]='newUsr.address' />
-    </label>
-  </div>
-  <button (click)="add() ; newUsr.name=''; newUsr.surname=''; newUsr.cuil=''; newUsr.email=''; newUsr.address='' ">
+  <button class="btn btn-success"  [routerLink]="['../addUser']">
     Crear Usuario
   </button>
-  <!--  -->
 </div>

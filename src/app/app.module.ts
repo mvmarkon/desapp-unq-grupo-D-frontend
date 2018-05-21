@@ -21,6 +21,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { UserService } from './services/user.service';
 import { VehicleService } from './services/vehicle.service';
 import { MessageService } from './services/message.service';
+import { UserFormComponent } from './user-form/user-form.component';
+import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { MessageService } from './services/message.service';
     VehicleDetailComponent,
     MessagesComponent,
     DashboardComponent,
+    UserFormComponent,
+    VehicleFormComponent,
   ],
   imports: [
     BrowserModule,

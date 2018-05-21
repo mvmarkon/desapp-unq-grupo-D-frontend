@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router'
 import { User } from '../models/user';
 import { Vehicle } from '../models/vehicle';
 
@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
 
   newUsr: User = {
     name: '',
-    cuil: '',
+    cuil: null,
     currentAccount: null,
     email: '',
     surname: '',
@@ -23,7 +23,11 @@ export class UsersComponent implements OnInit {
     vehicles: []
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private route:ActivatedRoute) {
+//Cambia la estrategia de ruteo para que cuando venga desde otro componente  refresque la pagina
+    route.params.subscribe(val => {
+      this.getUsers();
+    }); }
 
   ngOnInit() {
     this.getUsers();
