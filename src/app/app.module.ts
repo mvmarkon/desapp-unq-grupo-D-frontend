@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
 
 
 import { AppComponent } from './app.component';
@@ -49,7 +50,8 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
       apiKey: 'AIzaSyCMOl4awvlwM_nCyrYOnQZGPr-vAkO3hIY',
       libraries: ['places']
     }),
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [
     MessageService,

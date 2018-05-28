@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router  } from '@angular/router'
+import { Subject } from 'rxjs';
+
 import { User } from '../models/user';
 import { Vehicle } from '../models/vehicle';
 
@@ -12,6 +14,8 @@ import { UserService } from '../services/user.service';
 })
 export class UsersComponent implements OnInit {
   users: User[];
+  dtOptions: DataTables.Settings ;
+  dtTrigger: Subject<any> = new Subject();
 
   newUsr: User = {
     name: '',
@@ -23,18 +27,37 @@ export class UsersComponent implements OnInit {
     vehicles: []
   };
 
-  constructor(private userService: UserService,private route:ActivatedRoute) {
-//Cambia la estrategia de ruteo para que cuando venga desde otro componente  refresque la pagina
+  constructor(private userService: UserService,private route:ActivatedRoute,private router:Router) {
+    //Cambia la estrategia de ruteo para que cuando venga desde otro componente  refresque la pagina
     route.params.subscribe(val => {
       this.getUsers();
     }); }
 
   ngOnInit() {
-    this.getUsers();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      rowCallback: (row: Node, data: any[] | Object, index: number) => {
+        const self = this;
+        $('td', row).unbind('click');
+        $('td', row).bind('click', () => {
+          self.routeUserPage(data);
+        });
+        return row;
+      }
+
+  }
+
+}
+  routeUserPage(data):void{
+    this.router.navigateByUrl('/userdetail/'+ data[0])
   }
   getUsers(): void {
     this.userService.getUsers()
-      .subscribe(users => this.users = users);
+      .subscribe(users =>{
+        this.users = users
+        this.dtTrigger.next();
+      })
   }
 
   add(): void {

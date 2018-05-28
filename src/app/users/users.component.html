@@ -1,12 +1,29 @@
 <!-- LISTA DE USUARIOS -->
-<h2>Usuarios</h2>
+<!-- <h2>Usuarios</h2>
 <ul class="users">
   <li *ngFor="let user of users">
     <a routerLink="/userdetail/{{user.cuil}}">
       <span class="badge">{{user.cuil}}</span> {{user.name}}
     </a>
   </li>
-</ul>
+</ul> -->
+<h2>Lista de Usuarios</h2>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>First name</th>
+    <th>Last name</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let user of users">
+    <td>{{ user.cuil }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.surname }}</td>
+  </tr>
+</tbody>
+</table>
 
 <div>
   <button class="btn btn-success"  [routerLink]="['../addUser']">
