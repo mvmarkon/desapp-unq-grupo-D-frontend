@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DataTablesModule } from 'angular-datatables';
+import { AgmCoreModule } from '@agm/core';
+import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
 
 
 import { AppComponent } from './app.component';
@@ -24,6 +28,17 @@ import { VehicleService } from './services/vehicle.service';
 import { MessageService } from './services/message.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("498468987520-vfvaeevqsj1lmvktk3ihe93vtniejhbr.apps.googleusercontent.com")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("Facebook-App-Id")
+  }
+]);
 
 
 @NgModule({
@@ -50,8 +65,10 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
       apiKey: 'AIzaSyCMOl4awvlwM_nCyrYOnQZGPr-vAkO3hIY',
       libraries: ['places']
     }),
+    NgbModule.forRoot(),
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    SocialLoginModule.initialize(config)
   ],
   providers: [
     MessageService,
