@@ -2,34 +2,34 @@
   <!-- EDICION DE NUEVO USUSARIO -->
   <form #userForm="ngForm">
     <div class="form-group">
-      <label for="cuil">CUIL</label>
+      <label for="cuil"i18n="labelUser| @@formIdentityCode">SSN</label>
       <input type="text" class="form-control" id="cuil" required
      [(ngModel)]="model.cuil" name="cuil" >
     </div>
 
     <div class="form-group">
-      <label for="name">Nombre</label>
+      <label for="name" i18n="labelUser| @@formName">Name</label>
       <input type="text" class="form-control" id="name" required
       [(ngModel)]="model.name" name="name">
     </div>
 
     <div class="form-group">
-        <label for="surname">Apellido</label>
+        <label for="surname" i18n="labelUser| @@formSurname">Surname</label>
         <input type="text" class="form-control" id="surname" required
         [(ngModel)]="model.surname" name="surname">
     </div>
 
     <div class="form-group">
-        <label for="email">Mail</label>
+        <label for="email" i18n="labelUser| @@formMail">Mail</label>
         <input type="email" class="form-control" id="email" required
         [(ngModel)]="model.email" name="email">
     </div>
     <div class="form-group">
-        <label for="address">Dirección</label>
+        <label for="address" i18n="labelUser| @@formAddress">Address</label>
         <input type="text" class="form-control" id="address" required
         [(ngModel)]="model.address" name="address">
     </div>
 
-    <button class="btn btn-success" (click)="add()" [disabled]="!userForm.form.valid" >
-      Crear Usuario
+    <button class="btn btn-success" (click)="add()" [disabled]="!userForm.form.valid"  i18n="labelButton| @@newUserButton">
+      New User
     </button>
