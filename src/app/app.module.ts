@@ -6,6 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 
+import { registerLocaleData } from '@angular/common';
+import localeAR from '@angular/common/locales/es-AR';
+
+
+
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
@@ -25,6 +30,7 @@ import { MessageService } from './services/message.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 
+registerLocaleData(localeAR);
 
 @NgModule({
   declarations: [
@@ -60,4 +66,5 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

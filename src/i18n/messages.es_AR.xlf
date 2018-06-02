@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="es_AR">
+    <body>
+      <trans-unit id="formName" datatype="html">
+        <source>Name</source><target state="new">Nombre</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-form/user-form.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">labelUser</note>
+      </trans-unit>
+      <trans-unit id="formSurname" datatype="html">
+        <source>Surname</source><target state="new">Apellido</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-form/user-form.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">labelUser</note>
+      </trans-unit>
+    <trans-unit id="formIdentityCode" datatype="html">
+        <source>SSN</source><target state="new">CUIT</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-form/user-form.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">labelUser</note>
+      </trans-unit><trans-unit id="formMail" datatype="html">
+        <source>Mail</source><target state="new">Correo Electronico</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-form/user-form.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">labelUser</note>
+      </trans-unit><trans-unit id="formAddress" datatype="html">
+        <source>Address</source><target state="new">Address</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-form/user-form.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">labelUser</note>
+      </trans-unit></body>
+  </file>
+</xliff>

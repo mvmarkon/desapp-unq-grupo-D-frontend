@@ -5,6 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:es_AR": "ng serve --aot --i18n-file=src/i18n/messages.es_AR.xlf --locale es_AR --i18n-format=xlf",
+    "extract-i18n": "ng xi18n --output-path src/i18n --locale es_AR && xliffmerge --profile xliffmerge.json en es_AR",
     "build": "ng build --prod"
   },
   "private": true,
