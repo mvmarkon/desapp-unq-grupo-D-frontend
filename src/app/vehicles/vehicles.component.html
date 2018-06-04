@@ -1,5 +1,5 @@
 <!-- LISTADO DE VEHICULOS -->
-<h2>Vehiculos</h2>
+<h2 i18n="navDashboard| @@navVehicles">Vehicles</h2>
 <div class="container-fluid">
   <div class="row">
     <div class="col-6">
@@ -22,19 +22,19 @@
     </div>
 
     <div class="col-6">
-        <div><span>id: </span><input [(ngModel)]="newVehicle.id"></div>
-        <div><span>type: </span><input [(ngModel)]="newVehicle.type"></div>
-        <div><span>capacity: </span><input [(ngModel)]="newVehicle.capacity"></div>
-        <div><span>location: </span><input [(ngModel)]="newVehicle.location"></div>
-        <div><span>retirementAddress: </span><input [(ngModel)]="newVehicle.retirementAddress"></div>
-        <div><span>returnAddress: </span><input [(ngModel)]="newVehicle.returnAddress"></div>
-        <div><span>description: </span><input [(ngModel)]="newVehicle.description"></div>
-        <div><span>phone: </span><input [(ngModel)]="newVehicle.phone"></div>
-        <div><span>cost: </span><input [(ngModel)]="newVehicle.cost"></div>
+        <div><span i18n="vehiclesComponent| @@idForm">id: </span><input [(ngModel)]="newVehicle.id"></div>
+        <div><span i18n="vehiclesComponent| @@typeForm">type: </span><input [(ngModel)]="newVehicle.type"></div>
+        <div><span i18n="vehiclesComponent| @@capacityForm">capacity: </span><input [(ngModel)]="newVehicle.capacity"></div>
+        <div><span i18n="vehiclesComponent| @@locationForm">location: </span><input [(ngModel)]="newVehicle.location"></div>
+        <div><span i18n="vehiclesComponent| @@retirementAddressForm">retirementAddress: </span><input [(ngModel)]="newVehicle.retirementAddress"></div>
+        <div><span i18n="vehiclesComponent| @@returnAddressForm">returnAddress: </span><input [(ngModel)]="newVehicle.returnAddress"></div>
+        <div><span i18n="vehiclesComponent| @@descriptionForm">description: </span><input [(ngModel)]="newVehicle.description"></div>
+        <div><span i18n="vehiclesComponent| @@phoneForm">phone: </span><input [(ngModel)]="newVehicle.phone"></div>
+        <div><span i18n="vehiclesComponent| @@costForm">cost: </span><input [(ngModel)]="newVehicle.cost"></div>
       <div>
-        <button (click)="add()">Salvar</button>
+        <button (click)="add()" i18n="button| @@saveButton">Save</button>
       </div>
     </div>
-    <button (click)="goBack()">Volver</button>
+    <button (click)="goBack()" i18n="button| @@backButton">Back</button>
   </div>
 </div>

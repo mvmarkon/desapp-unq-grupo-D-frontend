@@ -2,10 +2,10 @@
   {{ title }}
 </h1>
 <nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/users">Usuarios</a>
-  <a routerLink="/vehicles">Vehiculos</a>
-  <a routerLink="/map">Mapa</a>
+  <a routerLink="/dashboard" i18n="navDashboard| @@navMenu">Dashboard</a>
+  <a routerLink="/users" i18n="navDashboard| @@navUser">User</a>
+  <a routerLink="/vehicles" i18n="navDashboard| @@navVehicles">Vehicles</a>
+  <a routerLink="/map" i18n="navDashboard| @@navMap">Map</a>
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>
