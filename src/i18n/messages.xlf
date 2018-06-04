@@ -38,6 +38,15 @@
         <note priority="1" from="description"> </note>
         <note priority="1" from="meaning">navDashboard</note>
       </trans-unit>
+      <trans-unit id="messageTitle" datatype="html">
+        <source>Messages</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/messages/messages.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">messageService</note>
+      </trans-unit>
       <trans-unit id="navTitle" datatype="html">
         <source>Best Users</source>
         <context-group purpose="location">
