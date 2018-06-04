@@ -42,6 +42,53 @@
         <note priority="1" from="description"> </note>
         <note priority="1" from="meaning">navDashboard</note>
       </trans-unit>
+      <trans-unit id="usersList" datatype="html">
+        <source>Users List</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/users/users.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">userComponent</note>
+      </trans-unit>
+      <trans-unit id="id" datatype="html">
+        <source>SNN</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/users/users.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">datetableRow</note>
+      </trans-unit>
+      <trans-unit id="firstName" datatype="html">
+        <source>First name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/users/users.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">datetableRow</note>
+      </trans-unit>
+      <trans-unit id="lastName" datatype="html">
+        <source>Last name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/users/users.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">datetableRow</note>
+      </trans-unit>
+      <trans-unit id="createUser" datatype="html">
+        <source>
+    Create User
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/users/users.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">button</note>
+      </trans-unit>
       <trans-unit id="idForm" datatype="html">
         <source>id: </source>
         <context-group purpose="location">
