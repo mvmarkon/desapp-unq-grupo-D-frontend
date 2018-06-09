@@ -5,12 +5,11 @@ import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
-
+import { ModalModule } from 'ngx-bootstrap';
+import { DemoComponent } from './demo/demo.component'
 import { registerLocaleData } from '@angular/common';
+
 import localeAR from '@angular/common/locales/es-AR';
-
-
-
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
@@ -23,6 +22,8 @@ import { MapComponent } from './map/map.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ModelContentComponent } from './model-content-component/model-content-component.component'
+
 
 import { UserService } from './services/user.service';
 import { VehicleService } from './services/vehicle.service';
@@ -47,6 +48,11 @@ registerLocaleData(localeAR);
     DashboardComponent,
     UserFormComponent,
     VehicleFormComponent,
+    DemoComponent,
+    ModelContentComponent
+  ],
+  entryComponents: [
+    ModelContentComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,8 @@ registerLocaleData(localeAR);
       libraries: ['places']
     }),
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    ModalModule.forRoot()
   ],
   providers: [
     MessageService,
