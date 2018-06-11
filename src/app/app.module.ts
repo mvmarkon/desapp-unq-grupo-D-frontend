@@ -29,6 +29,8 @@ import { VehicleService } from './services/vehicle.service';
 import { MessageService } from './services/message.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 registerLocaleData(localeAR);
 
@@ -47,6 +49,7 @@ registerLocaleData(localeAR);
     DashboardComponent,
     UserFormComponent,
     VehicleFormComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ registerLocaleData(localeAR);
   providers: [
     MessageService,
     UserService,
-    VehicleService
+    VehicleService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

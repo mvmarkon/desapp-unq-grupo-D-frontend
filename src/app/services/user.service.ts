@@ -4,19 +4,25 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-// import { USERS } from './mock-users';
 import { User } from '../models/user';
 
 import { MessageService } from './message.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  })
+  headers: null// new HttpHeaders({
+  //   'Content-Type': 'application/json',
+  //   // headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  //   // headers.append('Accept', 'application/json');
+  // })
 };
 
 @Injectable()
 export class UserService {
+
+  private currentUser = {
+    id_token: '',
+    mail: ''
+  };
 
   private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
 
@@ -24,9 +30,28 @@ export class UserService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
+  newhttpHeaders(): object {
+    let hds = new HttpHeaders();
+    hds = hds.set( 'Content-Type', 'application/json');
+    if (this.currentUser.id_token) {
+      hds = hds.set('Authorization', 'Bearer ' + this.currentUser.id_token);
+    }
+    return {headers: hds};
+  }
+
+  setCurrentUser(usr: any): void {
+    if (usr) {
+      this.currentUser.id_token = usr.id_token;
+      this.currentUser.mail = usr.mail;
+    }
+  }
+
+  isValid(): boolean {
+    return this.currentUser.id_token !== '' && this.currentUser.mail !== '';
+  }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl + '/all')
+    return this.http.get<User[]>(this.usersUrl + '/all', this.newhttpHeaders() )
     .pipe(
       tap(users => this.log(`fetched users`)),
       catchError(this.handleError('getUsers', []))
@@ -52,16 +77,13 @@ export class UserService {
   addUser(user: User): Observable<User> {
     const url = `${this.usersUrl}/save`;
     return this.http.post<User>(url, user, httpOptions).pipe(
-      tap((user: User) => this.log(`added user w/ id=${user.cuil}`)),
+      tap((usr: User) => this.log(`added user w/ id=${usr.cuil}`)),
       catchError(this.handleError<User>('addUser'))
     );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-
-      // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
       // Let the app keep running by returning an empty result.
       return of(result as T);

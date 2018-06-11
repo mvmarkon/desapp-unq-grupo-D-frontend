@@ -1,11 +1,17 @@
 <h1>
   {{ title }}
 </h1>
-<nav>
-  <a routerLink="/dashboard" i18n="navDashboard| @@navMenu">Dashboard</a>
-  <a routerLink="/users" i18n="navDashboard| @@navUser">User</a>
-  <a routerLink="/vehicles" i18n="navDashboard| @@navVehicles">Vehicles</a>
-  <a routerLink="/map" i18n="navDashboard| @@navMap">Map</a>
-</nav>
-<router-outlet></router-outlet>
-<app-messages></app-messages>
+<div *ngIf="!loggedIn">
+  <app-login></app-login>
+</div>
+<div *ngIf="loggedIn">
+
+  <nav>
+    <a routerLink="/dashboard" i18n="navDashboard| @@navMenu">Dashboard</a>
+    <a routerLink="/users" i18n="navDashboard| @@navUser">User</a>
+    <a routerLink="/vehicles" i18n="navDashboard| @@navVehicles">Vehicles</a>
+    <a routerLink="/map" i18n="navDashboard| @@navMap">Map</a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+  <app-messages></app-messages>
