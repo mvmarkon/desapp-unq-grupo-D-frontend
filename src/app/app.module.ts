@@ -22,7 +22,7 @@ import { MapComponent } from './map/map.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 import { MessagesComponent } from './messages/messages.component';
-import { ModelContentComponent } from './model-content-component/model-content-component.component'
+import { ModelContentComponent} from './model-content-component/model-content-component.component'
 
 
 import { UserService } from './services/user.service';
