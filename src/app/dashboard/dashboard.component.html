@@ -1,3 +1,4 @@
+<<<<<<< 946755872d14ddbfd9607a52b69ed32d0790940f
 <h3 i18n="navDashboard| @@navTitle">Best Users</h3>
 <div class="grid grid-pad">
   <a *ngFor="let user of users" class="col-1-4" routerLink="/detail/{{user.cuil}}">
@@ -5,4 +6,15 @@
       <h4>{{user.name}}</h4>
     </div>
   </a>
+=======
+<div class="jumbotron bg-transparent text-center">
+  <h3>Mejores Usuarios</h3>
+  <div class="grid grid-pad">
+    <a *ngFor="let user of users" class="col-1-4" routerLink="/detail/{{user.cuil}}">
+      <div class="module user">
+        <h4>{{user.name}}</h4>
+      </div>
+    </a>
+  </div>
+>>>>>>> separo componente login
 </div>

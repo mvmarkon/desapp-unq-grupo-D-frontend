@@ -13,9 +13,6 @@ import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-logi
 import { registerLocaleData } from '@angular/common';
 import localeAR from '@angular/common/locales/es-AR';
 
-
-
-
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
@@ -33,8 +30,10 @@ import { VehicleService } from './services/vehicle.service';
 import { MessageService } from './services/message.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { LoginComponent } from './login/login.component';
 
 registerLocaleData(localeAR);
+
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -61,6 +60,7 @@ const config = new AuthServiceConfig([
     DashboardComponent,
     UserFormComponent,
     VehicleFormComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

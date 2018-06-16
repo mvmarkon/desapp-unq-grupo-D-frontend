@@ -7,16 +7,22 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserFormComponent} from './user-form/user-form.component'
+import { UserFormComponent} from './user-form/user-form.component';
 
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
+import { LoginComponent } from './login/login.component';
+
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'map',
@@ -43,8 +49,8 @@ const routes: Routes = [
     component: VehicleDetailComponent
   },
   {
-    path:'addUser',
-    component:UserFormComponent
+    path: 'addUser',
+    component: UserFormComponent
   }
 ];
 
