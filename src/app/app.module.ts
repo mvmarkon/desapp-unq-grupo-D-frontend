@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DataTablesModule } from 'angular-datatables';
 import { AgmCoreModule } from '@agm/core';
-import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
+import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 
 
 import { AppComponent } from './app.component';
@@ -28,15 +28,16 @@ import { VehicleService } from './services/vehicle.service';
 import { MessageService } from './services/message.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { LoginComponent } from './login/login.component';
 
-let config = new AuthServiceConfig([
+const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("498468987520-vfvaeevqsj1lmvktk3ihe93vtniejhbr.apps.googleusercontent.com")
+    provider: new GoogleLoginProvider('498468987520-vfvaeevqsj1lmvktk3ihe93vtniejhbr.apps.googleusercontent.com')
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("Facebook-App-Id")
+    provider: new FacebookLoginProvider('Facebook-App-Id')
   }
 ]);
 
@@ -56,6 +57,7 @@ let config = new AuthServiceConfig([
     DashboardComponent,
     UserFormComponent,
     VehicleFormComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
