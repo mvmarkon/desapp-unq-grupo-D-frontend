@@ -13,6 +13,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
 import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -26,31 +27,38 @@ const routes: Routes = [
   },
   {
     path: 'map',
-    component: MapComponent
+    component: MapComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'users',
-    component: UsersComponent
+    component: UsersComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'vehicles',
-    component: VehiclesComponent
+    component: VehiclesComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'userdetail/:id',
-    component: UserDetailComponent
+    component: UserDetailComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'vehicledetail/:id',
-    component: VehicleDetailComponent
+    component: VehicleDetailComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'addUser',
-    component: UserFormComponent
+    component: UserFormComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 

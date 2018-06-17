@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { User } from '../models/user'
+import { User } from '../models/user';
 
 import { UserService } from '../services/user.service';
 
@@ -12,15 +12,14 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-  model:User;
-  constructor(private userService: UserService,
-  private router: Router) {
-
-}
+  model: User;
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.model =this.newUser()
-
+    this.model = this.newUser();
   }
 
   newUser(): User {

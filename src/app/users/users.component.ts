@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router  } from '@angular/router'
+import { ActivatedRoute, Router  } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { User } from '../models/user';
@@ -27,8 +27,11 @@ export class UsersComponent implements OnInit {
     vehicles: []
   };
 
-  constructor(private userService: UserService,private route:ActivatedRoute,private router:Router) {
-    //Cambia la estrategia de ruteo para que cuando venga desde otro componente  refresque la pagina
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router) {
+    // Cambia la estrategia de ruteo para que cuando venga desde otro componente  refresque la pagina
     route.params.subscribe(val => {
       this.getUsers();
     }); }
@@ -45,19 +48,17 @@ export class UsersComponent implements OnInit {
         });
         return row;
       }
-
+    };
   }
-
-}
-  routeUserPage(data):void{
-    this.router.navigateByUrl('/userdetail/'+ data[0])
+  routeUserPage(data): void {
+    this.router.navigateByUrl('/userdetail/' + data[0]);
   }
   getUsers(): void {
     this.userService.getUsers()
-      .subscribe(users =>{
-        this.users = users
+      .subscribe(usrs => {
+        this.users = usrs;
         this.dtTrigger.next();
-      })
+      });
   }
 
   add(): void {

@@ -18,12 +18,24 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
+  private user = null;
   private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
 
+  setCurrentUser(any) {
+    this.user = any;
+  }
+
+  getCurrentUser() {
+    return this.user;
+  }
+
+  isLoguedIn() {
+    return this.user !== null;
+  }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl + '/all')
@@ -52,7 +64,7 @@ export class UserService {
   addUser(user: User): Observable<User> {
     const url = `${this.usersUrl}/save`;
     return this.http.post<User>(url, user, httpOptions).pipe(
-      tap((user: User) => this.log(`added user w/ id=${user.cuil}`)),
+      tap((usr: User) => this.log(`added user w/ id=${usr.cuil}`)),
       catchError(this.handleError<User>('addUser'))
     );
   }

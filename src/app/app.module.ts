@@ -31,6 +31,7 @@ import { MessageService } from './services/message.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 registerLocaleData(localeAR);
 
@@ -78,7 +79,8 @@ const config = new AuthServiceConfig([
   providers: [
     MessageService,
     UserService,
-    VehicleService
+    VehicleService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
