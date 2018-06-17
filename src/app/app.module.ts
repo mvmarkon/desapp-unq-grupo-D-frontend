@@ -33,6 +33,9 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
+
 registerLocaleData(localeAR);
 
 const config = new AuthServiceConfig([
@@ -80,7 +83,12 @@ const config = new AuthServiceConfig([
     MessageService,
     UserService,
     VehicleService,
-    AuthGuardService
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

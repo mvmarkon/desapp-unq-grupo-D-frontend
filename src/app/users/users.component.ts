@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router  } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 import { User } from '../models/user';
 import { Vehicle } from '../models/vehicle';
