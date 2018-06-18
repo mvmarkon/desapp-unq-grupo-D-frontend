@@ -1,0 +1,22 @@
+<form #userForm="ngForm">
+  <div class="form-group">
+    <label for="rentalUserName"i18n="labelUser| @@formIdentityCode">SSN</label>
+     {{rentalUser.name}}
+  </div>
+  <div class="form-group">
+    <label for="ownerUserName"i18n="labelUser| @@formIdentityCode">SSN</label>
+    {{ownerUser.name}}
+  </div>
+  <div class="form-group">
+    <label for="vehicleId"i18n="labelUser| @@formIdentityCode">SSN</label>
+     {{vehicleRent.name}}
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  <button class="btn btn-success" (click)="add()" [disabled]="!userForm.form.valid"  i18n="labelButton| @@newUserButton">
+    New User
+  </button>
