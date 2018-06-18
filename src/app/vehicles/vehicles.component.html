@@ -1,27 +1,38 @@
-<!-- LISTADO DE VEHICULOS -->
-<h2 i18n="navDashboard| @@navVehicles">Vehicles</h2>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-6">
-      <ul class="vehicles">
-        <li *ngFor="let vehicle of vehicles">
-          <!-- <div class="display: block; text-align: center!important;"> -->
-            <span class="col">
-              <a routerLink="/vehicledetail/{{vehicle.id}}">
-                <span class="badge">{{vehicle.id}}</span> {{vehicle.type}}
-                <!--{{vehicle.brand}}-->
-              </a>
-              <span class="col">
-                <button (click)="delete(vehicle)">ELIMINAR </button>
-              </span>
-            </span>
-          <!-- </div> -->
-        </li>
-      </ul>
-      <!-- EDICION DE VEHICULO -->
-    </div>
 
-    <div class="col-6">
+<h2 i18n="navDashboard| @@navVehicles">Vehicles</h2>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+<thead>
+  <tr>
+    <th i18n="datetableRow| @@idVehicle">Vehicle ID</th>
+    <th i18n="datetableRow| @@typeVehicle">Type</th>
+    <th i18n="datetableRow| @@capacity">Capacity</th>
+    <th i18n="datetableRow| @@location">Location</th>
+    <th i18n="datetableRow| @@retirementAddress">Retirement Address</th>
+    <th i18n="datetableRow| @@returnAddress">Return Address</th>
+    <th i18n="datetableRow| @@phone">Phone</th>
+    <th i18n="datetableRow| @@delete">Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let vehicle of vehicles">
+    <td>{{ vehicle.id }}</td>
+    <td>{{ vehicle.type }}</td>
+    <td>{{ vehicle.capacity }}</td>
+    <td>{{ vehicle.location }}</td>
+    <td>{{ vehicle.retirementAddress }}</td>
+    <td>{{ vehicle.returnAddress }}</td>
+    <td>{{ vehicle.phone }}</td>
+    <td><button (click)="delete(vehicle)">Delete </button>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<ng-template [ngIf]="vehicleView";><div>
+  <app-vehicle-detail [vehicleId]="vehicleView"></app-vehicle-detail>
+</div></ng-template>
+
+    <!-- <div class="col-6">
         <div><span i18n="vehiclesComponent| @@idForm">id: </span><input [(ngModel)]="newVehicle.id"></div>
         <div><span i18n="vehiclesComponent| @@typeForm">type: </span><input [(ngModel)]="newVehicle.type"></div>
         <div><span i18n="vehiclesComponent| @@capacityForm">capacity: </span><input [(ngModel)]="newVehicle.capacity"></div>
@@ -34,7 +45,7 @@
       <div>
         <button (click)="add()" i18n="button| @@saveButton">Save</button>
       </div>
-    </div>
-    <button (click)="goBack()" i18n="button| @@backButton">Back</button>
-  </div>
+</div> -->
+<div>
+<button (click)="goBack()" i18n="button| @@backButton">Back</button>
 </div>
