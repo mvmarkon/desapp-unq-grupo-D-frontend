@@ -13,7 +13,8 @@ import { VehicleService } from '../services/vehicle.service';
 })
 
 export class VehicleDetailComponent implements OnInit {
-  @Input() vehicle: Vehicle;
+  @Input() vehicleId: string;
+  vehicle:Vehicle
 
   constructor(
     private route: ActivatedRoute,
@@ -31,13 +32,12 @@ export class VehicleDetailComponent implements OnInit {
     this.location.back();
   }
 
-  getVehicle(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+  getVehicle(id): void {
     this.vehicleService.getVehicle(id)
       .subscribe(fetchedVehicle => this.vehicle = fetchedVehicle);
   }
   ngOnInit() {
-    this.getVehicle();
+    this.getVehicle(this.vehicleId);
   }
 
 }
