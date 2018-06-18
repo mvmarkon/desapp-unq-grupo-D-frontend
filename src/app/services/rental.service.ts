@@ -25,7 +25,7 @@ export class RentalService {
     private messageService: MessageService) { }
 
 
-  getRental(): Observable<Rental[]> {
+  getRentals(): Observable<Rental[]> {
     return this.http.get<Rental[]>(this.rentalUrl + '/all')
     .pipe(
       tap(Rentals => this.log(`fetched rental`)),
@@ -42,7 +42,7 @@ export class RentalService {
   }
 
   addRental(rental: Rental): Observable<Rental> {
-    const url = `${this.rentalsUrl}/save`;
+    const url = `${this.rentalUrl}/save`;
     return this.http.post<Rental>(url, rental, httpOptions).pipe(
       tap((vle: Rental) => this.log(`added rental w/ id=${vle.id}`)),
       catchError(this.handleError<Rental>('addRental'))
@@ -50,7 +50,7 @@ export class RentalService {
   }
 
   collectVehicleRental(rental: Rental): Observable<any> {
-    const url = `${this.rentalsUrl}/rental/collect`;
+    const url = `${this.rentalUrl}/rental/collect`;
     return this.http.put(url, rental, httpOptions).pipe(
       tap(_ => this.log(`updated Rental id=${rental.id}`)),
       catchError(this.handleError<any>('collectVehicleRental'))
@@ -59,7 +59,7 @@ export class RentalService {
 
 
   payRental (rental:Rental):Observable<any> {
-    const url = `${this.rentalsUrl}/rental/pay`;
+    const url = `${this.rentalUrl}/rental/pay`;
     return this.http.put(url, rental, httpOptions).pipe(
       tap(_ => this.log(`updated Rental id=${rental.id}`)),
       catchError(this.handleError<any>('payRental'))
@@ -67,7 +67,7 @@ export class RentalService {
   }
 
   returnedVehicleRental (rental:Rental): Observable<any> {
-    const url = `${this.rentalsUrl}/rental/returned`;
+    const url = `${this.rentalUrl}/rental/returned`;
     return this.http.put(url, rental, httpOptions).pipe(
       tap(_ => this.log(`updated Rental id=${rental.id}`)),
       catchError(this.handleError<any>('returnedVehicleRental'))

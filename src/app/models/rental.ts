@@ -5,7 +5,7 @@ export class Rental {
   id: string;
   startDate: Date;
   endDate: Date;
-  owner: User;
-  rental: User;
-  vehicle: Vehicle;
+  ownerCuil: string;
+  rentalCuil: string;
+  vehicleID: string;
 }
