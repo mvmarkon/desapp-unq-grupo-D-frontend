@@ -15,6 +15,13 @@ import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.componen
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
+import { CurrentAccountComponent } from './current-account/current-account.component';
+import { CreateRentalComponent } from './create-rental/create-rental.component'
+import { RentalsComponent } from './rentals/rentals.component'
+import { RentCarComponent } from './rent-car/rent-car.component'
+
+
+
 const routes: Routes = [
   {
     path: '',
@@ -59,6 +66,22 @@ const routes: Routes = [
     path: 'addUser',
     component: UserFormComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path:'credits/:id',
+    component:CurrentAccountComponent
+   },
+  {
+    path:'addRental',
+    component:CreateRentalComponent
+  },
+  {
+    path:'rentals',
+    component:RentalsComponent
+  },
+  {
+    path:'rent-a-car',
+    component:RentCarComponent
   }
 ];
 

@@ -1,0 +1,36 @@
+
+  <h2> Cuenta de  {{ currentAccount.cuil | uppercase }}</h2>
+
+
+  <div class="row">
+    <label>Saldo:
+      <input [(ngModel)]="currentAccount.credits" >
+    </label>
+  </div>
+
+  <div class="row">
+    <label>Cargar:
+      <input [(ngModel)]="charge" placeholder="carga credito">
+    </label>
+  </div>
+
+  <button class="btn btn-success" (click)="chargeCredit()" >
+    Ejecutar
+  </button>
+
+<!--
+  <div class="row">
+    <label>Credito:
+      <input [(ngModel)]="" placeholder="monto">
+    </label>
+  </div>
+  <div>
+    <app-demo></app-demo>
+  </div>
+
+  <div>
+    <button class="btn btn-success" [routerLink]="['../credits/:id']">
+      Cargar Credito
+    </button>
+  </div>
+-->

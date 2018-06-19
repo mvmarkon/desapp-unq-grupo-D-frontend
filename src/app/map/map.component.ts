@@ -1,7 +1,8 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core/';
-import { google } from '@agm/core/services/google-maps-types';
+import { } from '@types/googlemaps';
+
 @Component({
   selector: 'map',
   templateUrl: 'map.component.html',
@@ -12,7 +13,7 @@ export class MapComponent implements OnInit {
   public title: string;
   public latitude: number;
   public longitude: number;
-  public map;
+  public map : google.maps.Map;;
   public addressTarget;
   public markers: Array<Marker>;
   public searchControl: FormControl;
@@ -21,6 +22,8 @@ export class MapComponent implements OnInit {
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
+
+  @ViewChild('gmap') gmapElement: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -31,190 +34,199 @@ export class MapComponent implements OnInit {
    * Ng Initialization method
    */
   ngOnInit() {
-
-    this.title = 'Mapa';
-
-    // Default UNQ coordinates
-    this.latitude  = -34.706556;
-    this.longitude = -58.2807111;
-
-    // Main Map
-    this.map = {
-      zoom: 13
-    };
-
-    //
-    this.addressTarget = {
-      latitude: -34.706556,
-      longitude: -58.2807111,
-      label: 'Direccion de retiro'
-    };
-
-    // Markers
-    this.markers = [];
-
-    // Default Distance between points
-    this.distanceBetweenPoints = {
-      value: 0,
-      measure: 'meters'
-    };
-
-    // Default Estimated Travel Time
-    this.estimatedTravelTime = {
-      value: 0,
-      measure: 'minutes'
-    };
-
-
-    this.setCurrentPosition();
-
-    // Loads the google maps API to retrieve the current position
-    this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['address']
-      });
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          console.log(this.ngZone);
-          // Gets the place result
-          const place = autocomplete.getPlace();
-
-          // Verifies result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          // Sets current position on the map
-          const latitude = place.geometry.location.lat();
-          const longitude = place.geometry.location.lng();
-          this.setSelectedPosition(latitude, longitude);
-          this.getDistanceTo(latitude, longitude);
-          this.setTravelTimeTo(latitude, longitude);
-         });
-      })
-    });
-  }
-
-
-
-  setMarkerAt(latitude: number, longitude: number) {
-    this.markers = [];
-    this.markers.push({
-      lat: latitude,
-      lng: longitude,
-      label: 'Direccion de entrega '
-    });
-    this.getDistanceTo(latitude, longitude);
-    this.setTravelTimeTo(latitude, longitude);
-  }
-
-
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
-  }
-
-  onMapClicked($event) {
-    const coordinates = $event.coords;
-    const latitude = coordinates.lat;
-    const longitude = coordinates.lng;
-    this.setMarkerAt(latitude, longitude);
-  }
-
-  markerDragEnd(m: Marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-  }
-
-  private setCurrentPosition() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.setMarkerAt(position.coords.latitude, position.coords.longitude);
-      });
-    }
-  }
-
-  /**
-   * Focus the map center to the given position
-   */
-  private setSelectedPosition(latitude: number, longitude: number) {
-    this.latitude = latitude;
-    this.longitude = longitude;
-    this.setMarkerAt(latitude, longitude);
-  }
-
-/**
- * Class Functions
- */
-
- /**
-  * @param {number} latitude
-  * @param {number} longitude
-  */
-  getDistanceTo(latitude, longitude) {
-    this.mapsAPILoader.load().then(() => {
-      console.log(this.mapsAPILoader);
-      const pointA = new google.maps.LatLng(this.addressTarget.latitude, this.addressTarget.longitude);
-      const pointB = new google.maps.LatLng(latitude, longitude);
-      console.log(pointB);
-      const distance = google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB);
-      this.distanceBetweenPoints = this.parseDistanceTo('meters', distance);
-    });
-  }
-
-  /**
-   * Given a valid measure and a distance returns a Distance object
-   * @param {string} measure
-   * @param {number} distance
-   */
-  parseDistanceTo(measure, distance) {
-
-    const distanceMeasures = {
-      meters: function(distance) {
-        const distanceBetweenPoints = {
-          value: Math.round(distance),
-          measure: 'meters'
-        };
-        return distanceBetweenPoints;
-      }
-    };
-
-    return distanceMeasures[measure](distance);
-  }
-
-  /**
-   * @param {number} latitude
-   * @param {number} longitude
-   */
-  setTravelTimeTo(latitude, longitude) {
-    this.mapsAPILoader.load().then( () => {
-      const directionsService = new google.maps.DirectionsService();
-      const request = {
-        origin: new google.maps.LatLng(this.addressTarget.latitude, this.addressTarget.longitude),
-        destination: new google.maps.LatLng(latitude, longitude),
-
-        travelMode: new google.maps.DirectionsTravelMode.DRIVING
-      };
-
-      directionsService.route(request, (response, status) => {
-        if (status === 'OK') {
-          const result = response.routes[0].legs[0];
-          this.estimatedTravelTime = this.parseTravelTime('minutes', result);
-        }
-      });
-    });
-  }
-
-
-  parseTravelTime(measure, travelTime) {
-    const result = {
-      value: travelTime.duration.text,
-      measure: ''
-    };
-    return result;
-  }
-
+    var mapProp = {
+    center: new google.maps.LatLng(-34.706556, -58.2807111),
+    zoom: 13,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 }
+}
+    //
+    //
+    // this.title = 'Mapa';
+    //
+    // // Default UNQ coordinates
+    // this.latitude  = -34.706556;
+    // this.longitude = -58.2807111;
+    //
+    // // Main Map
+    // this.map = {
+    //   zoom: 13
+    // };
+    //
+    // //
+    // this.addressTarget = {
+    //   latitude: -34.706556,
+    //   longitude: -58.2807111,
+    //   label: 'Direccion de retiro'
+    // };
+    //
+    // // Markers
+    // this.markers = [];
+    //
+    // // Default Distance between points
+    // this.distanceBetweenPoints = {
+    //   value: 0,
+    //   measure: 'meters'
+    // };
+    //
+    // // Default Estimated Travel Time
+    // this.estimatedTravelTime = {
+    //   value: 0,
+    //   measure: 'minutes'
+    // };
+
+
+//     this.setCurrentPosition();
+//
+//     // Loads the google maps API to retrieve the current position
+//     this.mapsAPILoader.load().then(() => {
+//       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+//         types: ['address']
+//       });
+//       autocomplete.addListener('place_changed', () => {
+//         this.ngZone.run(() => {
+//           console.log(this.ngZone);
+//           // Gets the place result
+//           const place = autocomplete.getPlace();
+//
+//           // Verifies result
+//           if (place.geometry === undefined || place.geometry === null) {
+//             return;
+//           }
+//
+//           // Sets current position on the map
+//           const latitude = place.geometry.location.lat();
+//           const longitude = place.geometry.location.lng();
+//           this.setSelectedPosition(latitude, longitude);
+//           this.getDistanceTo(latitude, longitude);
+//           this.setTravelTimeTo(latitude, longitude);
+//          });
+//       })
+//     });
+//   }
+//
+//
+//
+//   setMarkerAt(latitude: number, longitude: number) {
+//     this.markers = [];
+//     this.markers.push({
+//       lat: latitude,
+//       lng: longitude,
+//       label: 'Direccion de entrega '
+//     });
+//     this.getDistanceTo(latitude, longitude);
+//     this.setTravelTimeTo(latitude, longitude);
+//   }
+//
+//
+//   clickedMarker(label: string, index: number) {
+//     console.log(`clicked the marker: ${label || index}`);
+//   }
+//
+//   onMapClicked($event) {
+//     const coordinates = $event.coords;
+//     const latitude = coordinates.lat;
+//     const longitude = coordinates.lng;
+//     this.setMarkerAt(latitude, longitude);
+//   }
+//
+//   markerDragEnd(m: Marker, $event: MouseEvent) {
+//     console.log('dragEnd', m, $event);
+//   }
+//
+//   private setCurrentPosition() {
+//     if ('geolocation' in navigator) {
+//       navigator.geolocation.getCurrentPosition((position) => {
+//         this.latitude = position.coords.latitude;
+//         this.longitude = position.coords.longitude;
+//         this.setMarkerAt(position.coords.latitude, position.coords.longitude);
+//       });
+//     }
+//   }
+//
+//   /**
+//    * Focus the map center to the given position
+//    */
+//   private setSelectedPosition(latitude: number, longitude: number) {
+//     this.latitude = latitude;
+//     this.longitude = longitude;
+//     this.setMarkerAt(latitude, longitude);
+//   }
+//
+// /**
+//  * Class Functions
+//  */
+//
+//  /**
+//   * @param {number} latitude
+//   * @param {number} longitude
+//   */
+//   getDistanceTo(latitude, longitude) {
+//     this.mapsAPILoader.load().then(() => {
+//       console.log(this.mapsAPILoader);
+//       const pointA = new google.maps.LatLng(this.addressTarget.latitude, this.addressTarget.longitude);
+//       const pointB = new google.maps.LatLng(latitude, longitude);
+//       console.log(pointB);
+//       const distance = google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB);
+//       this.distanceBetweenPoints = this.parseDistanceTo('meters', distance);
+//     });
+//   }
+//
+//   /**
+//    * Given a valid measure and a distance returns a Distance object
+//    * @param {string} measure
+//    * @param {number} distance
+//    */
+//   parseDistanceTo(measure, distance) {
+//
+//     const distanceMeasures = {
+//       meters: function(distance) {
+//         const distanceBetweenPoints = {
+//           value: Math.round(distance),
+//           measure: 'meters'
+//         };
+//         return distanceBetweenPoints;
+//       }
+//     };
+//
+//     return distanceMeasures[measure](distance);
+//   }
+//
+//   /**
+//    * @param {number} latitude
+//    * @param {number} longitude
+//    */
+//   setTravelTimeTo(latitude, longitude) {
+//     this.mapsAPILoader.load().then( () => {
+//       const directionsService = new google.maps.DirectionsService();
+//       const request = {
+//         origin: new google.maps.LatLng(this.addressTarget.latitude, this.addressTarget.longitude),
+//         destination: new google.maps.LatLng(latitude, longitude),
+//
+//         travelMode: new google.maps.DirectionsTravelMode.DRIVING
+//       };
+//
+//       directionsService.route(request, (response, status) => {
+//         if (status === 'OK') {
+//           const result = response.routes[0].legs[0];
+//           this.estimatedTravelTime = this.parseTravelTime('minutes', result);
+//         }
+//       });
+//     });
+//   }
+//
+//
+//   parseTravelTime(measure, travelTime) {
+//     const result = {
+//       value: travelTime.duration.text,
+//       measure: ''
+//     };
+//     return result;
+//   }
+//
+// }
 // function getDistanceAndTimeToEndPoint(){
 // var service = new google.maps.DistanceMatrixService;
 //         service.getDistanceMatrix({

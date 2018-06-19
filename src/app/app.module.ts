@@ -5,13 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DataTablesModule } from 'angular-datatables';
 import { AgmCoreModule } from '@agm/core';
 import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
+import { DataTablesModule } from 'angular-datatables';
+import { ModalModule } from 'ngx-bootstrap';
+import { DemoComponent } from './demo/demo.component'
 import { registerLocaleData } from '@angular/common';
 import localeAR from '@angular/common/locales/es-AR';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
@@ -24,10 +31,15 @@ import { MapComponent } from './map/map.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ModelContentComponent} from './model-content-component/model-content-component.component'
+import { RentCarComponent } from './rent-car/rent-car.component';
+
 
 import { UserService } from './services/user.service';
 import { VehicleService } from './services/vehicle.service';
 import { MessageService } from './services/message.service';
+import { RentalService } from './services/rental.service';
+
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { LoginComponent } from './login/login.component';
@@ -35,6 +47,9 @@ import { AuthGuardService } from './services/auth-guard.service';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
+import { CurrentAccountComponent } from './current-account/current-account.component';
+import { HeaderComponent } from './header/header.component';
+import { CreateRentalComponent } from './create-rental/create-rental.component';
 
 registerLocaleData(localeAR);
 
@@ -65,10 +80,20 @@ const config = new AuthServiceConfig([
     UserFormComponent,
     VehicleFormComponent,
     LoginComponent,
+    DemoComponent,
+    ModelContentComponent,
+    HeaderComponent,
+    CreateRentalComponent,
+    RentCarComponent,
+    CurrentAccountComponent
   ],
+  entryComponents: [
+    ModelContentComponent
+      ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCMOl4awvlwM_nCyrYOnQZGPr-vAkO3hIY',
@@ -78,6 +103,8 @@ const config = new AuthServiceConfig([
     HttpClientModule,
     DataTablesModule,
     SocialLoginModule.initialize(config)
+    ModalModule.forRoot()
+    MyDatePickerModule
   ],
   providers: [
     MessageService,
@@ -89,6 +116,7 @@ const config = new AuthServiceConfig([
       useClass: TokenInterceptor,
       multi: true
     }
+    RentalService
   ],
   bootstrap: [AppComponent]
 })
