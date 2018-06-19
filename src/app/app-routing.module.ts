@@ -12,7 +12,13 @@ import { UserFormComponent} from './user-form/user-form.component'
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
+
 import { CurrentAccountComponent } from './current-account/current-account.component';
+import { CreateRentalComponent } from './create-rental/create-rental.component'
+import { RentalsComponent } from './rentals/rentals.component'
+import { RentCarComponent } from './rent-car/rent-car.component'
+
+
 
 const routes: Routes = [
   {
@@ -51,6 +57,18 @@ const routes: Routes = [
   {
     path:'credits/:id',
     component:CurrentAccountComponent
+   },
+  {
+    path:'addRental',
+    component:CreateRentalComponent
+  },
+  {
+    path:'rentals',
+    component:RentalsComponent
+  },
+  {
+    path:'rent-a-car',
+    component:RentCarComponent
   }
 ];
 

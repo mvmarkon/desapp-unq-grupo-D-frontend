@@ -1,0 +1,27 @@
+<h2 i18n="navDashboard| @@navRentACar">Rent a Car</h2>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+<thead>
+  <tr>
+    <th i18n="datetableRow| @@idVehicle">Vehicle ID</th>
+    <th i18n="datetableRow| @@typeVehicle">Type</th>
+    <th i18n="datetableRow| @@capacity">Capacity</th>
+    <th i18n="datetableRow| @@location">Location</th>
+    <th i18n="datetableRow| @@retirementAddress">Retirement Address</th>
+    <th i18n="datetableRow| @@returnAddress">Return Address</th>
+    <th i18n="datetableRow| @@phone">Phone</th>
+    <th i18n="datetableRow| @@delete">Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let vehicle of vehicles">
+    <td>{{ vehicle.id }}</td>
+    <td>{{ vehicle.type }}</td>
+    <td>{{ vehicle.capacity }}</td>
+    <td>{{ vehicle.location }}</td>
+    <td>{{ vehicle.retirementAddress }}</td>
+    <td>{{ vehicle.returnAddress }}</td>
+    <td>{{ vehicle.phone }}</td>
+    <td><button (click)="rent(vehicle)">Rent </button></td>
+  </tr>
+</tbody>
+</table>
