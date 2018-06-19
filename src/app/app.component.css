@@ -8,3 +8,6 @@ h2 {
   margin-top: 0;
   padding-top: 0;
 }
+#backImage {
+    background: url(http://www.assurline.com.ar/images/flota.jpg) no-repeat;
+}
