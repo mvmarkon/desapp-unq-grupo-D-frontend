@@ -1,5 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
+import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,11 +42,27 @@ import { RentalService } from './services/rental.service';
 
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
 import { CurrentAccountComponent } from './current-account/current-account.component';
 import { HeaderComponent } from './header/header.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
 
 registerLocaleData(localeAR);
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('498468987520-vfvaeevqsj1lmvktk3ihe93vtniejhbr.apps.googleusercontent.com')
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('Facebook-App-Id')
+  }
+]);
 
 @NgModule({
   declarations: [
@@ -55,6 +79,7 @@ registerLocaleData(localeAR);
     DashboardComponent,
     UserFormComponent,
     VehicleFormComponent,
+    LoginComponent,
     DemoComponent,
     ModelContentComponent,
     HeaderComponent,
@@ -74,8 +99,10 @@ registerLocaleData(localeAR);
       apiKey: 'AIzaSyCMOl4awvlwM_nCyrYOnQZGPr-vAkO3hIY',
       libraries: ['places']
     }),
+    NgbModule.forRoot(),
     HttpClientModule,
     DataTablesModule,
+    SocialLoginModule.initialize(config)
     ModalModule.forRoot()
     MyDatePickerModule
   ],
@@ -83,6 +110,12 @@ registerLocaleData(localeAR);
     MessageService,
     UserService,
     VehicleService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
     RentalService
   ],
   bootstrap: [AppComponent]

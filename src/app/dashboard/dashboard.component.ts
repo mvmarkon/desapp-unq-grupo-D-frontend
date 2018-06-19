@@ -10,7 +10,6 @@ import { DemoComponent } from '../demo/demo.component'
 })
 export class DashboardComponent implements OnInit {
   users: User[] = [];
-
   constructor(private userService: UserService) { }
 
   ngOnInit() {
@@ -21,5 +20,4 @@ export class DashboardComponent implements OnInit {
     this.userService.getUsers()
       .subscribe(users => this.users = users.slice(1, 5));
   }
-
 }
