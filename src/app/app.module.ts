@@ -1,11 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AgmCoreModule } from '@agm/core';
 import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
@@ -102,12 +98,13 @@ const config = new AuthServiceConfig([
     NgbModule.forRoot(),
     HttpClientModule,
     DataTablesModule,
-    SocialLoginModule.initialize(config)
-    ModalModule.forRoot()
+    SocialLoginModule.initialize(config),
+    ModalModule.forRoot(),
     MyDatePickerModule
   ],
   providers: [
     MessageService,
+    RentalService,
     UserService,
     VehicleService,
     AuthGuardService,
@@ -116,7 +113,6 @@ const config = new AuthServiceConfig([
       useClass: TokenInterceptor,
       multi: true
     }
-    RentalService
   ],
   bootstrap: [AppComponent]
 })
