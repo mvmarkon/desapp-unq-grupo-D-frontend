@@ -47,6 +47,9 @@ import { CurrentAccountComponent } from './current-account/current-account.compo
 import { HeaderComponent } from './header/header.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+
 registerLocaleData(localeAR);
 
 const config = new AuthServiceConfig([
@@ -82,7 +85,7 @@ const config = new AuthServiceConfig([
     CreateRentalComponent,
     RentCarComponent,
     CurrentAccountComponent
-  ],
+    ],
   entryComponents: [
     ModelContentComponent
       ],
@@ -100,7 +103,9 @@ const config = new AuthServiceConfig([
     DataTablesModule,
     SocialLoginModule.initialize(config),
     ModalModule.forRoot(),
-    MyDatePickerModule
+    MyDatePickerModule,
+    MatToolbarModule,
+    MatCardModule
   ],
   providers: [
     MessageService,
