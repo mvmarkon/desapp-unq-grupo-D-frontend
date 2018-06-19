@@ -30,6 +30,7 @@ import { VehicleService } from './services/vehicle.service';
 import { MessageService } from './services/message.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { CurrentAccountComponent } from './current-account/current-account.component';
 
 registerLocaleData(localeAR);
 
@@ -49,7 +50,8 @@ registerLocaleData(localeAR);
     UserFormComponent,
     VehicleFormComponent,
     DemoComponent,
-    ModelContentComponent
+    ModelContentComponent,
+    CurrentAccountComponent
   ],
   entryComponents: [
     ModelContentComponent

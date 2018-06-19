@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 
 // import { USERS } from './mock-users';
 import { User } from '../models/user';
+import { CurrentAccount } from '../models/currentAccount';
 
 import { MessageService } from './message.service';
 
@@ -56,6 +57,25 @@ export class UserService {
       catchError(this.handleError<User>('addUser'))
     );
   }
+
+
+  chargeCredit(currentAccount: CurrentAccount, credit: number): Observable<any> {
+    const url = `${this.usersUrl}/currentAccount/charge/${credit}`;
+    return this.http.put(url, currentAccount, httpOptions).pipe(
+      tap(_ => this.log(`updated CurrentAccount id=${credit}`)),
+      catchError(this.handleError<any>('chargeCredit'))
+    );
+  }
+
+
+  getCurrentAccount(cuil: number) {
+    const url = `${this.usersUrl}/currentAccount/${cuil}`;
+    return this.http.get<CurrentAccount>(url).pipe(
+      tap(_ => this.log(`fetched currentAccount cuil=${cuil}`)),
+      catchError(this.handleError<CurrentAccount>(`getCurrentAccount cuil=${cuil}`))
+    );
+  }
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

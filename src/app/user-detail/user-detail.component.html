@@ -25,9 +25,21 @@
         <input [(ngModel)]="user.address" placeholder="Direccion">
       </label>
     </div>
+
+    <div class="row">
+      <label>Credito:
+        <input [(ngModel)]="user.currentAccount.credits" placeholder="Direccion">
+      </label>
+    </div>
+    <div>
+      <button class="btn btn-success" (click)="charge()" style="color:blue">
+        Cargar Credito
+      </button>
+    </div>
     <div>
       <button (click)="update()">Modificar</button>
       <button (click)="goBack()">Volver</button>
+<!--      <app-demo></app-demo>  -->
     </div>
     <div *ngIf="user.vehicles">
       <h3>

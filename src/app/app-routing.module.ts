@@ -12,6 +12,8 @@ import { UserFormComponent} from './user-form/user-form.component'
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
+import { CurrentAccountComponent } from './current-account/current-account.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -45,6 +47,10 @@ const routes: Routes = [
   {
     path:'addUser',
     component:UserFormComponent
+  },
+  {
+    path:'credits/:id',
+    component:CurrentAccountComponent
   }
 ];
 
