@@ -6,9 +6,9 @@
      <div class="col-md-4 card">
       <div class="card-block">
         <h5 class="card-title" i18n="mapComponent| @@distancePoints">Distance Between Points </h5>
-        <p class="card-text">{{ distanceBetweenPoints.value }} {{ distanceBetweenPoints.measure }}</p>
+        <!-- <p class="card-text">{{ distanceBetweenPoints.valu }} {{ distanceBetweenPoints.measure }}</p> -->
         <h5 class="card-title" i18n="mapComponent| @@travelTime">Travel Time</h5>
-        <p class="card-text">{{ estimatedTravelTime.value }} {{ estimatedTravelTime.measure }}</p>
+        <!-- <p class="card-text">{{ estimatedTravelTime.value }} {{ estimatedTravelTime.measure }}</p> -->
         <button i18n="button| @@calculate" >Calculate !</button>
       </div>
     </div>
@@ -16,7 +16,10 @@
 
   <div class="row">
 
-    <div class="col-md-12">
+    <div #gmap style=”width:75%;height:400px”></div>
+
+
+    <!-- <div class="col-md-12">
       <agm-map
         [latitude]="latitude"
         [longitude]="longitude"
@@ -53,10 +56,10 @@
           </agm-info-window>
         </agm-marker>
 
-      </agm-map>
+      </agm-map> -->
 
-    </div>
+    <!-- </div>
 
-  </div>
+  </div> -->
 
 </div>

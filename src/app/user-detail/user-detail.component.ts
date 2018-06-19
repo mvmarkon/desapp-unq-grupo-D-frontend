@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router  } from '@angular/router'
 import { Location } from '@angular/common';
 
 import { UserService } from '../services/user.service';
 import { VehicleService } from '../services/vehicle.service';
 
-import { User } from '../models/user';
 import { Vehicle } from '../models/vehicle';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-user-detail',
@@ -23,7 +23,8 @@ export class UserDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private vehicleService: VehicleService,
-    private location: Location
+    private location: Location,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -47,7 +48,15 @@ export class UserDetailComponent implements OnInit {
   //     .subscribe(() => this.goBack());
   // }
 
+
   goBack(): void {
     this.location.back();
   }
+
+  charge(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.router.navigateByUrl('/credits/' + id);
+    }
+
+
 }

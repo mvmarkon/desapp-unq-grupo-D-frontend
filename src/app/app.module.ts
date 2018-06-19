@@ -5,10 +5,11 @@ import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import { DataTablesModule } from 'angular-datatables';
+import { ModalModule } from 'ngx-bootstrap';
+import { DemoComponent } from './demo/demo.component'
 import { registerLocaleData } from '@angular/common';
 import localeAR from '@angular/common/locales/es-AR';
-
-import { DataTablesModule } from 'angular-datatables';
 import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { MapComponent } from './map/map.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ModelContentComponent} from './model-content-component/model-content-component.component'
 import { RentCarComponent } from './rent-car/rent-car.component';
 
 
@@ -32,6 +34,7 @@ import { RentalService } from './services/rental.service';
 
 import { UserFormComponent } from './user-form/user-form.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { CurrentAccountComponent } from './current-account/current-account.component';
 import { HeaderComponent } from './header/header.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
 
@@ -52,10 +55,16 @@ registerLocaleData(localeAR);
     DashboardComponent,
     UserFormComponent,
     VehicleFormComponent,
+    DemoComponent,
+    ModelContentComponent,
     HeaderComponent,
     CreateRentalComponent,
-    RentCarComponent
+    RentCarComponent,
+    CurrentAccountComponent
   ],
+  entryComponents: [
+    ModelContentComponent
+      ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -67,6 +76,7 @@ registerLocaleData(localeAR);
     }),
     HttpClientModule,
     DataTablesModule,
+    ModalModule.forRoot()
     MyDatePickerModule
   ],
   providers: [
