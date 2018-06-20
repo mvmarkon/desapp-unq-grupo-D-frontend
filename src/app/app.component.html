@@ -1,10 +1,22 @@
-<h1>
-  {{ title }}
-</h1>
-<div *ngIf="isLogued">
+  <h1>
+    {{ title }}
+  </h1>
 
-</div>
+<div back-img="url(http://www.tiemporojas.com/wp-content/uploads/2015/04/autos-usados.jpg)">
+  <mat-toolbar color="primary" >
+<!-- style="{'background-image':'url(http://www.tiemporojas.com/wp-content/uploads/2015/04/autos-usados.jpg)'};"> -->
+    <div *ngIf="isLogued">
+    </div>
+
+    <!-- <img mat-card-image src="http://www.tiemporojas.com/wp-content/uploads/2015/04/autos-usados.jpg" style="background-image"> -->
+  </mat-toolbar>
+
+<mat-card>
 
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-messages></app-messages>
+
+</mat-card>
+
+</div>

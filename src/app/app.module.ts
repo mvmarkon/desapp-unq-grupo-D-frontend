@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
@@ -88,6 +91,8 @@ const config = new AuthServiceConfig([
       ],
   imports: [
     BrowserModule,
+    MatToolbarModule,
+    MatCardModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
