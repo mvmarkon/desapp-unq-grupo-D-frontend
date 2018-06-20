@@ -1,17 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
-import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
-import { FormsModule , ReactiveFormsModule } from '@angular/forms';
-import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+
+
 import { DataTablesModule } from 'angular-datatables';
 import { ModalModule } from 'ngx-bootstrap';
-import { DemoComponent } from './demo/demo.component'
+import { DemoComponent } from './demo/demo.component';
 import { registerLocaleData } from '@angular/common';
 import localeAR from '@angular/common/locales/es-AR';
 import { MyDatePickerModule } from 'mydatepicker';
@@ -27,7 +26,7 @@ import { MapComponent } from './map/map.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 import { MessagesComponent } from './messages/messages.component';
-import { ModelContentComponent} from './model-content-component/model-content-component.component'
+import { ModelContentComponent} from './model-content-component/model-content-component.component';
 import { RentCarComponent } from './rent-car/rent-car.component';
 
 
@@ -48,17 +47,6 @@ import { HeaderComponent } from './header/header.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
 
 registerLocaleData(localeAR);
-
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('498468987520-vfvaeevqsj1lmvktk3ihe93vtniejhbr.apps.googleusercontent.com')
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('Facebook-App-Id')
-  }
-]);
 
 @NgModule({
   declarations: [
@@ -98,7 +86,6 @@ const config = new AuthServiceConfig([
     NgbModule.forRoot(),
     HttpClientModule,
     DataTablesModule,
-    SocialLoginModule.initialize(config),
     ModalModule.forRoot(),
     MyDatePickerModule
   ],

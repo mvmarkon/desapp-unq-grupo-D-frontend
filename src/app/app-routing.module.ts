@@ -16,11 +16,9 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
 import { CurrentAccountComponent } from './current-account/current-account.component';
-import { CreateRentalComponent } from './create-rental/create-rental.component'
-import { RentalsComponent } from './rentals/rentals.component'
-import { RentCarComponent } from './rent-car/rent-car.component'
-
-
+import { CreateRentalComponent } from './create-rental/create-rental.component';
+import { RentalsComponent } from './rentals/rentals.component';
+import { RentCarComponent } from './rent-car/rent-car.component';
 
 const routes: Routes = [
   {
@@ -68,20 +66,24 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path:'credits/:id',
-    component:CurrentAccountComponent
+    path: 'credits/:id',
+    component: CurrentAccountComponent,
+    canActivate: [AuthGuardService]
    },
   {
-    path:'addRental',
-    component:CreateRentalComponent
+    path: 'addRental',
+    component: CreateRentalComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:'rentals',
-    component:RentalsComponent
+    path: 'rentals',
+    component: RentalsComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:'rent-a-car',
-    component:RentCarComponent
+    path: 'rent-a-car',
+    component: RentCarComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 

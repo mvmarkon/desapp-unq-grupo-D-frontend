@@ -8,7 +8,7 @@
       <p class="card-text">Sign in with</p>
     </div>
     <div class="card-block">
-      <button class="btn btn-social-icon btn-google" (click)="signInWithGoogle()">
+      <button class="btn btn-social-icon btn-google" id="signInWithGoogle">
         <span class="fa fa-google"></span>
       </button>
     </div>
@@ -18,10 +18,10 @@
       {{title}}
     </h6>
     <div class="card-block"></div>
-    <img class="card-img-top img-responsive photo" src="{{ user.photoUrl }}">
+    <img class="card-img-top img-responsive photo" src="{{ user.image }}">
     <div class="card-block">
       <h4 class="card-title">{{ user.name }}</h4>
-      <p class="card-text">{{ user.email }}</p>
+      <p class="card-text">{{ user.mail }}</p>
     </div>
     <div>
       <div class="card-block">
