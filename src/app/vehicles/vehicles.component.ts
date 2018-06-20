@@ -54,13 +54,9 @@ export class VehiclesComponent implements OnInit {
       .subscribe(fetchedVs => this.vehicles = fetchedVs);
   }
 
-  // add(): void {
-  //   delete this.newVehicle.typeName;
-  //   this.vehicleService.addVehicle(this.newVehicle)
-  //     .subscribe(vehicle => {
-  //       this.vehicles.push(vehicle);
-  //     } );
-  // }
+  add(): void {
+
+  }
   //
   // delete(vehicle): void {
   //   this.vehicleService.deleteVehicle(vehicle.id)
