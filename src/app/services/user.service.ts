@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 // import { USERS } from './mock-users';
 import { User } from '../models/user';
+import { UserDto } from '../models/userDto';
 import { CurrentAccount } from '../models/currentAccount';
 
 import { MessageService } from './message.service';
@@ -19,12 +21,21 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
-  private user = null;
   private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
+  private user = null;
+  private currentCuil = null;
+  private currentUserDto = null;
+  private currentMail = null;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
+
+
+  ngOnInit() {
+    const mail = this.getCurrentUser().mail;
+    console.log(`init  email=${mail}`);
+  }
 
   setCurrentUser(any) {
     this.user = any;
@@ -37,6 +48,44 @@ export class UserService {
   isLoguedIn() {
     return this.user !== null;
   }
+
+  setCurrentCuil(){
+    this.currentCuil = this.getCurrentUserCuil();
+  }
+
+  getCurrentCuil(){
+    return this.currentCuil;
+  }
+
+  setCurrentUserDto(){
+    const mail = this.getCurrentUser().mail;
+    this.currentMail = mail;
+    console.log(`setCurrentUserDto email=${this.currentMail}`);
+    this.currentUserDto = this.findUserDto(mail);
+  }
+
+  getCurrentUserDto(){
+    return this.currentUserDto;
+  }
+
+
+  getCurrentUserCuil() {
+    const mail = this.getCurrentUser().mail;
+    console.log(`getCurrentUserCuil email=${mail}`);
+    UserDto user = this.findUserDto(mail);
+    console.log(`getCurrentUserCuil user=${user}`);
+    return user.cuil;
+  }
+
+
+  findUserDto(email: string) {
+    const url = `${this.usersUrl}/mail/${email}`;
+    return this.http.get<UserDto>(url).pipe(
+      tap(_ => this.log(`fetched userDto mail=${email}`)),
+      catchError(this.handleError<UserDto>(`findUserDto mail=${email}`))
+    );
+  }
+
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl + '/all')

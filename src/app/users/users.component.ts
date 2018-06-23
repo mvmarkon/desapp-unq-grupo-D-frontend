@@ -50,6 +50,7 @@ export class UsersComponent implements OnInit {
         return row;
       }
     };
+    //this.userService.setCurrentCuil();
   }
   routeUserPage(data): void {
     this.router.navigateByUrl('/userdetail/' + data[0]);

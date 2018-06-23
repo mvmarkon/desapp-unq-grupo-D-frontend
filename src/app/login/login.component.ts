@@ -17,6 +17,7 @@ declare var gapi: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements  AfterViewInit {
+  //loggedIN: boolean = false;
   user: any;
   title: String = 'CARPND LOGIN';
   public auth2: any;
@@ -54,6 +55,8 @@ export class LoginComponent implements  AfterViewInit {
         usr['name'] = profile.ig;
         this.user = usr;
         this.userService.setCurrentUser(usr);
+        console.log(`loginnnnnnnnnnnnnn`);
+        this.userService.setCurrentUserDto();
         this.router.navigate(['dashboard']);
       }, function(error) {
         alert(JSON.stringify(error, undefined, 2));

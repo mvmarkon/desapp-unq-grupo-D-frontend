@@ -25,10 +25,10 @@ export class RentalService {
     private messageService: MessageService) { }
 
 
-  getRentals(): Observable<Rental[]> {
-    return this.http.get<Rental[]>(this.rentalUrl + '/all')
-    .pipe(
-      tap(Rentals => this.log(`fetched rental`)),
+  getRentals(id: string): Observable<Rental[]> {
+    const url = `${this.rentalUrl}/all/${id}`;
+    return this.http.get<Rental[]>(url).pipe(
+      tap(Rentals => this.log(`fetched rentals`)),
       catchError(this.handleError('getRental', []))
     );
   }
