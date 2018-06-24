@@ -62,23 +62,24 @@ export class UserService {
     this.currentMail = mail;
     console.log(`setCurrentUserDto email=${this.currentMail}`);
     this.currentUserDto = this.findUserDto(mail);
+    console.log(`init  this.currentUserDto=${this.currentUserDto.email}`);
   }
 
   getCurrentUserDto(){
-    return this.currentUserDto;
+    return this.currentUserDto; 
   }
 
 
   getCurrentUserCuil() {
     const mail = this.getCurrentUser().mail;
     console.log(`getCurrentUserCuil email=${mail}`);
-    UserDto user = this.findUserDto(mail);
+    const user = this.findUserDto(mail);
     console.log(`getCurrentUserCuil user=${user}`);
-    return user.cuil;
+    return user;
   }
 
 
-  findUserDto(email: string) {
+  findUserDto(email: string): Observable<UserDto> {
     const url = `${this.usersUrl}/mail/${email}`;
     return this.http.get<UserDto>(url).pipe(
       tap(_ => this.log(`fetched userDto mail=${email}`)),

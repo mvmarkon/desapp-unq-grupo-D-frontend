@@ -37,6 +37,7 @@ export class UsersComponent implements OnInit {
       this.getUsers();
     }); }
 
+
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -52,9 +53,13 @@ export class UsersComponent implements OnInit {
     };
     //this.userService.setCurrentCuil();
   }
+
+
   routeUserPage(data): void {
     this.router.navigateByUrl('/userdetail/' + data[0]);
   }
+
+
   getUsers(): void {
     this.userService.getUsers()
       .subscribe(usrs => {
