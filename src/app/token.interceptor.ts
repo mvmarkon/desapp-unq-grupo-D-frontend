@@ -10,12 +10,12 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public userservice: UserService) {}
-  public usertokenid = this.userservice.getCurrentUser().idToken;
+  public usertokenid = this.userservice.getCurrentUser().idtoken;
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
-      // setHeaders: {
-      //   Authorization: 'Bearer' + this.usertokenid
-      // }
+      setHeaders: {
+        Authorization: 'Bearer' + this.usertokenid
+      }
     });
     return next.handle(request);
   }

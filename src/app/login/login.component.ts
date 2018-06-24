@@ -1,22 +1,14 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 declare var gapi: any;
 
-// const hintPromise = googleyolo.hint({
-//   supportedAuthMethods: ['https://accounts.google.com'],
-//   supportedIdTokenProviders: [
-//     {
-//       uri: 'https://accounts.google.com',
-//       clientId: '554541568676-lbhid6hqkvse7dsk70vu705lq9aspsog.apps.googleusercontent.com'
-//     }]
-//   });
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements  AfterViewInit {
+export class LoginComponent implements  AfterViewInit, OnInit {
   user: any;
   title: String = 'CARPND LOGIN';
   public auth2: any;
@@ -27,9 +19,13 @@ export class LoginComponent implements  AfterViewInit {
   ) { }
 
   signOut(): void {
-    gapi.auth2.signOut();
-    this.user = null;
-    this.userService.setCurrentUser(null);
+    const self = this;
+    const auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(() => {
+      this.userService.removeCurrentUser();
+      this.router.navigate(['login']);
+      // this.user = this.userService.getCurrentUser();
+    });
   }
 
   public googleInit() {
@@ -60,10 +56,12 @@ export class LoginComponent implements  AfterViewInit {
       });
   }
 
+  ngOnInit() {
+    this.userService.cast.subscribe(usr => {
+      this.user = usr;
+    });
+  }
   ngAfterViewInit() {
-    this.user = this.userService.getCurrentUser();
-    if (!this.userService.isLoguedIn()) {
-      this.googleInit();
-    }
+    this.googleInit();
   }
 }

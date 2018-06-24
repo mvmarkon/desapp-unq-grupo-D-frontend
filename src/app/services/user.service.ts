@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-// import { USERS } from './mock-users';
+import { Profile } from '../models/profile';
 import { User } from '../models/user';
 import { CurrentAccount } from '../models/currentAccount';
 
@@ -18,8 +19,8 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
-
-  private user = null;
+  private user = new BehaviorSubject<Profile>(null);
+  cast = this.user.asObservable();
   private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
 
   constructor(
@@ -27,15 +28,19 @@ export class UserService {
     private messageService: MessageService) { }
 
   setCurrentUser(any) {
-    this.user = any;
+    this.user.next(any);
+  }
+
+  removeCurrentUser() {
+    this.setCurrentUser(null);
   }
 
   getCurrentUser() {
-    return this.user;
+    return this.user.value;
   }
 
   isLoguedIn() {
-    return this.user !== null;
+    return this.user.value !== null;
   }
 
   getUsers(): Observable<User[]> {
