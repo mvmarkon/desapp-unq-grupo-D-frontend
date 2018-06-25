@@ -9,15 +9,16 @@ import { DemoComponent } from '../demo/demo.component'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  users: User[] = [];
+  user: User;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.getUsers();
+    this.getUser();
+    console.log(this.user)
   }
 
-  getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users.slice(1, 5));
+  getUser(): void {
+    this.user= this.userService.getCurrentUserDto()
+
   }
 }

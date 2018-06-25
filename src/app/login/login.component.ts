@@ -56,7 +56,7 @@ export class LoginComponent implements  AfterViewInit {
         this.user = usr;
         this.userService.setCurrentUser(usr);
         console.log(`loginnnnnnnnnnnnnn`);
-        this.userService.setCurrentUserDto();
+        this.userService.setCurrentUserDto()
         this.router.navigate(['dashboard']);
       }, function(error) {
         alert(JSON.stringify(error, undefined, 2));

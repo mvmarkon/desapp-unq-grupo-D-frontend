@@ -28,7 +28,6 @@ export class UserService {
   private currentCuil = null;
   private currentUserDto = null;
   private currentMail = null;
-  userDTO: UserDto;
 
   constructor(
     private http: HttpClient,
@@ -36,13 +35,11 @@ export class UserService {
 
 
   ngOnInit() {
-    const mail = this.getCurrentUser().mail;
-    console.log(`init  email=${mail}`);
-    //this.userDTO = this.findUserDto(mail);
   }
 
   setCurrentUser(any) {
     this.user = any;
+    this.currentMail=this.user.mail;
   }
 
   getCurrentUser() {
@@ -62,14 +59,14 @@ export class UserService {
   }
 
   setCurrentUserDto(){
-    const mail = this.getCurrentUser().mail;
-    this.currentMail = mail;
-    console.log(`setCurrentUserDto email=${this.currentMail}`);
-    //this.currentUserDto = this.findUserDto(mail);
-    this.userDTO = <UserDto>this.findUserDto(mail);
-    //let dto = this.findUserDto(mail);
-    console.log(`init  this.currentUserDto=${this.userDTO.name}`);
-  }
+    this.findUserDto(this.currentMail).subscribe(
+    currentUser => {
+      console.log(currentUser)
+        this.currentUserDto =currentUser;
+      });
+    console.log(`init  this.currentUserDto=${this.currentUserDto.name}`);
+  };
+
 
   getCurrentUserDto(){
     return this.currentUserDto;
@@ -88,20 +85,10 @@ export class UserService {
   findUserDto(email: string) {
     const url = `${this.usersUrl}/mail/${email}`;
     return this.http.get<UserDto>(url)
-    .map((res: UserDto) => {
-      let newDto: UserDto = {
-        name: res.name,
-        cuil: res.cuil,
-        email: res.email,
-        surname: res.surname,
-        address: res.address
-      };
-       console.log("body: " + newDto.cuil);
-       return newDto || null
-     })
-     .catch((error) => {
-       return Observable.throw(error)
-     })
+    .pipe(
+      tap(userDto => this.log(`fetched userDto`)),
+      catchError(this.handleError('findUserDto', []))
+    );
   }
 
 

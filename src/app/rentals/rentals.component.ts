@@ -51,7 +51,7 @@ export class RentalsComponent implements OnInit {
   getUserDTO(): void {
     //const id = +this.route.snapshot.paramMap.get('id');
     this.userService.findUserDto("mverdecanna@gmail.com")
-      .subscribe(user => this.dto = user);
+      .subscribe(user => console.log(user));
   }
 
 
