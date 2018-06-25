@@ -37,23 +37,14 @@ export class RentalsComponent implements OnInit {
     //const cuil = this.userService.getCurrentUserDto();
     //this.dto = this.userService.getCurrentUserDto();
     this.getUserDTO();
-    this.email = "mverdecannaQgmail.com";
-    console.log(`en init rental dto=${this.email}`);
+    this.email = "mverdecanna@gmail.com";
+    console.log(`en init rental dto=${this.dto}`);
     //console.log(`en rental cuil=${cuil}`);
-    this.rentalService.getRentals("20320231680").subscribe(rentals =>{
-        this.rentals = rentals
-      });
-    console.log(`en init rentals=${this.rentals}`);
-  }
 
-
-
-  getRentals(): void {
-    this.rentalService.getRentals("20320231680")
-      .subscribe(rents => {
-        this.rentals = rents;
-        this.dtTrigger.next();
-      });
+    // this.rentalService.getRentals("20320231680").subscribe(rentals =>{
+    //     this.rentals = rentals
+    //   });
+    // console.log(`en init rentals=${this.rentals}`);
   }
 
 
@@ -64,6 +55,13 @@ export class RentalsComponent implements OnInit {
   }
 
 
+  getRentals(): void {
+    this.rentalService.getRentals("20320231680")
+      .subscribe(rents => {
+        this.rentals = rents;
+        this.dtTrigger.next();
+      });
+  }
 
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Response } from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -11,6 +11,8 @@ import { UserDto } from '../models/userDto';
 import { CurrentAccount } from '../models/currentAccount';
 
 import { MessageService } from './message.service';
+//import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,15 +28,17 @@ export class UserService {
   private currentCuil = null;
   private currentUserDto = null;
   private currentMail = null;
+  userDTO: UserDto;
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {}
 
 
   ngOnInit() {
     const mail = this.getCurrentUser().mail;
     console.log(`init  email=${mail}`);
+    //this.userDTO = this.findUserDto(mail);
   }
 
   setCurrentUser(any) {
@@ -61,31 +65,45 @@ export class UserService {
     const mail = this.getCurrentUser().mail;
     this.currentMail = mail;
     console.log(`setCurrentUserDto email=${this.currentMail}`);
-    this.currentUserDto = this.findUserDto(mail);
-    console.log(`init  this.currentUserDto=${this.currentUserDto.email}`);
+    //this.currentUserDto = this.findUserDto(mail);
+    this.userDTO = <UserDto>this.findUserDto(mail);
+    //let dto = this.findUserDto(mail);
+    console.log(`init  this.currentUserDto=${this.userDTO.name}`);
   }
 
   getCurrentUserDto(){
-    return this.currentUserDto; 
+    return this.currentUserDto;
   }
 
 
   getCurrentUserCuil() {
     const mail = this.getCurrentUser().mail;
     console.log(`getCurrentUserCuil email=${mail}`);
-    const user = this.findUserDto(mail);
+    let user = this.findUserDto(mail);
     console.log(`getCurrentUserCuil user=${user}`);
     return user;
   }
 
 
-  findUserDto(email: string): Observable<UserDto> {
+  findUserDto(email: string) {
     const url = `${this.usersUrl}/mail/${email}`;
-    return this.http.get<UserDto>(url).pipe(
-      tap(_ => this.log(`fetched userDto mail=${email}`)),
-      catchError(this.handleError<UserDto>(`findUserDto mail=${email}`))
-    );
+    return this.http.get<UserDto>(url)
+    .map((res: UserDto) => {
+      let newDto: UserDto = {
+        name: res.name,
+        cuil: res.cuil,
+        email: res.email,
+        surname: res.surname,
+        address: res.address
+      };
+       console.log("body: " + newDto.cuil);
+       return newDto || null
+     })
+     .catch((error) => {
+       return Observable.throw(error)
+     })
   }
+
 
 
   getUsers(): Observable<User[]> {
