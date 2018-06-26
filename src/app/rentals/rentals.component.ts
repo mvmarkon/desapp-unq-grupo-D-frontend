@@ -38,7 +38,7 @@ export class RentalsComponent implements OnInit {
     //this.dto = this.userService.getCurrentUserDto();
     this.getUserDTO();
     this.email = "mverdecanna@gmail.com";
-    console.log(`en init rental dto=${this.dto}`);
+    console.log(`en init rental 2 dto=${this.dto}`);
     //console.log(`en rental cuil=${cuil}`);
 
     // this.rentalService.getRentals("20320231680").subscribe(rentals =>{
@@ -50,13 +50,18 @@ export class RentalsComponent implements OnInit {
 
   getUserDTO(): void {
     //const id = +this.route.snapshot.paramMap.get('id');
-    this.userService.findUserDto("mverdecanna@gmail.com")
-      .subscribe(user => console.log(user));
+    this.dto = this.userService.getCurrentUserDto();
+    console.log(`en init rental 1 dto=${this.dto.name}`);
+    //this.userService.findUserDto("mverdecanna@gmail.com")
+      //.subscribe(user => console.log(user));
+      //.subscribe(user => this.dto = user);
   }
 
 
   getRentals(): void {
-    this.rentalService.getRentals("20320231680")
+    let cuil = this.userService.getCurrentUserDto().cuil;
+    console.log(`en init rental cuil=${cuil}`);
+    this.rentalService.getRentals(cuil)
       .subscribe(rents => {
         this.rentals = rents;
         this.dtTrigger.next();

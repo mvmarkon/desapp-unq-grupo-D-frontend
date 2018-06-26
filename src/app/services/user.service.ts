@@ -64,7 +64,9 @@ export class UserService {
       console.log(currentUser)
         this.currentUserDto =currentUser;
       });
-    console.log(`init  this.currentUserDto=${this.currentUserDto.name}`);
+    console.log(`init  this.currentUserDto=${this.currentUserDto}`);
+    //this.currentCuil = this.currentUserDto.cuil;
+    //console.log(`init  this.currentCuil=${this.currentCuil}`);
   };
 
 
