@@ -71,7 +71,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
    },
   {
-    path: 'addRental',
+    path: 'addRental/:id',
     component: CreateRentalComponent,
     canActivate: [AuthGuardService]
   },

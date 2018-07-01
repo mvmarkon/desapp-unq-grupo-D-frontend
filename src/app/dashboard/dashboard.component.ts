@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
+import { UserDto } from '../models/userDto'
 import { UserService } from '../services/user.service';
 import { DemoComponent } from '../demo/demo.component'
 
@@ -9,7 +10,7 @@ import { DemoComponent } from '../demo/demo.component'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  user: User;
+  user: UserDto;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
