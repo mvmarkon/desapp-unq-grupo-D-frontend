@@ -4,8 +4,13 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { IMyDpOptions } from 'mydatepicker'
 
 import { RentalService } from '../services/rental.service'
+import { UserService } from '../services/user.service'
+import { VehicleService } from '../services/vehicle.service'
+
 
 import { User } from '../models/user'
+import { UserDto} from '../models/userDto'
+
 import { Vehicle } from '../models/vehicle'
 import { Rental } from '../models/rental'
 
@@ -17,36 +22,51 @@ import { Rental } from '../models/rental'
 })
 export class CreateRentalComponent implements OnInit {
   @Input() vehicleRent:Vehicle
-  rentUser:User
+  rentUser:UserDto
   ownerUser:User
-  model:Rental
-
-  public myDatePickerOptions: IMyDpOptions = {
-            height: '34px',
-            width: '210px',
-            inline: false,
-            dateFormat: 'dd.mm.yyyy'
-     };
-
   private myForm: FormGroup;
 
-  constructor(private rentalService:RentalService,private formBuilder: FormBuilder) { }
+  constructor(private rentalService:RentalService,
+              private userService:UserService,
+              private vehicleService:VehicleService,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.model = this.newRental()
-    }
+    console.log(this.vehicleRent)
+    this.rentUser = this.userService.getCurrentUserDto()
+    console.log(this.vehicleRent.ownerCuil);
+    const cuil = parseInt(this.vehicleRent.ownerCuil);
+    console.log(cuil)
+    this.userService.getUser(cuil).subscribe(
+      user => {
+            console.log(user)
+            this.ownerUser = user
+      }
+    )
 
-  newRental():Rental {
-  return {
-    id :"",
-    startDate : new Date(),
-    endDate : new Date(),
-    ownerCuil : this.ownerUser.cuil,
-    rentalCuil: this.rentUser.cuil,
-    vehicleID : this.vehicleRent.id
-  }
 }
+
+
+
   createRental(){
-        this.rentalService.addRental(this.model)
+        var log =(<HTMLInputElement>document.getElementById("begin-time")).value;
+        var log2 =(<HTMLInputElement>document.getElementById("finish-time")).value;
+
+        var res= {
+        'id':'1',
+        'ownerCuil' : this.ownerUser.cuil,
+        'vehicleID' : this.vehicleRent.id,
+        'clientCuil': this.rentUser.cuil,
+        'startDate' : new Date(Date.parse(log)),
+        'endDate'  : new Date(Date.parse(log))
+      }
+        console.log(res)
+        // this.model.startDate=new Date (log.value);
+        // this.model.endDate=new Date(log2.value)
+        this.rentalService.addRental(res).subscribe(
+        rental=> {
+          console.log(rental)
+        }
+      )
     }
 }

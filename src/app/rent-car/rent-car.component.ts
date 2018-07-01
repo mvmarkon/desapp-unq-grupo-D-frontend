@@ -11,6 +11,7 @@ import { VehicleService } from '../services/vehicle.service';
   styleUrls: ['./rent-car.component.css']
 })
 export class RentCarComponent implements OnInit {
+    rentalAccept: boolean = false;
     vehicles: Vehicle[];
     dtOptions: DataTables.Settings ;
     // dtTrigger: Subject<any> = new Subject();
@@ -46,7 +47,9 @@ export class RentCarComponent implements OnInit {
         .subscribe(fetchedVs => this.vehicles = fetchedVs);
     }
     rent(vehicle){
-
+          console.log(vehicle)
+          this.vehicleView = vehicle
+          this.rentalAccept = true
 
     }
 }
