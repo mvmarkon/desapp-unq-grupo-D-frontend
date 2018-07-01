@@ -6,6 +6,6 @@ export class Rental {
   startDate: Date;
   endDate: Date;
   ownerCuil: string;
-  rentalCuil: string;
+  clientCuil: string;
   vehicleID: string;
 }

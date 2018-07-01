@@ -9,4 +9,5 @@ export class Vehicle {
   description: string;
   phone: string;
   cost: number;
+  ownerCuil:string;
 }
