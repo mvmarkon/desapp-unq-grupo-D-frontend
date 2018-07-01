@@ -41,9 +41,9 @@ export class CreateRentalComponent implements OnInit {
     id :"",
     startDate : new Date(),
     endDate : new Date(),
-    ownerCuil : this.ownerUser.cuil,
-    rentalCuil: this.rentUser.cuil,
-    vehicleID : this.vehicleRent.id
+    ownerCuil : "",//this.ownerUser.cuil,
+    rentalCuil: "",//this.rentUser.cuil,
+    vehicleID : ""//this.vehicleRent.id
   }
 }
   createRental(){

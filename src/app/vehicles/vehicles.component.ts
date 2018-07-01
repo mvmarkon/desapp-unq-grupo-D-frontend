@@ -16,7 +16,7 @@ export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[];
   dtOptions: DataTables.Settings;
   //dtTrigger: Subject<any> = new Subject();
-  vehicleView:Vehicle
+  vehicleView:Vehicle;
 
   constructor(
     private router: Router,
