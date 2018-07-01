@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Vehicle } from '../models/vehicle';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { VehicleDetailComponent } from '../vehicle-detail/vehicle-detail.component';
 import { VehicleService } from '../services/vehicle.service';
 
@@ -15,8 +15,9 @@ import { VehicleService } from '../services/vehicle.service';
 export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[];
   dtOptions: DataTables.Settings;
-  //dtTrigger: Subject<any> = new Subject();
-  vehicleView:Vehicle
+  dtTrigger: Subject<any> = new Subject();
+  vehicleView:Vehicle;
+  newVehicle:Vehicle;
 
   constructor(
     private router: Router,
@@ -28,46 +29,64 @@ export class VehiclesComponent implements OnInit {
     }); }
 
   ngOnInit() {
-    // this.getVehicles();
+    this.getVehicles();
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
-      rowCallback: (row: Node, data: any[] | Object, index: number) => {
-        console.log("cambio el click")
-        const self = this;
-        $('td', row).unbind('click');
-        $('td', row).bind('click', () => {
-          self.routeVehiclePage(data);
-        });
-        return row;
-      }
+      pageLength: 5
+      // rowCallback: (row: Node, data: any[] | Object, index: number) => {
+      //   console.log("cambio el click")
+      //   const self = this;
+      //   $('td', row).unbind('click');
+      //   $('td', row).bind('click', () => {
+      //     self.routeVehiclePage(data);
+      //   });
+      //   return row;
+      // }
     }
+    this.newVehicle ={
+      id: "",
+      type: null,
+      typeName: null,
+      capacity: 0,
+      location: null,
+      retirementAddress: null,
+      returnAddress: null,
+      description: null,
+      phone: null,
+      cost: null,
+      ownerCuil:null
+    }
+
+    console.log(this.vehicles)
 }
 
   routeVehiclePage(data):void{
   console.log(data)
-  this.vehicleView = data[0]
+  // this.vehicleView = data[0]
   }
 
   getVehicles(): void {
     this.vehicleService.getVehicles()
-      .subscribe(fetchedVs => this.vehicles = fetchedVs);
+      .subscribe(
+      fetchedVs =>{ this.vehicles = fetchedVs;
+        console.log(this.vehicles);
+    });
   }
 
   add(): void {
 
   }
   //
-  // delete(vehicle): void {
-  //   this.vehicleService.deleteVehicle(vehicle.id)
-  //     .subscribe(_ => this.vehicles = this.eliminarVehiculo(vehicle.id));
-  // }
-  //
-  // eliminarVehiculo(id): Vehicle[] {
-  //   return this.vehicles.filter(function(v) {
-  //     return id !== v.id;
-  //   });
-  // }
+  delete(vehicle): void {
+    this.vehicleService.deleteVehicle(vehicle.id)
+      .subscribe(_ => this.vehicles = this.eliminarVehiculo(vehicle.id));
+  }
+
+  eliminarVehiculo(id): Vehicle[] {
+    return this.vehicles.filter(function(v) {
+      return id !== v.id;
+    });
+  }
 
   goBack(): void {
     this.location.back();
