@@ -42,8 +42,8 @@ export class RentalService {
     );
   }
 
-  addRental(rental: Rental): Observable<Rental> {
-    const url = `${this.rentalUrl}/save`;
+  addRental(rental) {
+    const url = `${this.rentalUrl}/create`;
     return this.http.post<Rental>(url, rental, httpOptions).pipe(
       tap((vle: Rental) => this.log(`added rental w/ id=${vle.id}`)),
       catchError(this.handleError<Rental>('addRental'))
@@ -80,6 +80,7 @@ export class RentalService {
       // TODO: send the error to remote logging infrastructure
 
       // TODO: better job of transforming error for user consumption
+      console.log(error.message)
       this.log(`${operation} failed: ${error.message}`);
       // Let the app keep running by returning an empty result.
       return of(result as T);
