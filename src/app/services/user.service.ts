@@ -11,8 +11,9 @@ import { UserDto } from '../models/userDto';
 import { CurrentAccount } from '../models/currentAccount';
 
 import { MessageService } from './message.service';
-//import 'rxjs/add/operator/map';
-import 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Profile } from '../models/profile';
+// import 'rxjs/Rx';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,54 +25,55 @@ const httpOptions = {
 export class UserService {
 
   private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
-  private user = null;
+  private user = new BehaviorSubject<Profile>(null);
   private currentCuil = null;
   private currentUserDto = null;
   private currentMail = null;
+  cast = this.user.asObservable();
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {}
 
-
-  ngOnInit() {
-  }
-
   setCurrentUser(any) {
-    this.user = any;
-    this.currentMail=this.user.mail;
-    this.currentCuil=this.user.cuil;
+    this.user.next(any);
+    if (any !== null) {
+      this.currentMail = this.getCurrentUser().mail;
+    }
+  }
+  removeCurrentUser() {
+      this.setCurrentUser(null);
   }
 
   getCurrentUser() {
-    return this.user;
+    return this.user.value;
   }
 
   isLoguedIn() {
-    return this.user !== null;
+    return this.user.value !== null;
   }
 
-  setCurrentCuil(){
+  setCurrentCuil() {
     this.currentCuil = this.getCurrentUserCuil();
   }
 
-  getCurrentCuil(){
+  getCurrentCuil() {
     return this.currentCuil;
   }
 
-  setCurrentUserDto(){
+  setCurrentUserDto() {
     this.findUserDto(this.currentMail).subscribe(
     currentUser => {
-      console.log(currentUser)
-        this.currentUserDto =currentUser;
-      });
-    console.log(`init  this.currentUserDto=${this.currentUserDto}`);
-    this.currentCuil = this.currentUserDto.cuil;
-    console.log(`init  this.currentCuil=${this.currentCuil}`);
-  };
+      console.log(currentUser);
+      this.currentUserDto = currentUser;
+    });
+    // console.log(`init  this.currentUserDto=${this.currentUserDto}`);
+    // this.currentCuil = this.currentUserDto.cuil;
+    // console.log(`init  this.currentCuil=${this.currentCuil}`);
+  }
 
 
-  getCurrentUserDto(){
+  getCurrentUserDto() {
     return this.currentUserDto;
   }
 
@@ -79,9 +81,9 @@ export class UserService {
   getCurrentUserCuil() {
     const mail = this.getCurrentUser().mail;
     console.log(`getCurrentUserCuil email=${mail}`);
-    let user = this.findUserDto(mail);
-    console.log(`getCurrentUserCuil user=${user}`);
-    return user;
+    const usr = this.findUserDto(mail);
+    console.log(`getCurrentUserCuil user=${usr}`);
+    return usr;
   }
 
 
