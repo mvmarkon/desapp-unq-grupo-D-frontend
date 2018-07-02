@@ -45,6 +45,7 @@ import { TokenInterceptor } from './token.interceptor';
 import { CurrentAccountComponent } from './current-account/current-account.component';
 import { HeaderComponent } from './header/header.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
+import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 
 registerLocaleData(localeAR);
 
@@ -69,7 +70,8 @@ registerLocaleData(localeAR);
     HeaderComponent,
     CreateRentalComponent,
     RentCarComponent,
-    CurrentAccountComponent
+    CurrentAccountComponent,
+    RentalDetailComponent
   ],
   entryComponents: [
     ModelContentComponent

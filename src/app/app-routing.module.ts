@@ -18,6 +18,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { CurrentAccountComponent } from './current-account/current-account.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
 import { RentalsComponent } from './rentals/rentals.component';
+import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentCarComponent } from './rent-car/rent-car.component';
 
 const routes: Routes = [

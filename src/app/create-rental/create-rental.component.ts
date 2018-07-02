@@ -24,7 +24,7 @@ export class CreateRentalComponent implements OnInit {
   @Input() vehicleRent:Vehicle
   rentUser:UserDto
   ownerUser:User
-  private myForm: FormGroup;
+
 
   constructor(private rentalService:RentalService,
               private userService:UserService,
@@ -43,10 +43,7 @@ export class CreateRentalComponent implements OnInit {
             this.ownerUser = user
       }
     )
-
-}
-
-
+  }
 
   createRental(){
         var log =(<HTMLInputElement>document.getElementById("begin-time")).value;

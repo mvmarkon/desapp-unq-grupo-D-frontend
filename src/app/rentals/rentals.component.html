@@ -1,4 +1,46 @@
+
+<h2 i18n="navDashboard| @@navRentals">Rentals</h2>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+<thead>
+  <tr>
+    <th i18n="datetableRow| @@rentalId">Rental ID</th>
+    <th i18n="datetableRow| @@startDate">Fecha comienzo</th>
+    <th i18n="datetableRow| @@endDate">Fecha fin</th>
+    <th i18n="datetableRow| @@location">Locacion</th>
+    <th i18n="datetableRow| @@ownerCuil">Cuil del titular</th>
+    <th i18n="datetableRow| @@clientCuil">Cuil del cliente</th>
+<!--    <th i18n="datetableRow| @@delete">Delete</th>  -->
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let rental of rentals">
+    <td>{{ rental.vehicleID }}</td>
+    <td>{{ rental.startDate }}</td>
+    <td>{{ rental.endDate }}</td>
+    <td>{{ rental.location }}</td>
+    <td>{{ rental.ownerCuil }}</td>
+    <td>{{ rental.clientCuil }}</td>
+<!--    <td><button (click)="">Delete </button>  -->
+    <!-- </td> -->
+  </tr>
+</tbody>
+</table>
+
+<ng-template [ngIf]="rentalView";><div>
+  <app-rental-detail [rentalId]="rentalView"></app-rental-detail>
+</div></ng-template>
+
+    <div class="col-6">
+        <div><span i18n="RentalsComponent| @@rentalIdForm">id: </span><input [(ngModel)]="newRental.id"></div>
+        <div><span i18n="RentalsComponent| @@startDateForm">startDate: </span><input [(ngModel)]="newRental.startDate"></div>
+        <div><span i18n="RentalsComponent| @@capacityForm">endDate: </span><input [(ngModel)]="newRental.endDate"></div>
+        <div><span i18n="RentalsComponent| @@locationForm">location: </span><input [(ngModel)]="newRental.location"></div>
+        <div><span i18n="RentalsComponent| @@ownerCuilForm">ownerCuil: </span><input [(ngModel)]="newRental.ownerCuil"></div>
+        <div><span i18n="RentalsComponent| @@clientCuilForm">clientCuil: </span><input [(ngModel)]="newRental.clientCuil"></div>
+      <div>
+        <button (click)="add()" i18n="button| @@saveButton">Save</button>
+      </div>
+</div>
 <div>
-<li *ngFor="let rental of rentals">
-</li>
+<button (click)="goBack()" i18n="button| @@backButton">Back</button>
 </div>
