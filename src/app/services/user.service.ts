@@ -40,6 +40,7 @@ export class UserService {
   setCurrentUser(any) {
     this.user = any;
     this.currentMail=this.user.mail;
+    this.currentCuil=this.user.cuil;
   }
 
   getCurrentUser() {
@@ -65,8 +66,8 @@ export class UserService {
         this.currentUserDto =currentUser;
       });
     console.log(`init  this.currentUserDto=${this.currentUserDto}`);
-    //this.currentCuil = this.currentUserDto.cuil;
-    //console.log(`init  this.currentCuil=${this.currentCuil}`);
+    this.currentCuil = this.currentUserDto.cuil;
+    console.log(`init  this.currentCuil=${this.currentCuil}`);
   };
 
 

@@ -5,6 +5,7 @@ import { Vehicle } from '../models/vehicle';
 import { Subject } from 'rxjs/Subject';
 import { VehicleDetailComponent } from '../vehicle-detail/vehicle-detail.component';
 import { VehicleService } from '../services/vehicle.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-vehicles',
@@ -23,6 +24,7 @@ export class VehiclesComponent implements OnInit {
     private router: Router,
     private location: Location,
     private vehicleService: VehicleService,
+    private userService:UserService,
     private route:ActivatedRoute) {
     route.params.subscribe(val => {
       this.getVehicles();
@@ -74,7 +76,13 @@ export class VehiclesComponent implements OnInit {
   }
 
   add(): void {
-
+    delete this.newVehicle.typeName;
+    this.newVehicle.ownerCuil = this.userService.getCurrentUserDto().cuil
+    console.log(this.newVehicle.ownerCuil)
+    this.vehicleService.addVehicle(this.newVehicle)
+      .subscribe(vehicle => {
+        this.vehicles.push(vehicle);
+      } );
   }
   //
   delete(vehicle): void {

@@ -53,7 +53,6 @@ export class CreateRentalComponent implements OnInit {
         var log2 =(<HTMLInputElement>document.getElementById("finish-time")).value;
 
         var res= {
-        'id':'1',
         'ownerCuil' : this.ownerUser.cuil,
         'vehicleID' : this.vehicleRent.id,
         'clientCuil': this.rentUser.cuil,
