@@ -14,13 +14,18 @@ import { VehicleService } from '../services/vehicle.service';
 
 export class VehicleDetailComponent implements OnInit {
   @Input() vehicleId: string;
-  vehicle:Vehicle
+  @Input() vehicle: Vehicle;
 
   constructor(
     private route: ActivatedRoute,
     private vehicleService: VehicleService,
     private location: Location
   ) {}
+
+
+  ngOnInit() {
+    this.getVehicle();
+  }
 
   update(): void {
     delete this.vehicle.typeName;
@@ -32,13 +37,11 @@ export class VehicleDetailComponent implements OnInit {
     this.location.back();
   }
 
-  getVehicle(id): void {
+  getVehicle(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
     this.vehicleService.getVehicle(id)
       .subscribe(fetchedVehicle => this.vehicle = fetchedVehicle);
   }
-  ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.getVehicle(id);
-  }
+
 
 }

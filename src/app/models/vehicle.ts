@@ -9,5 +9,6 @@ export class Vehicle {
   description: string;
   phone: string;
   cost: number;
-  ownerCuil:string;
+  ownerCuil: string;
+  photo: string;
 }

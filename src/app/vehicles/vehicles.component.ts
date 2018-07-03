@@ -56,7 +56,8 @@ export class VehiclesComponent implements OnInit {
       description: null,
       phone: null,
       cost: null,
-      ownerCuil:null
+      ownerCuil:null,
+      photo: null
     }
 
     console.log(this.vehicles)

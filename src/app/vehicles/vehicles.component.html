@@ -10,6 +10,7 @@
     <th i18n="datetableRow| @@retirementAddress">Retirement Address</th>
     <th i18n="datetableRow| @@returnAddress">Return Address</th>
     <th i18n="datetableRow| @@phone">Phone</th>
+<!--    <th i18n="datetableRow| @@photo">Photo</th>  -->
     <th i18n="datetableRow| @@delete">Delete</th>
     <th i18n="datetableRow| @@details">Details</th>
   </tr>
@@ -24,6 +25,7 @@
     <td>{{ vehicle.retirementAddress }}</td>
     <td>{{ vehicle.returnAddress }}</td>
     <td>{{ vehicle.phone }}</td>
+<!--    <td>{{ vehicle.photo }}</td> -->
     <td><button (click)="delete(vehicle)">Delete </button>
     </td>
     <td><button (click)="goVehicleDetail(vehicle)">Details</button>
@@ -51,6 +53,7 @@
     <div><span i18n="vehiclesComponent| @@descriptionForm">description: </span><input [(ngModel)]="newVehicle.description"></div>
     <div><span i18n="vehiclesComponent| @@phoneForm">phone: </span><input [(ngModel)]="newVehicle.phone"></div>
     <div><span i18n="vehiclesComponent| @@costForm">cost: </span><input [(ngModel)]="newVehicle.cost"></div>
+    <div><span i18n="vehiclesComponent| @@photoForm">photo: </span><input [(ngModel)]="newVehicle.photo"></div>
     <div>
       <button (click)="add()" i18n="button| @@saveButton">Save</button>
       <button (click)="goBack()" i18n="button| @@backButton">Back</button>
