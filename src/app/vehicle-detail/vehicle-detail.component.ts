@@ -37,7 +37,8 @@ export class VehicleDetailComponent implements OnInit {
       .subscribe(fetchedVehicle => this.vehicle = fetchedVehicle);
   }
   ngOnInit() {
-    this.getVehicle(this.vehicleId);
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.getVehicle(id);
   }
 
 }

@@ -96,6 +96,10 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
+  goVehicleDetail(vehicle){
+    this.router.navigateByUrl('/vehicledetail/' + vehicle.id)
+  }
+
   goBack(): void {
     this.location.back();
   }

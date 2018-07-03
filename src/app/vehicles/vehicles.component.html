@@ -11,6 +11,7 @@
     <th i18n="datetableRow| @@returnAddress">Return Address</th>
     <th i18n="datetableRow| @@phone">Phone</th>
     <th i18n="datetableRow| @@delete">Delete</th>
+    <th i18n="datetableRow| @@details">Details</th>
   </tr>
 </thead>
 <tbody>
@@ -24,6 +25,8 @@
     <td>{{ vehicle.returnAddress }}</td>
     <td>{{ vehicle.phone }}</td>
     <td><button (click)="delete(vehicle)">Delete </button>
+    </td>
+    <td><button (click)="goVehicleDetail(vehicle)">Details</button>
     </td>
   </tr>
 </tbody>
