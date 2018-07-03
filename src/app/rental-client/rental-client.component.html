@@ -13,8 +13,8 @@
 <tbody>
   <tr *ngFor="let rental of rentals">
     <td>{{ rental.vehicleID }}</td>
-    <td>{{ rental.startDate }}</td>
-    <td>{{ rental.endDate }}</td>
+    <td>{{ rental.startDate | date:'dd/MM/yyyy' }}</td>
+    <td>{{ rental.endDate | date:'dd/MM/yyyy' }}</td>
     <td>{{ rental.ownerCuil }}</td>
     <td>{{ rental.clientCuil }}</td>
 <!--    <td><button (click)="">Delete </button>  -->
