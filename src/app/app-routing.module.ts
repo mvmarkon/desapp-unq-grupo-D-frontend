@@ -20,7 +20,7 @@ import { CreateRentalComponent } from './create-rental/create-rental.component';
 import { RentalsComponent } from './rentals/rentals.component';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentCarComponent } from './rent-car/rent-car.component';
-
+import { RentalClientComponent } from './rental-client/rental-client.component'
 const routes: Routes = [
   {
     path: '',
@@ -79,6 +79,11 @@ const routes: Routes = [
   {
     path: 'rentals',
     component: RentalsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'rental-client',
+    component: RentalClientComponent,
     canActivate: [AuthGuardService]
   },
   {

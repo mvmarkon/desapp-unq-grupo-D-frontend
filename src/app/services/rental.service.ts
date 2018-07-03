@@ -29,12 +29,19 @@ export class RentalService {
     //const url = `${this.rentalUrl}/all/${cuil}`;
     return this.http.get<Rental[]>(this.rentalUrl + `/all/${cuil}`)
     .pipe(
-      tap(rentals => {
-        this.log(`fetched rentals`)
-      }),
+      tap(rentals => this.log(`fetched rentals`)),
       catchError(this.handleError('getRental', []))
     );
   }
+  getClientRentals(cuil: string): Observable<Rental[]> {
+    //const url = `${this.rentalUrl}/all/${cuil}`;
+    return this.http.get<Rental[]>(this.rentalUrl + `/allclient/${cuil}`)
+    .pipe(
+      tap(rentals => this.log(`fetched rentals`)),
+      catchError(this.handleError('getRental', []))
+    );
+  }
+
 
   getRental(id: number) {
     const url = `${this.rentalUrl}/${id}`;

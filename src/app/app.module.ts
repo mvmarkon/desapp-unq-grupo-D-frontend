@@ -46,6 +46,7 @@ import { CurrentAccountComponent } from './current-account/current-account.compo
 import { HeaderComponent } from './header/header.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
+import { RentalClientComponent } from './rental-client/rental-client.component';
 
 registerLocaleData(localeAR);
 
@@ -71,7 +72,8 @@ registerLocaleData(localeAR);
     CreateRentalComponent,
     RentCarComponent,
     CurrentAccountComponent,
-    RentalDetailComponent
+    RentalDetailComponent,
+    RentalClientComponent
   ],
   entryComponents: [
     ModelContentComponent

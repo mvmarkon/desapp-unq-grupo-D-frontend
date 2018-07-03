@@ -1,0 +1,24 @@
+<h2 i18n="navDashboard| @@navRentals">Rentals</h2>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+<thead>
+  <tr>
+    <th i18n="datetableRow| @@rentalId">Rental ID</th>
+    <th i18n="datetableRow| @@startDate">Fecha comienzo</th>
+    <th i18n="datetableRow| @@endDate">Fecha fin</th>
+    <th i18n="datetableRow| @@ownerCuil">Cuil del titular</th>
+    <th i18n="datetableRow| @@clientCuil">Cuil del cliente</th>
+<!--    <th i18n="datetableRow| @@delete">Delete</th>  -->
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let rental of rentals">
+    <td>{{ rental.vehicleID }}</td>
+    <td>{{ rental.startDate }}</td>
+    <td>{{ rental.endDate }}</td>
+    <td>{{ rental.ownerCuil }}</td>
+    <td>{{ rental.clientCuil }}</td>
+<!--    <td><button (click)="">Delete </button>  -->
+    <!-- </td> -->
+  </tr>
+</tbody>
+</table>
