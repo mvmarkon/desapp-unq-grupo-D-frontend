@@ -1,7 +1,12 @@
 <div *ngIf="vehicle">
   <h2>{{ vehicle.type | uppercase }} Detalles</h2>
-  <div><span>id: </span><input [(ngModel)]="vehicle.id"></div>
-  <div><span>type: </span><input [(ngModel)]="vehicle.type"></div>
+  <!-- <div><span>id: </span><input [(ngModel)]="vehicle.id"></div> -->
+  <div>
+    <label for="type">TYPE</label>
+    <select class="form-control" id="type" required [(ngModel)]="newVehicle.type">
+      <option *ngFor="let type of types" [value]="type">{{type}}</option>
+    </select>
+  <div>
   <div><span>capacity: </span><input [(ngModel)]="vehicle.capacity"></div>
   <div><span>location: </span><input [(ngModel)]="vehicle.location"></div>
   <div><span>retirementAddress: </span><input [(ngModel)]="vehicle.retirementAddress"></div>

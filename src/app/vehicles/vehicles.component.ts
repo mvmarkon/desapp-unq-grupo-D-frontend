@@ -19,7 +19,7 @@ export class VehiclesComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   vehicleView:Vehicle;
   newVehicle:Vehicle;
-
+  types=['MOTORCYCLE','CAR','VAN','TRUCK']
   constructor(
     private router: Router,
     private location: Location,
