@@ -6,7 +6,6 @@
     <th i18n="datetableRow| @@rentalId">Rental ID</th>
     <th i18n="datetableRow| @@startDate">Fecha comienzo</th>
     <th i18n="datetableRow| @@endDate">Fecha fin</th>
-    <th i18n="datetableRow| @@location">Locacion</th>
     <th i18n="datetableRow| @@ownerCuil">Cuil del titular</th>
     <th i18n="datetableRow| @@clientCuil">Cuil del cliente</th>
 <!--    <th i18n="datetableRow| @@delete">Delete</th>  -->
@@ -17,7 +16,6 @@
     <td>{{ rental.vehicleID }}</td>
     <td>{{ rental.startDate }}</td>
     <td>{{ rental.endDate }}</td>
-    <td>{{ rental.location }}</td>
     <td>{{ rental.ownerCuil }}</td>
     <td>{{ rental.clientCuil }}</td>
 <!--    <td><button (click)="">Delete </button>  -->
@@ -26,11 +24,11 @@
 </tbody>
 </table>
 
-<ng-template [ngIf]="rentalView";><div>
+<!-- <ng-template [ngIf]="rentalView";><div>
   <app-rental-detail [rentalId]="rentalView"></app-rental-detail>
-</div></ng-template>
+</div></ng-template> -->
 
-    <div class="col-6">
+    <!-- <div class="col-6">
         <div><span i18n="RentalsComponent| @@rentalIdForm">id: </span><input [(ngModel)]="newRental.id"></div>
         <div><span i18n="RentalsComponent| @@startDateForm">startDate: </span><input [(ngModel)]="newRental.startDate"></div>
         <div><span i18n="RentalsComponent| @@capacityForm">endDate: </span><input [(ngModel)]="newRental.endDate"></div>
@@ -43,4 +41,4 @@
 </div>
 <div>
 <button (click)="goBack()" i18n="button| @@backButton">Back</button>
-</div>
+</div> -->

@@ -27,11 +27,13 @@ export class VehiclesComponent implements OnInit {
     private userService:UserService,
     private route:ActivatedRoute) {
     route.params.subscribe(val => {
-      this.getVehicles();
+      var id = this.userService.getCurrentUserDto().cuil;
+      console.log(id)
+      this.getVehicles(id);
     }); }
 
   ngOnInit() {
-    this.getVehicles();
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5
@@ -68,8 +70,8 @@ export class VehiclesComponent implements OnInit {
   // this.vehicleView = data[0]
   }
 
-  getVehicles(): void {
-    this.vehicleService.getVehicles()
+  getVehicles(id): void {
+    this.vehicleService.getUserVehicles(id)
       .subscribe(
       fetchedVs =>{ this.vehicles = fetchedVs;
         console.log(this.vehicles);

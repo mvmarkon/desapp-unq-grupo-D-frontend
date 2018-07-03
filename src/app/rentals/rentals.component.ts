@@ -82,6 +82,10 @@ export class RentalsComponent implements OnInit {
     this.rentalService.getRentals(cuil)
       .subscribe(rents => {
         this.rentals = rents;
+        this.rentals.map(function(ren){
+          ren.startDate= new Date(ren.startDate)
+          ren.endDate= new Date(ren.endDate)
+        })
         this.dtTrigger.next();
       });
   }

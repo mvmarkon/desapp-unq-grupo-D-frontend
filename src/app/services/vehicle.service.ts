@@ -74,6 +74,15 @@ export class VehicleService {
     );
   }
 
+  getRentalVehicles(id: number): Observable<Vehicle[]> {
+    const url = `${this.vehiclesUrl}/notUser/${id}`;
+    return this.http.get<Vehicle[]>(url)
+    .pipe(
+      tap(vehicles => this.log(`fetched rentalVehicles for user id=${id}`)),
+      catchError(this.handleError('getRentalVehicles', []))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
