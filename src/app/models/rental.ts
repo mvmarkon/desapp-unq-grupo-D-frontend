@@ -8,4 +8,5 @@ export class Rental {
   ownerCuil: string;
   clientCuil: string;
   vehicleID: string;
+  status:string
 }

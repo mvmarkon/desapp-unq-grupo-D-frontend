@@ -3,7 +3,7 @@ import { User } from '../models/user';
 import { UserDto } from '../models/userDto'
 import { UserService } from '../services/user.service';
 import { DemoComponent } from '../demo/demo.component'
-
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,7 +11,8 @@ import { DemoComponent } from '../demo/demo.component'
 })
 export class DashboardComponent implements OnInit {
   user: UserDto;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router:Router) { }
 
   ngOnInit() {
     this.getUser();
@@ -19,7 +20,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getUser(): void {
-    this.user= this.userService.getCurrentUserDto()
-
+    this.user = this.userService.getCurrentUserDto()
   }
+  charge(): void {
+
+    this.router.navigateByUrl('/credits/' + parseInt(this.user.cuil));
+    }
 }
