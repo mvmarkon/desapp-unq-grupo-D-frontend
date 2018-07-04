@@ -1,13 +1,16 @@
 <div *ngIf="rental">
-  <h2>{{ rental.ownerCuil | uppercase }} Detalles</h2>
-  <div><span>id: </span><input [(ngModel)]="rental.id"></div>
-  <div><span>startDate: </span><input [(ngModel)]="rental.startDate"></div>
-  <div><span>endDate: </span><input [(ngModel)]="rental.endDate"></div>
-  <div><span>ownerCuil: </span><input [(ngModel)]="rental.ownerCuil"></div>
-  <div><span>clientCuil: </span><input [(ngModel)]="rental.clientCuil"></div>
-  <div><span>vehicleID: </span><input [(ngModel)]="rental.vehicleID"></div>
+  <h2>Detalles</h2>
   <div>
-    <button (click)="update()">Modificar</button>
-    <button (click)="goBack()">Volver</button>
+    <label>id: </label>
+    {{ rentalView.id }}
   </div>
+  <div><span>startDate: {{ rentalView.startDate }} </span></div>
+  <div><span>endDate: </span>{{rentalView.endDate}}</div>
+  <div><span>ownerCuil: </span>{{rentalView.ownerCuil}}</div>
+  <div><span>clientCuil: </span>{{rentalView.clientCuil}}</div>
+  <div><span>vehicleID: </span>{{rentalView.vehicleID}}</div>
 </div>
+    <div>
+    <button (click)="confirm(rentalView,10)">Confirm</button>
+    <button (click)="cancel(rentalView,10)">Cancel</button>
+  </div>

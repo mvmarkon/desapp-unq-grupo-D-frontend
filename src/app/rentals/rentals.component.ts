@@ -24,6 +24,7 @@ export class RentalsComponent implements OnInit {
   dtOptions: DataTables.Settings ;
   dtTrigger: Subject<any> = new Subject();
   rentalView:Rental;
+  rentalAccept:boolean=false;
 
   constructor(
     private userService: UserService,
@@ -45,7 +46,7 @@ export class RentalsComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 1,
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         console.log("cambio el click")
         const self = this;
@@ -90,7 +91,11 @@ export class RentalsComponent implements OnInit {
       });
   }
 
-
+  details(rental){
+    this.rentalAccept=false
+    this.rentalView=rental
+    this.rentalAccept=true
+  }
   goBack(): void {
     this.location.back();
   }

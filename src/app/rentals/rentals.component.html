@@ -8,7 +8,8 @@
     <th i18n="datetableRow| @@endDate">Fecha fin</th>
     <th i18n="datetableRow| @@ownerCuil">Cuil del titular</th>
     <th i18n="datetableRow| @@clientCuil">Cuil del cliente</th>
-<!--    <th i18n="datetableRow| @@delete">Delete</th>  -->
+    <th i18n="datetableRow| @@status">Status</th>
+   <th i18n="datetableRow| @@details">Details</th>
   </tr>
 </thead>
 <tbody>
@@ -18,16 +19,18 @@
     <td>{{ rental.endDate | date:'dd/MM/yyyy' }}</td>
     <td>{{ rental.ownerCuil }}</td>
     <td>{{ rental.clientCuil }}</td>
-<!--    <td><button (click)="">Delete </button>  -->
-    <!-- </td> -->
+    <td>{{ rental.state }}   </td>
+   <td><button (click)="details(rental)">Details </button>  -->
+    </td>
   </tr>
 </tbody>
 </table>
 
 
-<!-- <ng-template [ngIf]="rentalView";><div>
-  <app-rental-detail [rentalId]="rentalView"></app-rental-detail>
-</div></ng-template> -->
+<div *ngIf="rentalAccept">
+  <div>
+  <app-rental-detail [rental]="rentalView"></app-rental-detail>
+</div>
 
     <!-- <div class="col-6">
         <div><span i18n="RentalsComponent| @@rentalIdForm">id: </span><input [(ngModel)]="newRental.id"></div>

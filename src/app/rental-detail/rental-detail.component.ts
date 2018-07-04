@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Rental } from '../models/rental';
-
+import { Transaction } from '../models/transaction'
 import { RentalService } from '../services/rental.service';
 
 
@@ -14,9 +14,9 @@ import { RentalService } from '../services/rental.service';
 })
 export class RentalDetailComponent implements OnInit {
 
-  @Input() rentalId: string;
-  rental:Rental
-
+  @Input() rental: Rental;
+  rentalView:Rental;
+  transaction:Transaction;
   constructor(
     private route: ActivatedRoute,
     private rentalService: RentalService,
@@ -28,16 +28,40 @@ export class RentalDetailComponent implements OnInit {
     this.location.back();
   }
 
+  confirm(rental,cost){
+    this.transaction = {
+      id: "",
+      cost: cost,
+      create: null,
+      lastUpdate: null,
+      state:null   ,
+      rental: rental
+    }
+    this.rentalService.createTransaction(this.transaction)
+    .subscribe(transaction =>{
+    console.log(transaction)
+    })
 
-  getRental(id): void {
-    this.rentalService.getRental(id)
-      .subscribe(fetchedRental => this.rental = fetchedRental);
+    }
+    cancel(rental,cost){
+      this.transaction = {
+        id: "",
+        cost: cost,
+        create: null,
+        lastUpdate: null,
+        state:null   ,
+        rental: rental
+      }
+      this.rentalService.rejectTransaction(this.transaction)
+      .subscribe(transaction =>{
+      console.log(transaction)
+      })
+    }
+
+    ngOnInit() {
+      this.rentalView=this.rental
+      console.log(this.rental)
+    }
+
+
   }
-
-
-  ngOnInit() {
-    this.getRental(this.rental);
-  }
-
-
-}
