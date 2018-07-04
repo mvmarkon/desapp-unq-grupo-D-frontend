@@ -8,6 +8,7 @@ import { Rental } from '../models/rental';
 
 
 import { MessageService } from '../services/message.service';
+import { Transaction } from '../models/transaction';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -56,6 +57,21 @@ export class RentalService {
     return this.http.post<Rental>(url, rental, httpOptions).pipe(
       tap((vle: Rental) => this.log(`added rental w/ id=${vle.id}`)),
       catchError(this.handleError<Rental>('addRental'))
+    );
+  }
+
+  createTransaction(transaction) {
+    const url = `${this.rentalUrl}/transaction/create`;
+    return this.http.post<Transaction>(url, transaction, httpOptions).pipe(
+      tap((vle: Transaction) => this.log(`added rental w/ id=${vle.id}`)),
+      catchError(this.handleError<Transaction>('createTransaction'))
+    );
+  }
+  rejectTransaction(transaction) {
+    const url = `${this.rentalUrl}/transaction/reject`;
+    return this.http.post<Transaction>(url, transaction, httpOptions).pipe(
+      tap((vle: Transaction) => this.log(`added rental w/ id=${vle.id}`)),
+      catchError(this.handleError<Transaction>('createTransaction'))
     );
   }
 

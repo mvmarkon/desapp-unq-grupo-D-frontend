@@ -25,6 +25,7 @@ export class RentalClientComponent implements OnInit {
   dtOptions: DataTables.Settings ;
   dtTrigger: Subject<any> = new Subject();
   rentalView:Rental;
+  rentalAccept:boolean=false;
 
   constructor(
     private userService: UserService,
@@ -93,6 +94,11 @@ export class RentalClientComponent implements OnInit {
 }
 
 
+details(rental){
+  this.rentalAccept=false
+  this.rentalView=rental
+  this.rentalAccept=true
+}
 
   goBack(): void {
     this.location.back();

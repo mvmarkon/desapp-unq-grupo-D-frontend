@@ -7,6 +7,7 @@
     <th i18n="datetableRow| @@endDate">Fecha fin</th>
     <th i18n="datetableRow| @@ownerCuil">Cuil del titular</th>
     <th i18n="datetableRow| @@clientCuil">Cuil del cliente</th>
+    <th i18n="datetableRow| @@status">Status</th>
 <!--    <th i18n="datetableRow| @@delete">Delete</th>  -->
   </tr>
 </thead>
@@ -17,6 +18,8 @@
     <td>{{ rental.endDate | date:'dd/MM/yyyy' }}</td>
     <td>{{ rental.ownerCuil }}</td>
     <td>{{ rental.clientCuil }}</td>
+    <td>{{ rental.state }}</td>
+
 <!--    <td><button (click)="">Delete </button>  -->
     <!-- </td> -->
   </tr>
