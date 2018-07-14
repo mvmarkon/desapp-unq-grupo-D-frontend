@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ModalCreditsComponent } from '../modal-credits/modal-credits.component'
- 
+import { ModalCreditsComponent } from '../modal-credits/modal-credits.component';
+
 @Component({
   selector: 'app-button-modal',
   templateUrl: './button-modal.component.html',
@@ -11,7 +11,7 @@ import { ModalCreditsComponent } from '../modal-credits/modal-credits.component'
 export class ButtonModalComponent implements OnInit {
   bsModalRef: BsModalRef;
   constructor(private modalService: BsModalService) {}
- 
+
   openModalWithComponent() {
     const initialState = {
       list: [

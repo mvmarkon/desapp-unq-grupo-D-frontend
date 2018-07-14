@@ -47,6 +47,8 @@ import { HeaderComponent } from './header/header.component';
 import { CreateRentalComponent } from './create-rental/create-rental.component';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentalClientComponent } from './rental-client/rental-client.component';
+import { ModalCreditsComponent } from './modal-credits/modal-credits.component';
+import { ButtonModalComponent } from './button-modal/button-modal.component';
 
 registerLocaleData(localeAR);
 
@@ -73,7 +75,9 @@ registerLocaleData(localeAR);
     RentCarComponent,
     CurrentAccountComponent,
     RentalDetailComponent,
-    RentalClientComponent
+    RentalClientComponent,
+    ModalCreditsComponent,
+    ButtonModalComponent
   ],
   entryComponents: [
     ModelContentComponent

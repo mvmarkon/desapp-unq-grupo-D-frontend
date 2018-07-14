@@ -8,7 +8,6 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
   title = 'Carpnd';
-
   constructor (
     private usrService: UserService,
   ) {}

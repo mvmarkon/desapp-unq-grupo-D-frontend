@@ -1,10 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a routerLink="/dashboard" i18n="navDashboard| @@navMenu">Dashboard</a>
-  <a routerLink="/rent-a-car" i18n="navDashboard| @@navRentACar">Rent a Car</a>
-  <!-- <a routerLink="/users" i18n="navDashboard| @@navUser">User</a> -->
-  <a routerLink="/vehicles" i18n="navDashboard| @@navVehicles">Vehicles</a>
-  <a routerLink="/rentals" i18n="navDashboard| @@navRentals">Rentals</a>
-  <a routerLink="/rental-client" i18n="navDashboard| @@navRentalClient">ClientRental</a>
-  <a routerLink="/login" >Perfil</a>
-<!-- <a routerLink="/map" i18n="navDashboard| @@navMap">Map</a> -->
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+  <div class="navbar-header">
+    <img src="assets/CARPNDLogo.png" style="max-width: 45px;padding:0px; float: left"/>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+      <ul class="nav" id="side-menu">
+        <li>
+          <a routerLink="/dashboard" i18n="navDashboard| @@navMenu"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="/rent-a-car" i18n="navDashboard| @@navRentACar">Rent a Car</a>
+        </li>
+        <li>
+          <a routerLink="/vehicles" i18n="navDashboard| @@navVehicles">Vehicles</a>
+        </li>
+        <li>
+          <a routerLink="/rentals" i18n="navDashboard| @@navRentals">Rentals</a>
+        </li>
+        <li>
+          <a routerLink="/rental-client" i18n="navDashboard| @@navRentalClient">ClientRental</a>
+        </li>
+        <li>
+          <a routerLink="/login" >Perfil</a>
+        </li>
+          <!-- <a routerLink="/users" i18n="navDashboard| @@navUser">User</a> -->
+          <!-- <a routerLink="/map" i18n="navDashboard| @@navMap">Map</a> -->
+      </ul>
+    </div>
+  </div>
 </nav>
+
+
+<!-- </div> -->
