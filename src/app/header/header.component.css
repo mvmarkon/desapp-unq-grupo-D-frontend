@@ -39,7 +39,7 @@ body {
 @media (min-width:768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 250px;
+    margin: 0 0 0 150px;
     padding: 0 30px;
     border-left: 1px solid #e7e7e7
   }
@@ -105,7 +105,7 @@ body {
 
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
-  padding-right: 0
+  padding-right: 0;
 }
 
 .sidebar .sidebar-search {
@@ -149,7 +149,7 @@ body {
   .sidebar {
     z-index: 1;
     position: absolute;
-    width: 250px;
+    width: 150px;
     margin-top: 51px
   }
   .navbar-top-links .dropdown-alerts,
@@ -157,6 +157,9 @@ body {
   .navbar-top-links .dropdown-tasks {
     margin-left: auto
   }
+}
+.navbar-default .sidebar {
+  background-color: #f8f8f8;
 }
 
 .btn-outline {
