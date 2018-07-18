@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -27,22 +27,53 @@ export class UserService {
   private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
   private user = new BehaviorSubject<Profile>(null);
   private currentCuil = null;
-  private currentUserDto = null;
-  private currentMail = null;
+  private currentUserDto = new BehaviorSubject<any>(null);
+  private currentMail =  new BehaviorSubject<any>(null);
+  firstTime = true;
   cast = this.user.asObservable();
+  dto = this.currentUserDto.asObservable();
+  mail = this.currentMail.asObservable();
+  tempusr = null;
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) {}
+    private messageService: MessageService) {
+      this.init();
+    }
 
-  setCurrentUser(any) {
+  init() {
+    console.log('user service started');
+    this.mail.subscribe(cmail => {
+      if (cmail) {
+        console.log('mail subscribed');
+        this.setCurrentUserDto();
+      }
+    });
+    this.dto.subscribe(uDto => {
+      this.user.next(this.tempusr);
+    });
+  }
+
+  verifyUser(any) {
+    this.tempusr = any;
     this.user.next(any);
     if (any !== null) {
-      this.currentMail = this.getCurrentUser().mail;
+      this.currentMail.next(any.mail);
     }
   }
+
+  setCurrentUser(any) {
+    // if (any !== null) {
+    //   this.currentMail.next(any.mail);
+    // }
+    this.user.next(any);
+  }
   removeCurrentUser() {
-      this.setCurrentUser(null);
+    this.setCurrentUser(null);
+    this.currentMail.next(null);
+    this.currentUserDto.next(null);
+    this.firstTime = true;
+    this.tempusr = null;
   }
 
   getCurrentUser() {
@@ -50,23 +81,26 @@ export class UserService {
   }
 
   isLoguedIn() {
-    return this.user.value !== null;
+    return this.getCurrentUser() !== null;
   }
 
-  setCurrentCuil() {
-    this.currentCuil = this.getCurrentUserCuil();
-  }
+  // setCurrentCuil() {
+  //   this.currentCuil = this.getCurrentUserCuil();
+  // }
 
-  getCurrentCuil() {
-    return this.currentCuil;
-  }
+  // getCurrentCuil() {
+  //   return this.currentCuil;
+  // }
 
   setCurrentUserDto() {
-    this.findUserDto(this.currentMail).subscribe(
-    currentUser => {
-      console.log(currentUser);
-      this.currentUserDto = currentUser;
-    });
+    this.findUserDto(this.currentMail.value);
+    // .subscribe(
+    // currentUser => {
+    //   if (currentUser) {
+    //     console.log(currentUser);
+    //     this.currentUserDto.next(currentUser);
+    //   }
+    // });
     // console.log(`init  this.currentUserDto=${this.currentUserDto}`);
     // this.currentCuil = this.currentUserDto.cuil;
     // console.log(`init  this.currentCuil=${this.currentCuil}`);
@@ -74,7 +108,7 @@ export class UserService {
 
 
   getCurrentUserDto() {
-    return this.currentUserDto;
+    return this.currentUserDto.value;
   }
 
 
@@ -90,10 +124,17 @@ export class UserService {
   findUserDto(email: string) {
     const url = `${this.usersUrl}/mail/${email}`;
     return this.http.get<UserDto>(url)
-    .pipe(
-      tap(userDto => this.log(`fetched userDto`)),
-      catchError(this.handleError('findUserDto', []))
-    );
+      .subscribe(data  => {
+        console.log(data);
+        this.currentUserDto.next(data);
+        if (data) {
+          this.firstTime = false;
+        }
+      });
+    // .pipe(
+    //   tap(userDto => this.log(`fetched userDto`)),
+    //   catchError(this.handleError<UserDto>('findUserDto'))
+    // );
   }
 
 

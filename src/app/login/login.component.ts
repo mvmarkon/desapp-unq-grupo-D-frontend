@@ -12,6 +12,9 @@ export class LoginComponent implements  AfterViewInit, OnInit {
   user: any;
   title: String = 'CARPND LOGIN';
   public auth2: any;
+  firstTime = false;
+  editing = false;
+  registerEnabled = false;
 
   constructor(
     private userService: UserService,
@@ -23,7 +26,6 @@ export class LoginComponent implements  AfterViewInit, OnInit {
     const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
       this.userService.removeCurrentUser();
-      // this.router.navigate(['login']);
       window.location.reload();
     });
   }
@@ -49,24 +51,31 @@ export class LoginComponent implements  AfterViewInit, OnInit {
         usr['mail'] = profile.U3;
         usr['name'] = profile.ig;
         this.user = usr;
-        this.userService.setCurrentUser(usr);
+        this.userService.verifyUser(usr);
         console.log(`loginnnnnnnnnnnnnn`);
-        this.userService.setCurrentUserDto();
-        this.router.navigate(['dashboard']);
-      }, function(error) {
-        alert(JSON.stringify(error, undefined, 2));
-      });
+    }, function(error) {
+      alert(JSON.stringify(error, undefined, 2));
+    });
   }
-
+  edit() {
+    this.editing = true;
+  }
   ngOnInit() {
+    this.firstTime = this.userService.firstTime;
     this.userService.cast.subscribe(usr => {
       this.user = usr;
     });
+    this.userService.dto.subscribe(udto => {
+      if (udto && udto['register'] && this.userService.firstTime) {
+        this.user = this.userService.getCurrentUser();
+        this.router.navigate(['dashboard']);
+      } else if (udto && !udto['register']) {
+        this.registerEnabled = true;
+        alert(`The user isn't registered, please complete the user data to register`);
+      }
+    });
   }
   ngAfterViewInit() {
-    // this.user = this.userService.getCurrentUser();
-    // if (!this.userService.isLoguedIn()) {
     this.googleInit();
-    // }
   }
 }
