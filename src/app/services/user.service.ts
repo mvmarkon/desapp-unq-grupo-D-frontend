@@ -5,13 +5,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-// import { USERS } from './mock-users';
 import { User } from '../models/user';
 import { UserDto } from '../models/userDto';
 import { CurrentAccount } from '../models/currentAccount';
 
 import { MessageService } from './message.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject, Subject } from 'rxjs/';
 import { Profile } from '../models/profile';
 // import 'rxjs/Rx';
 
@@ -29,11 +28,12 @@ export class UserService {
   private currentCuil = null;
   private currentUserDto = new BehaviorSubject<any>(null);
   private currentMail =  new BehaviorSubject<any>(null);
-  firstTime = true;
+  public firstTime = new BehaviorSubject<any>(true);
   cast = this.user.asObservable();
   dto = this.currentUserDto.asObservable();
   mail = this.currentMail.asObservable();
   tempusr = null;
+  reg = this.firstTime.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -45,21 +45,35 @@ export class UserService {
     console.log('user service started');
     this.mail.subscribe(cmail => {
       if (cmail) {
-        console.log('mail subscribed');
         this.setCurrentUserDto();
       }
     });
     this.dto.subscribe(uDto => {
-      this.user.next(this.tempusr);
+      if (uDto && uDto['register']) {
+        this.user.next(this.tempusr);
+        this.currentCuil = uDto.cuil;
+        // this.firstTime.next(false);
+      } else {
+        this.user.next(null);
+      }
     });
+  }
+
+  failReg() {
+    this.removeCurrentUser();
+    this.firstTime.next(false);
   }
 
   verifyUser(any) {
     this.tempusr = any;
-    this.user.next(any);
+    // this.user.next(any);
     if (any !== null) {
       this.currentMail.next(any.mail);
     }
+  }
+
+  toogleFirst() {
+    this.firstTime.next(!this.firstTime.value);
   }
 
   setCurrentUser(any) {
@@ -72,7 +86,7 @@ export class UserService {
     this.setCurrentUser(null);
     this.currentMail.next(null);
     this.currentUserDto.next(null);
-    this.firstTime = true;
+    this.firstTime.next(true);
     this.tempusr = null;
   }
 
@@ -113,11 +127,12 @@ export class UserService {
 
 
   getCurrentUserCuil() {
-    const mail = this.getCurrentUser().mail;
-    console.log(`getCurrentUserCuil email=${mail}`);
-    const usr = this.findUserDto(mail);
-    console.log(`getCurrentUserCuil user=${usr}`);
-    return usr;
+    // const mail = this.getCurrentUser().mail;
+    // console.log(`getCurrentUserCuil email=${mail}`);
+    // const usr = this.findUserDto(mail);
+    // console.log(`getCurrentUserCuil user=${usr}`);
+    // return usr;
+    return this.currentCuil;
   }
 
 
@@ -127,9 +142,6 @@ export class UserService {
       .subscribe(data  => {
         console.log(data);
         this.currentUserDto.next(data);
-        if (data) {
-          this.firstTime = false;
-        }
       });
     // .pipe(
     //   tap(userDto => this.log(`fetched userDto`)),

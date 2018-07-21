@@ -1,38 +1,60 @@
-<div class="jumbotron bg-transparent text-center">
-  <div *ngIf="!user" class="card text-center">
-    <h6 class="card-header">
-      {{title}}
-    </h6>
-    <div class="card-block">
-      <h4 class="card-title">Not signed in</h4>
-      <p class="card-text">Sign in with</p>
-    </div>
-    <div class="card-block">
-      <button class="btn btn-social-icon btn-google" id="signInWithGoogle">
-        <span class="fa fa-google"></span>
-      </button>
+<div class="row">
+  <div [ngClass]="{'col-md-6': oneOr2, 'col-md-12': !oneOr2}">
+    <div class="jumbotron bg-transparent text-center">
+      <div *ngIf="!user" class="card text-center">
+        <h6 class="card-header">
+          {{title}}
+        </h6>
+        <div class="card-block">
+          <h4 class="card-title">Not signed in</h4>
+          <p class="card-text">Sign in with</p>
+        </div>
+        <div class="card-block">
+          <p>
+            <button class="btn btn-social-icon btn-google" id="signInWithGoogle">
+              <span class="fa fa-google"></span>
+            </button>
+          </p>
+        </div>
+      </div>
+      <div *ngIf="user" class="card text-center">
+        <h6 class="card-header">
+          {{title}}
+        </h6>
+        <div class="card-block">
+          <img class="card-img-top img-responsive photo" src="{{ user.image }}">
+        </div>
+        <div class="card-block">
+          <h4 class="card-title">{{ user.name }}</h4>
+          <p class="card-text">{{ user.mail }}</p>
+        </div>
+        <div>
+          <!-- <div class="card-block"> -->
+            <p>
+              <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+            <!-- </p>
+          </div> -->
+          <!-- <div class="card-block">
+            <p> -->
+              <button class="btn btn-info" (click)="edit()">Edit</button>
+            </p>
+          <!-- </div> -->
+        </div>
+      </div>
+      <p>
+        <button class="btn btn-primary" (click)="register()">Register user</button>
+      </p>
     </div>
   </div>
-  <div *ngIf="!!user" class="card text-center">
-    <h6 class="card-header">
-      {{title}}
-    </h6>
-    <div class="card-block"></div>
-    <img class="card-img-top img-responsive photo" src="{{ user.image }}">
-    <div class="card-block">
-      <h4 class="card-title">{{ user.name }}</h4>
-      <p class="card-text">{{ user.mail }}</p>
-    </div>
-    <div>
-      <div class="card-block">
-        <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+  <div class= "col-md-6">
+    <div class="reg">
+      <div *ngIf= "registerEnabled">
+        <h2 class="card-title">Register user</h2>
+        <app-user-form></app-user-form>
       </div>
-      <div class="card-block">
-        <button disabled="editing" class="btn btn-info" (click)="edit()">Edit</button>
+      <div *ngIf= "editing">
+        <app-user-detail></app-user-detail>
       </div>
-    </div>
-    <div *ngIf="registerEnabled">
-      <app-user-form></app-user-form>
     </div>
   </div>
 </div>

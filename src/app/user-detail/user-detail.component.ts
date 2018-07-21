@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router  } from '@angular/router'
+import { ActivatedRoute, Router  } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { UserService } from '../services/user.service';
@@ -24,7 +24,7 @@ export class UserDetailComponent implements OnInit {
     private userService: UserService,
     private vehicleService: VehicleService,
     private location: Location,
-    private router:Router
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -32,7 +32,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   getUser(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    // const id = +this.route.snapshot.paramMap.get('id');
+    let id = null;
+    if (this.userService.isLoguedIn()) {
+      id = this.userService.getCurrentUserCuil();
+    }
     this.userService.getUser(id)
       .subscribe(user => this.user = user);
   }
