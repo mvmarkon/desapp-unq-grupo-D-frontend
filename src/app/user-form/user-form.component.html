@@ -1,33 +1,43 @@
 
   <!-- EDICION DE NUEVO USUSARIO -->
-  <form #userForm="ngForm">
-    <div class="form-group">
-      <label for="cuil"i18n="labelUser| @@formIdentityCode">SSN</label>
-      <input type="text" class="form-control" id="cuil" required
-     [(ngModel)]="model.cuil" name="cuil" >
+  <form #userForm="ngForm" class="form-horizontal">
+    <div class="form-group row">
+      <label class="col-sm-3 control-label" for="cuil"i18n="labelUser| @@formIdentityCode">SSN:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="cuil" required
+        [(ngModel)]="model.cuil" name="cuil" >
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="name" i18n="labelUser| @@formName">Name</label>
-      <input type="text" class="form-control" id="name" required
-      [(ngModel)]="model.name" name="name">
+      <label class="col-sm-3 control-label" for="name" i18n="labelUser| @@formName">Name:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="name" required
+        [(ngModel)]="model.name" name="name">
+      </div>
     </div>
 
     <div class="form-group">
-        <label for="surname" i18n="labelUser| @@formSurname">Surname</label>
-        <input type="text" class="form-control" id="surname" required
-        [(ngModel)]="model.surname" name="surname">
+        <label class="col-sm-3 control-label" for="surname" i18n="labelUser| @@formSurname">Surname:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="surname" required
+          [(ngModel)]="model.surname" name="surname">
+        </div>
     </div>
 
     <div class="form-group">
-        <label for="email" i18n="labelUser| @@formMail">Mail</label>
-        <input type="email" class="form-control" id="email" required
-        [(ngModel)]="model.email" name="email">
+        <label class="col-sm-3 control-label" for="email" i18n="labelUser| @@formMail">Mail:</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="email" required
+          [(ngModel)]="model.email" name="email">
+        </div>
     </div>
     <div class="form-group">
-        <label for="address" i18n="labelUser| @@formAddress">Address</label>
-        <input type="text" class="form-control" id="address" required
-        [(ngModel)]="model.address" name="address">
+        <label class="col-sm-3 control-label" for="address" i18n="labelUser| @@formAddress">Address:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="address" required
+          [(ngModel)]="model.address" name="address">
+        </div>
     </div>
 
     <button class="btn btn-success" (click)="add()" [disabled]="!userForm.form.valid"  i18n="labelButton| @@newUserButton">

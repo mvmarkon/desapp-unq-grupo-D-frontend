@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Vehicle } from '../models/vehicle';
 import { Subject } from 'rxjs/Subject';
@@ -17,18 +17,18 @@ export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[];
   dtOptions: DataTables.Settings;
   dtTrigger: Subject<any> = new Subject();
-  vehicleView:Vehicle;
-  newVehicle:Vehicle;
-  types=['MOTORCYCLE','CAR','VAN','TRUCK']
+  vehicleView: Vehicle;
+  newVehicle: Vehicle;
+  types = ['MOTORCYCLE', 'CAR', 'VAN', 'TRUCK'];
   constructor(
     private router: Router,
     private location: Location,
     private vehicleService: VehicleService,
-    private userService:UserService,
-    private route:ActivatedRoute) {
+    private userService: UserService,
+    private route: ActivatedRoute) {
     route.params.subscribe(val => {
-      var id = this.userService.getCurrentUserDto().cuil;
-      console.log(id)
+      const id = this.userService.getCurrentUserDto().cuil;
+      console.log(id);
       this.getVehicles(id);
     }); }
 
@@ -46,9 +46,9 @@ export class VehiclesComponent implements OnInit {
       //   });
       //   return row;
       // }
-    }
-    this.newVehicle ={
-      id: "",
+    };
+    this.newVehicle = {
+      id: '',
       type: null,
       typeName: null,
       capacity: 0,
@@ -58,30 +58,29 @@ export class VehiclesComponent implements OnInit {
       description: null,
       phone: null,
       cost: null,
-      ownerCuil:null,
+      ownerCuil: null,
       photo: null
-    }
+    };
+    console.log(this.vehicles);
+  }
 
-    console.log(this.vehicles)
-}
-
-  routeVehiclePage(data):void{
-  console.log(data)
-  // this.vehicleView = data[0]
+  routeVehiclePage(data): void {
+    console.log(data);
+    // this.vehicleView = data[0]
   }
 
   getVehicles(id): void {
     this.vehicleService.getUserVehicles(id)
       .subscribe(
-      fetchedVs =>{ this.vehicles = fetchedVs;
+      fetchedVs => { this.vehicles = fetchedVs;
         console.log(this.vehicles);
     });
   }
 
   add(): void {
     delete this.newVehicle.typeName;
-    this.newVehicle.ownerCuil = this.userService.getCurrentUserDto().cuil
-    console.log(this.newVehicle.ownerCuil)
+    this.newVehicle.ownerCuil = this.userService.getCurrentUserDto().cuil;
+    console.log(this.newVehicle.ownerCuil);
     this.vehicleService.addVehicle(this.newVehicle)
       .subscribe(vehicle => {
         this.vehicles.push(vehicle);
@@ -99,8 +98,8 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  goVehicleDetail(vehicle){
-    this.router.navigateByUrl('/vehicledetail/' + vehicle.id)
+  goVehicleDetail(vehicle) {
+    this.router.navigateByUrl('/vehicledetail/' + vehicle.id);
   }
 
   goBack(): void {
