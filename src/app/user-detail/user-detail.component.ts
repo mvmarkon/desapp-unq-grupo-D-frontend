@@ -57,10 +57,10 @@ export class UserDetailComponent implements OnInit {
     this.location.back();
   }
 
-  charge(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.router.navigateByUrl('/credits/' + id);
-    }
+  // charge(): void {
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   this.router.navigateByUrl('/credits/' + id);
+  //   }
 
 
 }
