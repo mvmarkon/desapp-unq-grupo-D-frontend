@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit {
     this.user = this.userService.getCurrentUserDto();
   }
   charge(): void {
-
-    this.router.navigateByUrl('/credits/' + parseInt(this.user.cuil, 2));
+    this.router.navigateByUrl('/credits/' + parseInt(this.user.cuil));
     }
 }

@@ -13,7 +13,7 @@ import { CurrentAccount } from '../models/currentAccount';
 })
 export class CurrentAccountComponent implements OnInit {
 
-  @Input() currentAccount: CurrentAccount;
+  currentAccount: CurrentAccount;
 
   charge: number;
 
@@ -31,7 +31,7 @@ export class CurrentAccountComponent implements OnInit {
 
 
   getCurrentAccount(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    var id = +this.route.snapshot.paramMap.get('id');
     this.userService.getCurrentAccount(id)
       .subscribe(currentAccount => this.currentAccount = currentAccount);
   }
