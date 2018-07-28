@@ -1,22 +1,13 @@
-<br>
-<div class="container">
-
-   <div class="row">
-
-     <div class="col-md-4 card">
-      <div class="card-block">
-        <h5 class="card-title" i18n="mapComponent| @@distancePoints">Distance Between Points </h5>
-        <!-- <p class="card-text">{{ distanceBetweenPoints.valu }} {{ distanceBetweenPoints.measure }}</p> -->
-        <h5 class="card-title" i18n="mapComponent| @@travelTime">Travel Time</h5>
-        <!-- <p class="card-text">{{ estimatedTravelTime.value }} {{ estimatedTravelTime.measure }}</p> -->
-        <button i18n="button| @@calculate" >Calculate !</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-
-    <div #gmap style=”width:75%;height:400px”></div>
+<div class="row">
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div class="col-md-12">
+        <div class="text-center">
+          <h3>
+            <div id="gmap" #gmap style="width:100%;height:1200px"></div>
+        </h3>
+       </div>
+     </div>
+   </div>
 
 
     <!-- <div class="col-md-12">
@@ -61,5 +52,3 @@
     <!-- </div>
 
   </div> -->
-
-</div>
