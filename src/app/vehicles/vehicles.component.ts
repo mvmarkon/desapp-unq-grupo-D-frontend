@@ -14,11 +14,13 @@ import { UserService } from '../services/user.service';
 
 })
 export class VehiclesComponent implements OnInit {
+  public retirementAddress;
   vehicles: Vehicle[];
   dtOptions: DataTables.Settings;
   dtTrigger: Subject<any> = new Subject();
   vehicleView: Vehicle;
   newVehicle: Vehicle;
+  public returnAddress;
   types = ['MOTORCYCLE', 'CAR', 'VAN', 'TRUCK'];
   constructor(
     private router: Router,
@@ -47,6 +49,13 @@ export class VehiclesComponent implements OnInit {
       //   return row;
       // }
     };
+    var inputReturnAddress = <HTMLInputElement> document.getElementById('returnAddress')
+    this.returnAddress = new google.maps.places.SearchBox(inputReturnAddress)
+
+    var inputRetirementAddress= <HTMLInputElement> document.getElementById('retirementAddress')
+    this.retirementAddress = new google.maps.places.SearchBox(inputRetirementAddress)
+
+
     this.newVehicle = {
       id: '',
       type: null,
@@ -78,6 +87,8 @@ export class VehiclesComponent implements OnInit {
   }
 
   add(): void {
+    this.newVehicle.returnAddress=this.returnAddress.getPlaces()[0].formatted_address;
+    this.newVehicle.retirementAddress=this.retirementAddress.getPlaces()[0].formatted_address;
     delete this.newVehicle.typeName;
     this.newVehicle.ownerCuil = this.userService.getCurrentUserDto().cuil;
     console.log(this.newVehicle.ownerCuil);

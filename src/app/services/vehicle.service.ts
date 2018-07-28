@@ -33,7 +33,7 @@ export class VehicleService {
     );
   }
 
-  getVehicle(id: number) {
+  getVehicle(id: string) {
     const url = `${this.vehiclesUrl}/${id}`;
     return this.http.get<Vehicle>(url).pipe(
       tap(_ => this.log(`fetched vehicle id=${id}`)),

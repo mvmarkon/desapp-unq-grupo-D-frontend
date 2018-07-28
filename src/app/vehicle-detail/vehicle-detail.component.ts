@@ -38,7 +38,7 @@ export class VehicleDetailComponent implements OnInit {
   }
 
   getVehicle(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.vehicleService.getVehicle(id)
       .subscribe(fetchedVehicle => this.vehicle = fetchedVehicle);
   }

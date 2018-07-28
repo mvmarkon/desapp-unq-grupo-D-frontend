@@ -46,10 +46,11 @@
         <option *ngFor="let type of types" [value]="type">{{type}}</option>
       </select>
     <div>
-    <div><span i18n="vehiclesComponent| @@capacityForm">capacity: </span><input [(ngModel)]="newVehicle.capacity"></div>
+      <div><span i18n="vehiclesComponent| @@plateForm">plate: </span><input type="text" [(ngModel)]="newVehicle.id"></div>
+    <div><span i18n="vehiclesComponent| @@capacityForm">capacity: </span><input type="number" [(ngModel)]="newVehicle.capacity"></div>
     <div><span i18n="vehiclesComponent| @@locationForm">location: </span><input [(ngModel)]="newVehicle.location"></div>
-    <div><span i18n="vehiclesComponent| @@retirementAddressForm">retirementAddress: </span><input [(ngModel)]="newVehicle.retirementAddress"></div>
-    <div><span i18n="vehiclesComponent| @@returnAddressForm">returnAddress: </span><input [(ngModel)]="newVehicle.returnAddress"></div>
+    <div><span i18n="vehiclesComponent| @@retirementAddressForm">retirementAddress: </span><input id="retirementAddress" class="controls" type="text" [(ngModel)]="newVehicle.retirementAddress" placeholder="insert Retirement Address"></div>
+    <div><span i18n="vehiclesComponent| @@returnAddressForm">returnAddress: </span><input id="returnAddress" class="controls" type="text" [(ngModel)]="newVehicle.returnAddress" placeholder="insert Return Address"></div>
     <div><span i18n="vehiclesComponent| @@descriptionForm">description: </span><input [(ngModel)]="newVehicle.description"></div>
     <div><span i18n="vehiclesComponent| @@phoneForm">phone: </span><input [(ngModel)]="newVehicle.phone"></div>
     <div><span i18n="vehiclesComponent| @@costForm">cost: </span><input [(ngModel)]="newVehicle.cost"></div>
