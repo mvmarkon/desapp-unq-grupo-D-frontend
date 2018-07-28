@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { MessageService } from '../services/message.service';
+
 declare var gapi: any;
 
 @Component({
@@ -18,7 +20,8 @@ export class LoginComponent implements  AfterViewInit, OnInit {
 
   constructor(
     public userService: UserService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) { }
 
   signOut(): void {
@@ -82,7 +85,7 @@ export class LoginComponent implements  AfterViewInit, OnInit {
         this.router.navigate(['dashboard']);
       } else if (udto && !udto['register']) {
         this.userService.failReg();
-        alert(`The user isn't registered, please complete the user data to register`);
+        this.messageService.add('Error', `The user isn't registered, please complete the user data to register`);
       }
     });
   }

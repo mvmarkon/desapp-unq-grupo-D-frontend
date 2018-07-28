@@ -1,4 +1,4 @@
-import { Rental } from './rental'
+import { Rental } from './rental';
 
 export class Transaction {
   id: string;

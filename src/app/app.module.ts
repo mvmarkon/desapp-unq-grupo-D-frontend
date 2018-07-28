@@ -80,8 +80,9 @@ registerLocaleData(localeAR);
     ButtonModalComponent
   ],
   entryComponents: [
-    ModelContentComponent
-      ],
+    ModelContentComponent,
+    MessagesComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,

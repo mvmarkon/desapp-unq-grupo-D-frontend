@@ -27,18 +27,18 @@ export class RentalService {
 
 
   getRentals(cuil: string): Observable<Rental[]> {
-    //const url = `${this.rentalUrl}/all/${cuil}`;
+    // const url = `${this.rentalUrl}/all/${cuil}`;
     return this.http.get<Rental[]>(this.rentalUrl + `/all/${cuil}`)
     .pipe(
-      tap(rentals => this.log(`fetched rentals`)),
+      // tap(rentals => this.log('Success', `fetched rentals`)),
       catchError(this.handleError('getRental', []))
     );
   }
   getClientRentals(cuil: string): Observable<Rental[]> {
-    //const url = `${this.rentalUrl}/all/${cuil}`;
+    // const url = `${this.rentalUrl}/all/${cuil}`;
     return this.http.get<Rental[]>(this.rentalUrl + `/allclient/${cuil}`)
     .pipe(
-      tap(rentals => this.log(`fetched rentals`)),
+      // tap(rentals => this.log('Success', `fetched rentals`)),
       catchError(this.handleError('getRental', []))
     );
   }
@@ -47,7 +47,7 @@ export class RentalService {
   getRental(id: number) {
     const url = `${this.rentalUrl}/${id}`;
     return this.http.get<Rental>(url).pipe(
-      tap(_ => this.log(`fetched rental id=${id}`)),
+      // tap(_ => this.log('Success', `fetched rental id=${id}`)),
       catchError(this.handleError<Rental>(`getRental id=${id}`))
     );
   }
@@ -55,7 +55,7 @@ export class RentalService {
   addRental(rental) {
     const url = `${this.rentalUrl}/create`;
     return this.http.post<Rental>(url, rental, httpOptions).pipe(
-      tap((vle: Rental) => this.log(`added rental w/ id=${vle.id}`)),
+      tap((vle: Rental) => this.log('Success', `added rental w/ id=${vle.id}`)),
       catchError(this.handleError<Rental>('addRental'))
     );
   }
@@ -63,14 +63,14 @@ export class RentalService {
   createTransaction(transaction) {
     const url = `${this.rentalUrl}/transaction/create`;
     return this.http.post<Transaction>(url, transaction, httpOptions).pipe(
-      tap((vle: Transaction) => this.log(`added rental w/ id=${vle.id}`)),
+      tap((vle: Transaction) => this.log('Success', `added rental w/ id=${vle.id}`)),
       catchError(this.handleError<Transaction>('createTransaction'))
     );
   }
   rejectTransaction(transaction) {
     const url = `${this.rentalUrl}/transaction/reject`;
     return this.http.post<Transaction>(url, transaction, httpOptions).pipe(
-      tap((vle: Transaction) => this.log(`added rental w/ id=${vle.id}`)),
+      tap((vle: Transaction) => this.log('Success', `added rental w/ id=${vle.id}`)),
       catchError(this.handleError<Transaction>('createTransaction'))
     );
   }
@@ -78,24 +78,24 @@ export class RentalService {
   collectVehicleRental(rental: Rental): Observable<any> {
     const url = `${this.rentalUrl}/rental/collect`;
     return this.http.put(url, rental, httpOptions).pipe(
-      tap(_ => this.log(`updated Rental id=${rental.id}`)),
+      tap(_ => this.log('Success', `updated Rental id=${rental.id}`)),
       catchError(this.handleError<any>('collectVehicleRental'))
     );
   }
 
 
-  payRental (rental:Rental):Observable<any> {
+  payRental (rental: Rental): Observable<any> {
     const url = `${this.rentalUrl}/rental/pay`;
     return this.http.put(url, rental, httpOptions).pipe(
-      tap(_ => this.log(`updated Rental id=${rental.id}`)),
+      tap(_ => this.log('Success', `updated Rental id=${rental.id}`)),
       catchError(this.handleError<any>('payRental'))
     );
   }
 
-  returnedVehicleRental (rental:Rental): Observable<any> {
+  returnedVehicleRental (rental: Rental): Observable<any> {
     const url = `${this.rentalUrl}/rental/returned`;
     return this.http.put(url, rental, httpOptions).pipe(
-      tap(_ => this.log(`updated Rental id=${rental.id}`)),
+      tap(_ => this.log('Success', `updated Rental id=${rental.id}`)),
       catchError(this.handleError<any>('returnedVehicleRental'))
     );
   }
@@ -105,13 +105,13 @@ export class RentalService {
       // TODO: send the error to remote logging infrastructure
 
       // TODO: better job of transforming error for user consumption
-      console.log(error.message)
-      this.log(`${operation} failed: ${error.message}`);
+      console.log(error.message);
+      this.log('Error', `${operation} failed: ${error.error}`);
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
-  private log(message: string) {
-    this.messageService.add('UserService: ' + message);
+  private log(type: string, message: string) {
+    this.messageService.add(type, message);
   }
 }

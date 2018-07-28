@@ -37,8 +37,8 @@ export class UserFormComponent implements OnInit {
   add(): void {
     this.userService.addUser(this.model)
     .subscribe( res => {
-      if ( res.cuil ) {
-        alert('The user has been registered succesfully');
+      if ( res ) {
+        // this.messageService.add(type, 'The user has been registered succesfully');
         window.location.reload();
       }}
     );
