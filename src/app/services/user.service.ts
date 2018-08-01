@@ -178,7 +178,10 @@ export class UserService {
   addUser(user: User): Observable<User> {
     const url = `${this.usersUrl}/save`;
     return this.http.post<User>(url, user, httpOptions).pipe(
-      tap((usr: User) => this.log('Success', `added user w/ id=${usr.cuil}`)),
+      tap((usr: User) => {
+        this.log('Success', `The user has been registered succesfully`);
+        setTimeout(function() { window.location.reload(); }, 4000);
+      }),
       catchError(this.handleError<any>(''))
     );
   }
