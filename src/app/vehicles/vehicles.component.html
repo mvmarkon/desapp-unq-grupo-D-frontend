@@ -34,30 +34,94 @@
 </tbody>
 </table>
 
-<ng-template [ngIf]="vehicleView";><div>
-  <app-vehicle-detail [vehicleId]="vehicleView"></app-vehicle-detail>
-</div></ng-template>
-<div>
 
-  <div class="col-6">
-    <div>
-      <label for="type">TYPE</label>
-      <select class="form-control" id="type" required [(ngModel)]="newVehicle.type">
-        <option *ngFor="let type of types" [value]="type">{{type}}</option>
-      </select>
-    <div>
-      <div><span i18n="vehiclesComponent| @@plateForm">plate: </span><input type="text" [(ngModel)]="newVehicle.id"></div>
+  <form #vehicleForm="ngForm" class="form-horizontal">
+      <div class="form-group ">
+        <label class="col-sm-3 control-label"  for="id" i18n="labelUser| @@formAddress">Plate:</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="id" required
+            [(ngModel)]="newVehicle.id" name="id">
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label"  i18n="vehiclesComponent| @@capacityForm">capacity: </label>
+        <div class="col-sm-9">
+            <input type="number" class="form-control" id="capacity" required
+            [(ngModel)]="newVehicle.capacity" name="capacity">
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label"  i18n="vehiclesComponent| @@locationForm">location: </label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="location" required
+            [(ngModel)]="newVehicle.location" name="location">
+          </div>
+
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label"   i18n="vehiclesComponent| @@retirementAddressForm">retirementAddress: </label>
+        <div class="col-sm-9">
+            <input id="retirementAddress" class="form-control" type="text" required
+            [(ngModel)]="newVehicle.retirementAddress" placeholder="insert Retirement Address" name="retirementAddress">
+          </div>
+
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label"   i18n="vehiclesComponent| @@returnAddressForm">returnAddress: </label>
+          <div class="col-sm-9">
+                <input id="returnAddress" class="form-control" type="text" required
+                [(ngModel)]="newVehicle.returnAddress" placeholder="insert Return Address" name="returnAddress">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label"   i18n="vehiclesComponent| @@descriptionForm">description: </label>
+        <div class="col-sm-9">
+                <input type="text"  class="form-control" required id="description" name="description"
+                [(ngModel)]="newVehicle.description">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label"   i18n="vehiclesComponent| @@phoneForm">Phone:  </label>
+        <div class="col-sm-9">
+                <input type="text" required id="phone" name="phone" class="form-control"
+                [(ngModel)]="newVehicle.phone">
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label"   i18n="vehiclesComponent| @@costForm">Cost:  </label>
+        <div class="col-sm-9">
+                <input type="number" required id="cost" name="cost" class="form-control"
+                [(ngModel)]="newVehicle.cost">
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label"   i18n="vehiclesComponent| @@photoForm">Photo:  </label>
+        <div class="col-sm-9">
+                <input type="text" required id="photo" name="photo" class="form-control"
+                [(ngModel)]="newVehicle.photo">
+          </div>
+      </div>
+
+
+      <!-- <div><span i18n="vehiclesComponent| @@plateForm">plate: </span><input type="text" [(ngModel)]="newVehicle.id"></div>
     <div><span i18n="vehiclesComponent| @@capacityForm">capacity: </span><input type="number" [(ngModel)]="newVehicle.capacity"></div>
     <div><span i18n="vehiclesComponent| @@locationForm">location: </span><input [(ngModel)]="newVehicle.location"></div>
     <div><span i18n="vehiclesComponent| @@retirementAddressForm">retirementAddress: </span><input id="retirementAddress" class="controls" type="text" [(ngModel)]="newVehicle.retirementAddress" placeholder="insert Retirement Address"></div>
     <div><span i18n="vehiclesComponent| @@returnAddressForm">returnAddress: </span><input id="returnAddress" class="controls" type="text" [(ngModel)]="newVehicle.returnAddress" placeholder="insert Return Address"></div>
     <div><span i18n="vehiclesComponent| @@descriptionForm">description: </span><input [(ngModel)]="newVehicle.description"></div>
     <div><span i18n="vehiclesComponent| @@phoneForm">phone: </span><input [(ngModel)]="newVehicle.phone"></div>
-    <div><span i18n="vehiclesComponent| @@costForm">cost: </span><input [(ngModel)]="newVehicle.cost"></div>
-    <div><span i18n="vehiclesComponent| @@photoForm">photo: </span><input [(ngModel)]="newVehicle.photo"></div>
-    <div>
-      <button (click)="add()" i18n="button| @@saveButton">Save</button>
-      <button (click)="goBack()" i18n="button| @@backButton">Back</button>
-    </div>
-  </div>
+    <div><span i18n="vehiclesComponent| @@costForm">cost: </span><input [(ngModel)]="newVehicle.cost"></div> -->
+    <!-- <div><span i18n="vehiclesComponent| @@photoForm">photo: </span><input [(ngModel)]="newVehicle.photo"></div>
+    <div> -->
+
+
+
+<div>
+  <button (click)="add()" [disabled]="!vehicleForm.form.valid" i18n="button| @@saveButton">Save</button>
+  <button (click)="goBack()" i18n="button| @@backButton">Back</button>
 </div>
+  <!-- </div> -->

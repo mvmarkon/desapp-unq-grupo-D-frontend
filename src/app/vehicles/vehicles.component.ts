@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Vehicle } from '../models/vehicle';
 import { Subject } from 'rxjs/Subject';
