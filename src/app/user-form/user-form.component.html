@@ -5,7 +5,7 @@
       <label class="col-sm-3 control-label" for="cuil"i18n="labelUser| @@formIdentityCode">SSN:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" id="cuil" required
-        [(ngModel)]="model.cuil" name="cuil" >
+        [(ngModel)]="model.cuil" name="cuil" minlength="11" maxlength="11">
       </div>
     </div>
 
@@ -13,7 +13,7 @@
       <label class="col-sm-3 control-label" for="name" i18n="labelUser| @@formName">Name:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" id="name" required
-        [(ngModel)]="model.name" name="name">
+        [(ngModel)]="model.name" name="name" minlength="4">
       </div>
     </div>
 
@@ -21,7 +21,7 @@
         <label class="col-sm-3 control-label" for="surname" i18n="labelUser| @@formSurname">Surname:</label>
         <div class="col-sm-9">
           <input type="text" class="form-control" id="surname" required
-          [(ngModel)]="model.surname" name="surname">
+          [(ngModel)]="model.surname" name="surname" minlength="4">
         </div>
     </div>
 
@@ -36,7 +36,7 @@
         <label class="col-sm-3 control-label" for="address" i18n="labelUser| @@formAddress">Address:</label>
         <div class="col-sm-9">
           <input type="text" class="form-control" id="address" required
-          [(ngModel)]="model.address" name="address">
+          [(ngModel)]="model.address" name="address" minlength="10">
         </div>
     </div>
 
