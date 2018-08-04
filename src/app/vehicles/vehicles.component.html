@@ -35,6 +35,14 @@
 </table>
 
 
+
+      <div>
+          <label  for="type">TYPE</label>
+            <select class="form-control" id="type" required [(ngModel)]="newVehicle.type">
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+      <div>
+
   <form #vehicleForm="ngForm" class="form-horizontal">
       <div class="form-group ">
         <label class="col-sm-3 control-label"  for="id" i18n="labelUser| @@formAddress">Plate:</label>
