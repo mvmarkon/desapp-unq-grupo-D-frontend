@@ -91,9 +91,11 @@ export class VehiclesComponent implements OnInit {
   getVehicles(id): void {
     this.vehicleService.getUserVehicles(id)
       .subscribe(
-      fetchedVs => { this.vehicles = fetchedVs;
-        console.log(this.vehicles);
-    });
+        fetchedVs => {
+        this.vehicles = fetchedVs;
+          console.log(this.vehicles);
+          this.dtTrigger.next();
+        });
   }
 
   openModal(template: TemplateRef<any>, vehicle: Vehicle) {
