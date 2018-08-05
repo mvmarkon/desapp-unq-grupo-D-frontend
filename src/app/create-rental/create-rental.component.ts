@@ -35,7 +35,7 @@ export class CreateRentalComponent implements OnInit {
     console.log(this.vehicleRent);
     this.rentUser = this.userService.getCurrentUserDto();
     console.log(this.vehicleRent.ownerCuil);
-    const cuil = parseInt(this.vehicleRent.ownerCuil, 2);
+    const cuil = parseInt(this.vehicleRent.ownerCuil);
     console.log(cuil);
     this.userService.getUser(cuil).subscribe(
       user => {
