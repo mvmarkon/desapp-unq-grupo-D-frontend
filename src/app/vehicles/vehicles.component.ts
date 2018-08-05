@@ -119,7 +119,7 @@ export class VehiclesComponent implements OnInit {
     console.log(this.newVehicle.ownerCuil);
     this.vehicleService.addVehicle(this.newVehicle)
       .subscribe(vehicle => {
-        this.vehicles.push(vehicle);
+        if (vehicle && vehicle.id ) {this.vehicles.push(vehicle); }
       } );
   }
   //

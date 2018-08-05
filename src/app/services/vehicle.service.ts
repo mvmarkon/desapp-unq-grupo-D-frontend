@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Vehicle } from '../models/vehicle';
 // import { VEHICLES } from './mock-vehicles';
-
+import { environment } from '../../environments/environment';
 import { MessageService } from '../services/message.service';
 
 const httpOptions = {
@@ -18,7 +18,7 @@ const httpOptions = {
 @Injectable()
 export class VehicleService {
 
-  private vehiclesUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/vehicle';
+  private vehiclesUrl = environment.API_URL + '/vehicle';
 
   constructor(
     private http: HttpClient,

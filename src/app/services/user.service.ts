@@ -13,6 +13,7 @@ import { MessageService } from './message.service';
 import { BehaviorSubject, Subject } from 'rxjs/';
 import { Profile } from '../models/profile';
 // import 'rxjs/Rx';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,7 +24,7 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
-  private usersUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/user';
+  private usersUrl = environment.API_URL + '/user';
   private user = new BehaviorSubject<Profile>(null);
   private currentCuil = null;
   private currentUserDto = new BehaviorSubject<any>(null);

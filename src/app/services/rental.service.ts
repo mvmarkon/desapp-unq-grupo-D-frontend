@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Rental } from '../models/rental';
 
-
+import { environment } from '../../environments/environment';
 import { MessageService } from '../services/message.service';
 import { Transaction } from '../models/transaction';
 
@@ -19,7 +19,7 @@ const httpOptions = {
 @Injectable()
 export class RentalService {
 
-  private rentalUrl = 'http://localhost:8080/desapp-groupD-backend/cxf/rental';
+  private rentalUrl = environment.API_URL + '/rental';
 
   constructor(
     private http: HttpClient,
