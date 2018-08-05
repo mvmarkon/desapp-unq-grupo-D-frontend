@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ModelContentComponent } from '../model-content-component/model-content-component.component'
+import { ModelContentComponent } from '../model-content-component/model-content-component.component';
 
 @Component({
   selector: 'app-demo',

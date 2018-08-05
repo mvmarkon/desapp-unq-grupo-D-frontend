@@ -1,5 +1,5 @@
-import { User } from './user'
-import { Vehicle } from './vehicle'
+import { User } from './user';
+import { Vehicle } from './vehicle';
 
 export class Rental {
   id: string;
@@ -8,5 +8,5 @@ export class Rental {
   ownerCuil: string;
   clientCuil: string;
   vehicleID: string;
-  status:string
+  status: string;
 }
