@@ -9,9 +9,24 @@
   <div><span>description: </span><input [(ngModel)]="vehicle.description"></div>
   <div><span>phone: </span><input [(ngModel)]="vehicle.phone"></div>
   <div><span>cost: </span><input [(ngModel)]="vehicle.cost"></div>
+  <div><span>ownerCuil: </span>{{vehicle.ownerCuil}}</div>
   <div> <img src="{{ vehicle.photo }}" width="150">  </div>
-  <div>
-    <button (click)="update()">Modificar</button>
-    <button (click)="goBack()">Volver</button>
-  </div>
+
+  <ng-container
+     *ngIf="isOwner; then ownerMode; else rentalMode">
+  </ng-container>
+
+  <ng-template #ownerMode>
+    <div>
+      <button (click)="update()">Modificar</button>
+      <button (click)="goBack()">Volver</button>
+    </div>
+  </ng-template>
+  <ng-template #rentalMode>
+    <div>
+      <button (click)="rental()">Rental</button>
+      <button (click)="goBack()">Volver</button>
+    </div>
+  </ng-template>
+
 </div>

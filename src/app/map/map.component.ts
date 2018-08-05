@@ -1,5 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core/';
 import { } from '@types/googlemaps';
 import { VehicleService } from '../services/vehicle.service'
@@ -34,6 +35,7 @@ export class MapComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
+    private router: Router,
     private vehicleService:VehicleService,
     private userService:UserService
   ) {}
@@ -53,59 +55,24 @@ export class MapComponent implements OnInit {
      this.geocoder= new google.maps.Geocoder()
      this.addVehicleInMap();
  }
-//   var input = <HTMLInputElement> document.getElementById('pac-input')
-//   this.searchBox = new google.maps.places.SearchBox(input);
-//   this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('pac-input'));
-//   google.maps.event.addListener(this.searchBox, 'places_changed', function() {
-//     console.log(self.searchBox)
-//     var places = self.searchBox.getPlaces();
-//     console.log(places)
-//     var bounds = new google.maps.LatLngBounds();
-//     var i, place;
-//     for (i = 0; place = places[i]; i++) {
-//       (function(place) {
-//         var marker = new google.maps.Marker({
-//
-//           position: place.geometry.location
-//         });
-//         marker.bindTo('map', self.searchBox, 'map');
-//         google.maps.event.addListener(marker, 'map_changed', function() {
-//           if (!this.getMap()) {
-//             this.unbindAll();
-//           }
-//         });
-//         bounds.extend(place.geometry.location);
-//
-//
-//       }(place));
-//
-//     }
-//     self.map.fitBounds(bounds);
-//     self.searchBox.set('map', self.map);
-//     self.map.setZoom(Math.min(self.map.getZoom(),12));
-//
-//   });
-// }
-
-
 
 addVehicleInMap():void {
-            var id= 0;
             var self= this;
-            this.vehicleService.getVehicles().subscribe((vehicles)=>{
+            this.vehicleService.getRentalVehicles(this.userService.getCurrentUserCuil()).subscribe((vehicles)=>{
                 console.log(vehicles)
                 vehicles.map(function setMaker(vehicle) {
-                    self.geocodeAddress(vehicle.retirementAddress,id,self.redMarker);
-                    self.geocodeAddress(vehicle.returnAddress,id,self.blueMarker)
-                    ++id
+                    self.geocodeAddress(vehicle.retirementAddress,vehicle.id,self.redMarker,self.map);
+                    self.geocodeAddress(vehicle.returnAddress,vehicle.id,self.blueMarker,self.map)
                 })
               })
             }
-geocodeAddress(address,id,markColor) {
+geocodeAddress(address,id,markColor,mapVehicles) {
+              var self=this;
               this.geocoder.geocode({ 'address': address }, function(results, status) {
                 if (status === 'OK') {
+
                   var marker = new google.maps.Marker({
-                    map: this.map,
+                    map: mapVehicles,
                     position: results[0].geometry.location,
                     label:id,
                     icon: {
@@ -115,6 +82,9 @@ geocodeAddress(address,id,markColor) {
                             fillOpacity:1// opacidad del relleno
                           }
                   });
+                  google.maps.event.addListener(marker, 'click', function() {
+                    self.router.navigateByUrl('/vehicledetail/' + marker.getLabel().toString());
+                    });
                 } else {
                   alert('Geocode was not successful for the following reason: ' + status);
                 }
