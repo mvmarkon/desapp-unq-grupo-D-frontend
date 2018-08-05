@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -7,6 +7,9 @@ import { Subject } from 'rxjs/Subject';
 import { VehicleDetailComponent } from '../vehicle-detail/vehicle-detail.component';
 import { VehicleService } from '../services/vehicle.service';
 import { UserService } from '../services/user.service';
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-vehicles',
@@ -21,6 +24,9 @@ export class VehiclesComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   vehicleView: Vehicle;
   newVehicle: Vehicle;
+
+  modalRef: BsModalRef;
+  selectedVehicle: Vehicle;
   public returnAddress;
   types = ['MOTORCYCLE', 'CAR', 'VAN', 'TRUCK'];
   constructor(
@@ -28,14 +34,17 @@ export class VehiclesComponent implements OnInit {
     private location: Location,
     private vehicleService: VehicleService,
     private userService: UserService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private modalService: BsModalService) {
     route.params.subscribe(val => {
       const id = this.userService.getCurrentUserDto().cuil;
       console.log(id);
       this.getVehicles(id);
-    }); }
+    });
+  }
 
   ngOnInit() {
+    // this.getVehicles(this.userService.getCurrentUserDto().cuil);
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -50,11 +59,11 @@ export class VehiclesComponent implements OnInit {
       //   return row;
       // }
     };
-    var inputReturnAddress = <HTMLInputElement> document.getElementById('returnAddress')
-    this.returnAddress = new google.maps.places.SearchBox(inputReturnAddress)
+    const inputReturnAddress = <HTMLInputElement> document.getElementById('returnAddress');
+    this.returnAddress = new google.maps.places.SearchBox(inputReturnAddress);
 
-    var inputRetirementAddress= <HTMLInputElement> document.getElementById('retirementAddress')
-    this.retirementAddress = new google.maps.places.SearchBox(inputRetirementAddress)
+    const inputRetirementAddress = <HTMLInputElement> document.getElementById('retirementAddress');
+    this.retirementAddress = new google.maps.places.SearchBox(inputRetirementAddress);
 
 
     this.newVehicle = {
@@ -87,9 +96,22 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
+  openModal(template: TemplateRef<any>, vehicle: Vehicle) {
+    this.selectedVehicle = vehicle;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+  confirm(): void {
+    this.delete(this.selectedVehicle);
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalRef.hide();
+  }
+
   add(): void {
-    this.newVehicle.returnAddress=this.returnAddress.getPlaces()[0].formatted_address;
-    this.newVehicle.retirementAddress=this.retirementAddress.getPlaces()[0].formatted_address;
+    this.newVehicle.returnAddress = this.returnAddress.getPlaces()[0].formatted_address;
+    this.newVehicle.retirementAddress = this.retirementAddress.getPlaces()[0].formatted_address;
     delete this.newVehicle.typeName;
     this.newVehicle.ownerCuil = this.userService.getCurrentUserDto().cuil;
     console.log(this.newVehicle.ownerCuil);
