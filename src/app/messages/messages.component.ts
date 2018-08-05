@@ -15,9 +15,12 @@ export class MessagesComponent implements OnInit {
   constructor(public bsModalRef: BsModalRef) { }
 
   tipoDeMensaje() {
-    let cls = 'alert alert-';
-    cls += (this.type === 'Error') ? 'danger' : 'success';
-    return cls;
+    const typeOfMessage = {
+      Error: 'alert alert-danger',
+      Success: 'alert alert-success',
+      Warning: 'alert alert-warning'
+    }
+    return typeOfMessage[this.type];
   }
 
   ngOnInit() {

@@ -6,7 +6,7 @@ import { IMyDpOptions } from 'mydatepicker';
 import { RentalService } from '../services/rental.service';
 import { UserService } from '../services/user.service';
 import { VehicleService } from '../services/vehicle.service';
-
+import { MessageService } from '../services/message.service';
 
 import { User } from '../models/user';
 import { UserDto} from '../models/userDto';
@@ -24,11 +24,12 @@ export class CreateRentalComponent implements OnInit {
   @Input() vehicleRent: Vehicle;
   rentUser: UserDto;
   ownerUser: User;
-
+  rentalCost;
 
   constructor(private rentalService: RentalService,
               private userService: UserService,
               private vehicleService: VehicleService,
+              private messageService: MessageService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -45,11 +46,11 @@ export class CreateRentalComponent implements OnInit {
     );
   }
 
+
   createRental() {
     const starTime = (<HTMLInputElement>document.getElementById('begin-time')).value;
     const endTime = (<HTMLInputElement>document.getElementById('finish-time')).value;
-    console.log(starTime);
-    console.log(endTime);
+    this.calculateRentalCost()
     const res = {
       'ownerCuil' : this.ownerUser.cuil,
       'vehicleID' : this.vehicleRent.id,
@@ -58,11 +59,31 @@ export class CreateRentalComponent implements OnInit {
       'endDate'  : new Date(Date.parse(endTime))
     };
     console.log(res);
-      // this.model.startDate=new Date (log.value);
-      // this.model.endDate=new Date(log2.value)
+
     this.rentalService.addRental(res).subscribe(
       rental => {
         console.log(rental);
       });
     }
+
+    calculateDiffDays(dateEnd,dateBegin){
+      console.log(dateEnd)
+      var timeDiff = dateEnd-dateBegin
+      var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      return daysDiff
+    }
+    calculateRentalCost(){
+      let starTime = (<HTMLInputElement>document.getElementById('begin-time')).value;
+      let endTime = (<HTMLInputElement>document.getElementById('finish-time')).value;
+      let dateEnd =  new Date(endTime)
+      let dateStart =  new Date(starTime)
+
+      if ( (starTime == '' || endTime == '' ) || dateEnd < dateStart ){
+        this.messageService.add('Warning','No esta cargada alguna fecho o la fecha de fin es anterior a la de comienzo' );
+      }
+      else{
+        this.rentalCost =this.vehicleRent.cost * this.calculateDiffDays(dateEnd,dateStart)
+      }
+    }
+
 }
