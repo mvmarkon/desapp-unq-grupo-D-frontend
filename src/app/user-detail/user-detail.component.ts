@@ -44,7 +44,8 @@ export class UserDetailComponent implements OnInit {
   update(): void {
     this.user.vehicles = [];
     this.userService.updateUser(this.user)
-      .subscribe(() => this.goBack());
+       .subscribe(() =>
+       this.goBack());
   }
 
   // save(): void {
@@ -54,7 +55,7 @@ export class UserDetailComponent implements OnInit {
 
 
   goBack(): void {
-    this.location.back();
+    // this.location.back();
   }
 
   // charge(): void {

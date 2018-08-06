@@ -30,7 +30,7 @@ export class RentalDetailComponent implements OnInit {
 
   confirm(rental, cost) {
     this.transaction = {
-      id: '',
+      id: rental.id,
       cost: cost,
       create: null,
       lastUpdate: null,
@@ -45,7 +45,7 @@ export class RentalDetailComponent implements OnInit {
     }
     cancel(rental, cost) {
       this.transaction = {
-        id: '',
+        id: rental.id,
         cost: cost,
         create: null,
         lastUpdate: null,

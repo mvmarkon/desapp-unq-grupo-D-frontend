@@ -1,11 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../services/user.service'
-
 import { Vehicle } from '../models/vehicle';
 
+
+import { UserService } from '../services/user.service'
 import { VehicleService } from '../services/vehicle.service';
+import { RentalService } from '../services/rental.service'
+
+
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -25,6 +28,7 @@ export class VehicleDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private vehicleService: VehicleService,
+    private rentalService: RentalService,
     private location: Location
   ) {}
 

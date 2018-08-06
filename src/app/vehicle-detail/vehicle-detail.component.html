@@ -1,6 +1,6 @@
 <div *ngIf="vehicle">
   <h2>{{ vehicle.type | uppercase }} Detalles</h2>
-  <!-- <div><span>id: </span><input [(ngModel)]="vehicle.id"></div> -->
+  <div><span>id: </span><{{vehicle.id}}></div>
   <div><span>type: </span><input [(ngModel)]="vehicle.type"></div>
   <div><span>capacity: </span><input [(ngModel)]="vehicle.capacity"></div>
   <div><span>location: </span><input [(ngModel)]="vehicle.location"></div>
@@ -19,13 +19,15 @@
   <ng-template #ownerMode>
     <div>
       <button (click)="update()">Modificar</button>
-      <button (click)="goBack()">Volver</button>
     </div>
   </ng-template>
   <ng-template #rentalMode>
     <div>
       <button (click)="rental()">Rental</button>
       <button (click)="goBack()">Volver</button>
+    </div>
+    <div>
+      <app-create-rental [vehicleRent]="vehicle"></app-create-rental>
     </div>
   </ng-template>
 

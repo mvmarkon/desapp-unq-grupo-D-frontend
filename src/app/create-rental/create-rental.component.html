@@ -18,12 +18,12 @@
 
   <div>
     <label> Fin  de alquiler</label>
-    <input type="date" id="finish-time" >
+    <input type="date" id="finish-time"  (blur)="calculateRentalCost()" >
   </div>
 
   <div>
     <label> Costo Total </label>
-      <button class="btn btn-success" (click)="calculateRentalCost()"i18n="button| @@rentalCost" >Calculate:</button> {{rentalCost}}
+       {{rentalCost}}
   </div>
 
   <button class="btn btn-success" (click)="createRental()"i18n="button| @@createRental" >
