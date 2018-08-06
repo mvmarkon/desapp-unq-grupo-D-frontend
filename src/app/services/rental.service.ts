@@ -60,6 +60,13 @@ export class RentalService {
     );
   }
 
+  getTransaction(id): Observable<any> {
+    const url = `${this.rentalUrl}/transaction/${id}`
+    return this.http.get<Transaction>(url).pipe(
+      catchError(this.handleError<Transaction>(`getTransaction id=${id}`))
+    )
+  }
+
   createTransaction(transaction) {
     const url = `${this.rentalUrl}/transaction/create`;
     return this.http.post<Transaction>(url, transaction, httpOptions).pipe(
@@ -75,10 +82,10 @@ export class RentalService {
     );
   }
 
-  collectVehicleRental(rental: Rental): Observable<any> {
+  collectVehicleRental(transaction: Transaction): Observable<any> {
     const url = `${this.rentalUrl}/rental/collect`;
-    return this.http.put(url, rental, httpOptions).pipe(
-      tap(_ => this.log('Success', `updated Rental id=${rental.id}`)),
+    return this.http.put(url, transaction, httpOptions).pipe(
+      tap(_ => this.log('Success', `updated Rental id=${transaction.id}`)),
       catchError(this.handleError<any>('collectVehicleRental'))
     );
   }

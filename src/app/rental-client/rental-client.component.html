@@ -8,6 +8,7 @@
     <th i18n="datetableRow| @@ownerCuil">Cuil del titular</th>
     <th i18n="datetableRow| @@clientCuil">Cuil del cliente</th>
     <th i18n="datetableRow| @@status">Status</th>
+    <th i18n="datetableRow| @@details">Details</th>
 <!--    <th i18n="datetableRow| @@delete">Delete</th>  -->
   </tr>
 </thead>
@@ -19,9 +20,15 @@
     <td>{{ rental.ownerCuil }}</td>
     <td>{{ rental.clientCuil }}</td>
     <td>{{ rental.state }}</td>
+     <td><button (click)="details(rental)">Details </button>
 
 <!--    <td><button (click)="">Delete </button>  -->
     <!-- </td> -->
   </tr>
 </tbody>
 </table>
+
+<div *ngIf="rentalAccept">
+  <div>
+  <app-rental-detail [rental]="rentalView"></app-rental-detail>
+</div>

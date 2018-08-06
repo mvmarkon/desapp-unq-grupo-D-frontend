@@ -10,7 +10,14 @@
   <div><span>clientCuil: </span>{{rentalView.clientCuil}}</div>
   <div><span>vehicleID: </span>{{rentalView.vehicleID}}</div>
 </div>
-    <div>
-    <button (click)="confirm(rentalView,10)">Confirm</button>
-    <button (click)="cancel(rentalView,10)">Cancel</button>
-  </div>
+    <div *ngIf="isWaitConfirm">
+          <button (click)="confirm(rentalView,10)">Confirm</button>
+          <button (click)="cancel(rentalView,10)">Cancel</button>
+    </div>
+
+    <div *ngIf="isConfirm ||  ! isOwner; else isConfirmOwner">
+            <button (click)="in_use(rentalView)">In_Use</button>
+    </div>
+    <ng-template #isConfirmOwner>
+            <button (click)="cancel(rentalView,10)">Cancel</button>
+    </ng-template>

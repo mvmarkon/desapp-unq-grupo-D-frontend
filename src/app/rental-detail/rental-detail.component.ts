@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Rental } from '../models/rental';
 import { Transaction } from '../models/transaction';
 import { RentalService } from '../services/rental.service';
-
+import { UserService } from '../services/user.service'
 
 @Component({
   selector: 'app-rental-detail',
@@ -15,11 +15,15 @@ import { RentalService } from '../services/rental.service';
 export class RentalDetailComponent implements OnInit {
 
   @Input() rental: Rental;
-  rentalView: Rental;
+  rentalView;
   transaction: Transaction;
+  isOwner;
+  isConfirm;
+  isWaitConfirm;
   constructor(
     private route: ActivatedRoute,
     private rentalService: RentalService,
+    private userService: UserService,
     private location: Location
   ) {}
 
@@ -58,8 +62,23 @@ export class RentalDetailComponent implements OnInit {
     });
   }
 
+  in_use(rental){
+      this.rentalService.getTransaction(rental.id)
+      .subscribe(transaction => {
+        console.log(transaction)
+         this.rentalService.collectVehicleRental(transaction)
+        .subscribe(transactionEnd =>{
+           console.log(transactionEnd)
+         })
+      ;
+  })
+ }
+
   ngOnInit() {
     this.rentalView = this.rental;
-    console.log(this.rental);
+    this.isOwner = this.rental.ownerCuil == this.userService.getCurrentUserCuil();
+    this.isWaitConfirm = this.rentalView.state == "WAIT_CONFIRM";
+    this.isConfirm = this.rentalView.state == "CONFIRM";
+
   }
 }
