@@ -1,34 +1,35 @@
-<div *ngIf="rental" class="panel panel-default rentbox">
-  <div class="panel-heading">
-    <h4> Rental Details</h4>
+<div *ngIf="rental">
+  <h2>Detalles</h2>
+  <div>
+    <label>id: </label>
+    {{ rentalView.id }}
   </div>
-  <div class="panel-body">
-    <div class="form-horizontal">
-      <div>
-        <label>Id:   </label>{{ rentalView.id }}
-      </div>
-      <div>
-        <label>StartDate:  </label>{{ rentalView.startDate }}
-      </div>
-      <div>
-        <label>EndDate:   </label>{{rentalView.endDate}}</div>
-      <div>
-        <label>OwnerCuil:   </label>{{rentalView.ownerCuil}}</div>
-      <div>
-        <label>ClientCuil:   </label>{{rentalView.clientCuil}}</div>
-      <div>
-        <label>vehicleID:   </label>{{rentalView.vehicleID}}</div>
-      <div *ngIf="isWaitConfirm">
-        <button (click)="confirm(rentalView,10)" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>  Confirm</button>
-        <button (click)="cancel(rentalView,10)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Cancel</button>
-      </div>
-
-      <div *ngIf="isConfirm ||  ! isOwner; else isConfirmOwner">
-        <button (click)="in_use(rentalView)" class="btn btn-warning"><i class="glyphicon glyphicon-equalizer"></i>  In_Use</button>
-      </div>
-      <ng-template #isConfirmOwner>
-        <button (click)="cancel(rentalView,10)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Cancel</button>
-      </ng-template>
-    </div>
-  </div>
+  <div><span>startDate: {{ rentalView.startDate }} </span></div>
+  <div><span>endDate: </span>{{rentalView.endDate}}</div>
+  <div><span>ownerCuil: </span>{{rentalView.ownerCuil}}</div>
+  <div><span>clientCuil: </span>{{rentalView.clientCuil}}</div>
+  <div><span>vehicleID: </span>{{rentalView.vehicleID}}</div>
 </div>
+    <div *ngIf="isWaitConfirm || isOwner">
+          <button (click)="confirm(rentalView,10)">Confirm</button>
+          <button (click)="cancel(rentalView,10)">Cancel</button>
+    </div>
+
+    <div *ngIf="isConfirm &&  ! isOwner; else isConfirmOwner">
+            <button (click)="payRental(rentalView)">PayRental</button>
+    </div>
+    <ng-template #isConfirmOwner>
+            <button (click)="cancel(rentalView,10)">Cancel</button>
+    </ng-template>
+
+    <div *ngIf="isDone && ! isOwner ">
+      <button (click)="in_use(rentalView)">Take a Car</button>
+    </div>
+
+    <div *ngIf="isIn_USE && ! isOwner">
+      <button (click)="returnVehicle(rentalView)">Returned a Car</button>
+    </div>
+
+    <div *ngIf="isScored && isOwner">
+      <button (click)="returnVehicle(rentalView)">Scored User</button>
+    </div>
