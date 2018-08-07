@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Rental } from '../models/rental';
 import { Transaction } from '../models/transaction';
 import { RentalService } from '../services/rental.service';
-import { UserService } from '../services/user.service'
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-rental-detail',
@@ -75,40 +75,39 @@ export class RentalDetailComponent implements OnInit {
            console.log(transactionEnd);
          })
       ;
-  })
+  });
  }
 
- pay_rental(rental){
+ pay_rental(rental) {
    this.rentalService.getTransaction(rental.id)
    .subscribe(transaction => {
-     console.log(transaction)
+     console.log(transaction);
       this.rentalService.payRental(transaction)
-     .subscribe(transactionEnd =>{
-        console.log(transactionEnd)
+     .subscribe(transactionEnd => {
+        console.log(transactionEnd);
       })
    ;
 })
  }
 
-  returnVehicle(rental){
+  returnVehicle(rental) {
     this.rentalService.getTransaction(rental.id)
     .subscribe(transaction => {
-      console.log(transaction)
+      console.log(transaction);
        this.rentalService.returnedVehicleRental(transaction)
-      .subscribe(transactionEnd =>{
-         console.log(transactionEnd)
-       })
-    ;
- })
+      .subscribe(transactionEnd => {
+         console.log(transactionEnd);
+       });
+    });
   }
 
-  scoredUser(rental){
+  scoredUser(rental) {
     this.rentalService.getTransaction(rental.id)
     .subscribe(transaction => {
-      console.log(transaction)
+      console.log(transaction);
        this.rentalService.payRental(transaction)
-      .subscribe(transactionEnd =>{
-         console.log(transactionEnd)
+      .subscribe(transactionEnd => {
+         console.log(transactionEnd);
        })
     ;
  })
@@ -118,18 +117,18 @@ export class RentalDetailComponent implements OnInit {
 
   ngOnInit() {
     this.rentalView = this.rental;
-    this.setButtonShowDependsState()
+    this.setButtonShowDependsState();
   }
 
 
-  setButtonShowDependsState(){
+  setButtonShowDependsState() {
 
-    this.isOwner = this.rental.ownerCuil == this.userService.getCurrentUserCuil();
-    this.isWaitConfirm = this.rentalView.state == "WAIT_CONFIRM";
-    this.isConfirm = this.rentalView.state == "CONFIRM";
-    this.isDone = this.rentalView.state == "DONE"
-    this.isIn_USE = this.rentalView.state == "IN_USE"
-    this.isReturned = this.rentalView.state == "RETURNED"
-    this.isScored = this.rentalView.state == "SCORED"
+    this.isOwner = this.rental.ownerCuil === this.userService.getCurrentUserCuil();
+    this.isWaitConfirm = this.rentalView.state === 'WAIT_CONFIRM';
+    this.isConfirm = this.rentalView.state === 'CONFIRM';
+    this.isDone = this.rentalView.state === 'DONE';
+    this.isIn_USE = this.rentalView.state === 'IN_USE';
+    this.isReturned = this.rentalView.state === 'RETURNED';
+    this.isScored = this.rentalView.state === 'SCORED';
   }
 }
