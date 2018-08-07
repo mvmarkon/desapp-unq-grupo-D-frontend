@@ -1,49 +1,32 @@
 <div *ngIf="user" class="container-fluid">
 
   <h2> Detalles de {{ user.name | uppercase }}</h2>
-  <div>
-    <span>cuil: </span>{{user.cuil}}
-  </div>
+  <h4> SSN: {{user.cuil}}</h4>
+  <h4> Mail: {{user.email}}</h4>
   <div>
     <div class="row">
-      <label>nombre:
+      <label>Name:
         <input [(ngModel)]="user.name" placeholder="Nombre">
       </label>
     </div>
     <div class="row">
-      <label>email:
-        <input [(ngModel)]="user.email" placeholder="E-mail">
-      </label>
-    </div>
-    <div class="row">
-      <label>surname:
+      <label>Surname:
         <input [(ngModel)]="user.surname" placeholder="Segundo nombre">
       </label>
     </div>
     <div class="row">
-      <label>Direccion:
+      <label>Address:
         <input [(ngModel)]="user.address" placeholder="Direccion">
       </label>
     </div>
 
-    <!-- <div class="row">
-      <label>Credito:
-        <input [(ngModel)]="user.currentAccount.credits" placeholder="Direccion">
-      </label>
-    </div>
     <div>
-      <button class="btn btn-success" (click)="charge()" style="color:blue">
-        Cargar Credito
-      </button>
-    </div>-->
-    <div>
-      <button (click)="update()">Modificar</button>
-      <!-- <button (click)="goBack()">Volver</button> -->
-<!--      <app-demo></app-demo>  -->
+      <button (click)="update()" class="btn btn-success">
+          <i class="glyphicon glyphicon-floppy-save"></i>  Save</button>
     </div>
     <div *ngIf="user.vehicles">
       <h3>
-        Vehiculos de: {{ user.name | uppercase }}
+        Vehicles of: {{ user.name | uppercase }}
       </h3>
       <ul class="vehicles">
         <li *ngFor="let vehicle of user.vehicles">

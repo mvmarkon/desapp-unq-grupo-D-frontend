@@ -56,15 +56,15 @@
     <ng-template #ownerMode>
       <div>
         <button (click)="update()" class="btn btn-success">
-          <i class="glyphicon glyphicon-floppy-save"></i> Modificar</button>
-        <button (click)="goBack()" class="btn btn-primary">Volver</button>
+          <i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+        <button (click)="goBack()" class="btn btn-primary">Go back</button>
       </div>
     </ng-template>
     <ng-template #rentalMode>
       <div>
         <button (click)="rental()" class="btn btn-success">
           <i class="glyphicon glyphicon-floppy-save"></i> Rental</button>
-        <button (click)="goBack()" class="btn btn-primary">Volver</button>
+        <button (click)="goBack()" class="btn btn-primary">Go back</button>
       </div>
       <div>
         <app-create-rental [vehicleRent]="vehicle"></app-create-rental>
