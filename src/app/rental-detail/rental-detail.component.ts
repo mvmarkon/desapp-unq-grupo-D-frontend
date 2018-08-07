@@ -62,13 +62,13 @@ export class RentalDetailComponent implements OnInit {
     });
   }
 
-  in_use(rental){
+  in_use(rental) {
       this.rentalService.getTransaction(rental.id)
       .subscribe(transaction => {
-        console.log(transaction)
+        console.log(transaction);
          this.rentalService.collectVehicleRental(transaction)
-        .subscribe(transactionEnd =>{
-           console.log(transactionEnd)
+        .subscribe(transactionEnd => {
+           console.log(transactionEnd);
          })
       ;
   })
@@ -76,9 +76,9 @@ export class RentalDetailComponent implements OnInit {
 
   ngOnInit() {
     this.rentalView = this.rental;
-    this.isOwner = this.rental.ownerCuil == this.userService.getCurrentUserCuil();
-    this.isWaitConfirm = this.rentalView.state == "WAIT_CONFIRM";
-    this.isConfirm = this.rentalView.state == "CONFIRM";
+    this.isOwner = this.rental.ownerCuil === this.userService.getCurrentUserCuil();
+    this.isWaitConfirm = this.rentalView.state === 'WAIT_CONFIRM';
+    this.isConfirm = this.rentalView.state === 'CONFIRM';
 
   }
 }

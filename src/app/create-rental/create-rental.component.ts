@@ -50,7 +50,7 @@ export class CreateRentalComponent implements OnInit {
   createRental() {
     const starTime = (<HTMLInputElement>document.getElementById('begin-time')).value;
     const endTime = (<HTMLInputElement>document.getElementById('finish-time')).value;
-    this.calculateRentalCost()
+    this.calculateRentalCost();
     const res = {
       'ownerCuil' : this.ownerUser.cuil,
       'vehicleID' : this.vehicleRent.id,
@@ -66,23 +66,22 @@ export class CreateRentalComponent implements OnInit {
       });
     }
 
-    calculateDiffDays(dateEnd,dateBegin){
-      console.log(dateEnd)
-      var timeDiff = dateEnd-dateBegin
-      var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-      return daysDiff
+    calculateDiffDays(dateEnd, dateBegin) {
+      console.log(dateEnd);
+      const timeDiff = dateEnd - dateBegin;
+      const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      return daysDiff;
     }
-    calculateRentalCost(){
-      let starTime = (<HTMLInputElement>document.getElementById('begin-time')).value;
-      let endTime = (<HTMLInputElement>document.getElementById('finish-time')).value;
-      let dateEnd =  new Date(endTime)
-      let dateStart =  new Date(starTime)
+    calculateRentalCost() {
+      const starTime = (<HTMLInputElement>document.getElementById('begin-time')).value;
+      const endTime = (<HTMLInputElement>document.getElementById('finish-time')).value;
+      const dateEnd =  new Date(endTime);
+      const dateStart =  new Date(starTime);
 
-      if ( (starTime == '' || endTime == '' ) || dateEnd < dateStart ){
-        this.messageService.add('Warning','No esta cargada alguna fecho o la fecha de fin es anterior a la de comienzo' );
-      }
-      else{
-        this.rentalCost =this.vehicleRent.cost * this.calculateDiffDays(dateEnd,dateStart)
+      if ( (starTime === '' || endTime === '' ) || dateEnd < dateStart ) {
+        this.messageService.add('Warning', 'No esta cargada alguna fecho o la fecha de fin es anterior a la de comienzo' );
+      } else {
+        this.rentalCost = this.vehicleRent.cost * this.calculateDiffDays(dateEnd, dateStart);
       }
     }
 
