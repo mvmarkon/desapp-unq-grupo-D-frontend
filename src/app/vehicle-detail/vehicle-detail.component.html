@@ -1,34 +1,75 @@
-<div *ngIf="vehicle">
-  <h2>{{ vehicle.type | uppercase }} Detalles</h2>
-  <div><span>id: </span><{{vehicle.id}}></div>
-  <div><span>type: </span><input [(ngModel)]="vehicle.type"></div>
-  <div><span>capacity: </span><input [(ngModel)]="vehicle.capacity"></div>
-  <div><span>location: </span><input [(ngModel)]="vehicle.location"></div>
-  <div><span>retirementAddress: </span><input [(ngModel)]="vehicle.retirementAddress"></div>
-  <div><span>returnAddress: </span><input [(ngModel)]="vehicle.returnAddress"></div>
-  <div><span>description: </span><input [(ngModel)]="vehicle.description"></div>
-  <div><span>phone: </span><input [(ngModel)]="vehicle.phone"></div>
-  <div><span>cost: </span><input [(ngModel)]="vehicle.cost"></div>
-  <div><span>ownerCuil: </span>{{vehicle.ownerCuil}}</div>
-  <div> <img src="{{ vehicle.photo }}" width="150">  </div>
-
-  <ng-container
-     *ngIf="isOwner; then ownerMode; else rentalMode">
-  </ng-container>
-
-  <ng-template #ownerMode>
-    <div>
-      <button (click)="update()">Modificar</button>
+<div *ngIf="vehicle" style="text-align:center">
+  <h3>Vehicle details of: {{ vehicle.id }} </h3>
+  <h4>Type: {{vehicle.type}} Owner Cuil: {{vehicle.ownerCuil}}</h4>
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-3 col-xs-3 control-label" for="capacity">Capacity: </label>
+      <div class="col-sm-5 col-xs-5">
+        <input class="form-control" id="capacity" required [(ngModel)]="vehicle.capacity" name="capacity">
+      </div>
     </div>
-  </ng-template>
-  <ng-template #rentalMode>
-    <div>
-      <button (click)="rental()">Rental</button>
-      <button (click)="goBack()">Volver</button>
+    <div class="form-group">
+      <label class="col-sm-3 col-xs-3 control-label" for="location">Location: </label>
+      <div class="col-sm-5 col-xs-5">
+        <input class="form-control" id="location" required [(ngModel)]="vehicle.location" name="location">
+      </div>
     </div>
-    <div>
-      <app-create-rental [vehicleRent]="vehicle"></app-create-rental>
+    <div class="form-group">
+      <label class="col-sm-3 col-xs-3 control-label" for="retirementaddress">Retirement Adr.: </label>
+      <div class="col-sm-5 col-xs-5">
+        <input class="form-control" id="retirementaddress" required [(ngModel)]="vehicle.retirementAddress" name="retirementaddress">
+      </div>
     </div>
-  </ng-template>
+    <div class="form-group">
+      <label class="col-sm-3 col-xs-3 control-label" for="returnaddress">Return Adr.: </label>
+      <div class="col-sm-5 col-xs-5">
+        <input class="form-control" id="returnaddress" required [(ngModel)]="vehicle.returnAddress" name="returnaddress">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 col-xs-3 control-label" for="description">Description: </label>
+      <div class="col-sm-5 col-xs-5">
+        <input class="form-control" id="description" required [(ngModel)]="vehicle.description" name="description">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 col-xs-3 control-label" for="phone">Phone: </label>
+      <div class="col-sm-5 col-xs-5">
+        <input class="form-control" id="description" required [(ngModel)]="vehicle.phone" name="phone">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 col-xs-3 control-label" for="cost">Cost: </label>
+      <div class="col-sm-5 col-xs-5">
+        <input class="form-control" id="cost" required [(ngModel)]="vehicle.cost" name="cost">
+      </div>
+    </div>
 
+  </div>
+  <div style="text-align:center" class="">
+    <div class="form-group col-xs-12 col-sm-12">
+      <img src="{{ vehicle.photo }}" width="150">
+    </div>
+    <ng-container *ngIf="isOwner; then ownerMode; else rentalMode">
+    </ng-container>
+
+    <ng-template #ownerMode>
+      <div>
+        <button (click)="update()" class="btn btn-success">
+          <i class="glyphicon glyphicon-floppy-save"></i> Modificar</button>
+        <button (click)="goBack()" class="btn btn-primary">Volver</button>
+      </div>
+    </ng-template>
+    <ng-template #rentalMode>
+      <div>
+        <button (click)="rental()" class="btn btn-success">
+          <i class="glyphicon glyphicon-floppy-save"></i> Rental</button>
+        <button (click)="goBack()" class="btn btn-primary">Volver</button>
+      </div>
+      <div>
+        <app-create-rental [vehicleRent]="vehicle"></app-create-rental>
+      </div>
+    </ng-template>
+  </div>
 </div>
+

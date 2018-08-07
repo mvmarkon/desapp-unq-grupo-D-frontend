@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Vehicle } from '../models/vehicle';
 
 
-import { UserService } from '../services/user.service'
+import { UserService } from '../services/user.service';
 import { VehicleService } from '../services/vehicle.service';
-import { RentalService } from '../services/rental.service'
+import { RentalService } from '../services/rental.service';
 
 
 
@@ -21,8 +21,8 @@ export class VehicleDetailComponent implements OnInit {
   @Input() vehicleId: string;
   @Input() vehicle: Vehicle;
 
-  userCuil:String;
-  isOwner:boolean;
+  userCuil: String;
+  isOwner: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +34,7 @@ export class VehicleDetailComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userCuil = this.userService.getCurrentUserCuil()
+    this.userCuil = this.userService.getCurrentUserCuil();
     this.getVehicle();
   }
 
@@ -53,8 +53,8 @@ export class VehicleDetailComponent implements OnInit {
     this.vehicleService.getVehicle(id)
       .subscribe(fetchedVehicle => {
         this.vehicle = fetchedVehicle;
-        this.isOwner = (this.userCuil === this.vehicle.ownerCuil)
-      })
+        this.isOwner = (this.userCuil === this.vehicle.ownerCuil);
+      });
   }
 
 
