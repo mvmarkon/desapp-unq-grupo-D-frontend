@@ -1,7 +1,8 @@
 import { Component, OnInit, Input,TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Rental } from '../models/rental';
 import { Transaction } from '../models/transaction';
 import { RentalService } from '../services/rental.service';
@@ -37,8 +38,9 @@ export class RentalDetailComponent implements OnInit {
     private rentalService: RentalService,
     private userService: UserService,
     private vehicleService: VehicleService,
-
+    private spinnerService: Ng4LoadingSpinnerService,
     private modalService: BsModalService,
+    private router:Router,
     private location: Location
   ) {}
 
@@ -48,6 +50,7 @@ export class RentalDetailComponent implements OnInit {
   }
 
   confirm(rental) {
+    this.spinnerService.show();
     this.transaction = {
       id: rental.id,
       cost: this.rentalCost,
@@ -59,10 +62,13 @@ export class RentalDetailComponent implements OnInit {
     this.rentalService.createTransaction(this.transaction)
     .subscribe(transaction => {
     console.log(transaction);
+    this.spinnerService.hide();
+    this.router.navigate(['/dashboard']);
     });
 
     }
     cancel(rental) {
+      this.spinnerService.show();
       this.transaction = {
         id: rental.id,
         cost: this.rentalCost,
@@ -74,33 +80,42 @@ export class RentalDetailComponent implements OnInit {
       this.rentalService.rejectTransaction(this.transaction)
       .subscribe(transaction => {
       console.log(transaction);
+      this.spinnerService.hide();
+      this.router.navigate(['/dashboard']);
     });
   }
 
   in_use(rental) {
+    this.spinnerService.show();
       this.rentalService.getTransaction(rental.id)
       .subscribe(transaction => {
         console.log(transaction);
          this.rentalService.collectVehicleRental(transaction)
         .subscribe(transactionEnd => {
            console.log(transactionEnd);
+           this.spinnerService.hide();
+           this.router.navigate(['/dashboard']);
          })
       ;
   });
  }
 
  pay_rental(rental) {
+   this.spinnerService.show();
    this.rentalService.getTransaction(rental.id)
    .subscribe(transaction => {
      console.log(transaction);
       this.rentalService.payRental(transaction)
      .subscribe(transactionEnd => {
         console.log(transactionEnd);
+        this.spinnerService.hide();
+        this.router.navigate(['/dashboard']);
       });
 });
  }
 
   returnVehicle(rental) {
+    this.spinnerService.show();
     this.rentalService.getTransaction(rental.id)
     .subscribe(transaction => {
        this.rentalService.returnedVehicleRental(transaction)
@@ -108,12 +123,15 @@ export class RentalDetailComponent implements OnInit {
          console.log(transactionEnd);
          this.scoredUser(rental)
          this.scoreValue=null
+         this.spinnerService.hide();
+         this.router.navigate(['/dashboard']);
        });
     });
   }
 
   scoredUser(rental) {
     let self=this;
+    this.spinnerService.show();
     this.rentalService.getTransaction(rental.id)
     .subscribe(transaction => {
       console.log(transaction);
@@ -129,6 +147,8 @@ export class RentalDetailComponent implements OnInit {
        this.rentalService.createScore(score)
       .subscribe(score => {
          console.log(score);
+         this.spinnerService.hide();
+         this.router.navigate(['/dashboard']);
        })
     ;
  });
