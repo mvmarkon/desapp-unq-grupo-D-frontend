@@ -18,39 +18,46 @@
         <label>ClientCuil: </label>{{rentalView.clientCuil}}</div>
       <div>
         <label>vehicleID: </label>{{rentalView.vehicleID}}</div>
-
     </div>
     <div *ngIf="isWaitConfirm && isOwner">
-      <button (click)="confirm(rentalView,10)" class="btn btn-success">
+      <!-- <button (click)="confirm(rentalView,10)" class="btn btn-success"> -->
+        <button (click)="openConfirmation(confirmTemplate, confirm, rentalView)" class="btn btn-success">
         <i class="glyphicon glyphicon-ok"></i>Confirm</button>
       <button (click)="cancel(rentalView,10)" class="btn btn-danger">
         <i class="glyphicon glyphicon-remove"></i>Cancel</button>
     </div>
 
     <div *ngIf="isConfirm &&  ! isOwner">
-      <button (click)="pay_rental(rentalView)" class="btn btn-success">
+      <button (click)="openConfirmation(confirmTemplate, pay_rental, rentalView)" class="btn btn-success">
         <i class="glyphicon glyphicon-ok"></i>Pay Rental to cost : {{rentalCost}}</button>
     </div>
 
 
     <div *ngIf="isConfirm &&  isOwner">
-      <button (click)="cancel(rentalView,10)" class="btn btn-danger">
+      <button (click)="openConfirmation(confirmTemplate, cancel, rentalView)" class="btn btn-danger">
         <i class="glyphicon glyphicon-remove"></i>Cancel</button>
     </div>
 
     <div *ngIf="isDone && ! isOwner ">
-      <button (click)="in_use(rentalView)" class="btn btn-warning">
+      <button (click)="openConfirmation(confirmTemplate, in_use, rentalView)" class="btn btn-warning">
         <i class="glyphicon glyphicon-equalizer"></i>Take a Car</button>
     </div>
 
     <div *ngIf="isIn_USE && ! isOwner">
-      <button (click)="returnVehicle(rentalView)" class="btn btn-success">
+      <button (click)="openConfirmation(confirmTemplate, returnVehicle, rentalView)" class="btn btn-success">
         <i class="glyphicon glyphicon-ok"></i>Returned a Car</button>
     </div>
 
     <div *ngIf="isScored && isOwner">
-      <button (click)="returnVehicle(rentalView)" class="btn btn-warning">
+      <button (click)="openConfirmation(confirmTemplate, returnVehicle, rentalView)" class="btn btn-warning">
         <i class="glyphicon glyphicon-equalizer"></i>Scored User</button>
     </div>
   </div>
 </div>
+<ng-template #confirmTemplate>
+  <div class="modal-body text-center">
+    <p>Confirm operation?</p>
+    <button type="button" class="btn btn-default" (click)="continueOperation()" >Confirm</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Cancel</button>
+  </div>
+</ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,18 +8,24 @@ import { RentalService } from '../services/rental.service';
 import { UserService } from '../services/user.service';
 import { VehicleService } from '../services/vehicle.service';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 @Component({
   selector: 'app-rental-detail',
   templateUrl: './rental-detail.component.html',
   styleUrls: ['./rental-detail.component.css']
 })
 export class RentalDetailComponent implements OnInit {
+  operationFunction;
+  selectedRental;
   isScored: boolean;
   isReturned: boolean;
   isIn_USE: boolean;
   isDone: boolean;
   @Input() rental: Rental;
   rentalView;
+  modalRef: BsModalRef;
   transaction: Transaction;
   isOwner;
   isConfirm;
@@ -30,7 +36,8 @@ export class RentalDetailComponent implements OnInit {
     private rentalService: RentalService,
     private userService: UserService,
     private vehicleService: VehicleService,
-    private location: Location
+    private location: Location,
+    private modalService: BsModalService
   ) {}
 
 
@@ -39,7 +46,7 @@ export class RentalDetailComponent implements OnInit {
   }
 
   confirm(rental) {
-    console.log(this.rentalCost)
+    console.log(this.rentalCost);
     this.transaction = {
       id: rental.id,
       cost: this.rentalCost,
@@ -54,10 +61,10 @@ export class RentalDetailComponent implements OnInit {
     });
 
     }
-    cancel(rental, cost) {
+    cancel(rental) {
       this.transaction = {
         id: rental.id,
-        cost: cost,
+        cost: this.rentalCost,
         create: null,
         lastUpdate: null,
         state: null,
@@ -88,9 +95,8 @@ export class RentalDetailComponent implements OnInit {
       this.rentalService.payRental(transaction)
      .subscribe(transactionEnd => {
         console.log(transactionEnd);
-      })
-   ;
-})
+      });
+});
  }
 
   returnVehicle(rental) {
@@ -113,7 +119,7 @@ export class RentalDetailComponent implements OnInit {
          console.log(transactionEnd);
        })
     ;
- })
+ });
   }
 
 
@@ -122,11 +128,11 @@ export class RentalDetailComponent implements OnInit {
     this.rentalView = this.rental;
     this.setButtonShowDependsState();
     this.vehicleService.getVehicle(this.rental.vehicleID).subscribe(fetchedVehicle => {
-      console.log("entre")
-      console.log(fetchedVehicle)
-      this.rentalCost = fetchedVehicle.cost * this.calculateDiffDays(this.rentalView.endDate,this.rentalView.startDate);
-      console.log(this.rentalCost)
-  })
+      console.log('entre');
+      console.log(fetchedVehicle);
+      this.rentalCost = fetchedVehicle.cost * this.calculateDiffDays(this.rentalView.endDate, this.rentalView.startDate);
+      console.log(this.rentalCost);
+  });
 }
 
   setButtonShowDependsState() {
@@ -144,5 +150,21 @@ export class RentalDetailComponent implements OnInit {
     const timeDiff = dateEnd - dateBegin;
     const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     return daysDiff;
+  }
+
+  // continueOperation
+  // decline
+  openConfirmation(template: TemplateRef<any>, func: any, rent: Rental) {
+    this.operationFunction = func;
+    this.selectedRental = rent;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+  continueOperation(): void {
+    this.operationFunction(this.selectedRental);
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalRef.hide();
   }
 }

@@ -33,7 +33,7 @@ export class CreateRentalComponent implements OnInit {
               private vehicleService: VehicleService,
               private messageService: MessageService,
               private spinnerService: Ng4LoadingSpinnerService,
-              private router:Router,
+              private router: Router,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -69,7 +69,7 @@ export class CreateRentalComponent implements OnInit {
       rental => {
         console.log(rental);
         this.spinnerService.hide();
-        this.router.navigate(['/rental-client'])
+        this.router.navigate(['/rental-client']);
       });
     }
 
