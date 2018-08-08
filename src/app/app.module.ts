@@ -8,12 +8,14 @@ import { AgmCoreModule } from '@agm/core';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 
 
+
 import { DataTablesModule } from 'angular-datatables';
 import { ModalModule } from 'ngx-bootstrap';
 import { DemoComponent } from './demo/demo.component';
 import { registerLocaleData } from '@angular/common';
 import localeAR from '@angular/common/locales/es-AR';
 import { MyDatePickerModule } from 'mydatepicker';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
@@ -84,6 +86,7 @@ registerLocaleData(localeAR);
     MessagesComponent
   ],
   imports: [
+    Ng4LoadingSpinnerModule.forRoot(),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

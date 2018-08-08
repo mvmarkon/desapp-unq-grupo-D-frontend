@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { IMyDpOptions } from 'mydatepicker';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 import { RentalService } from '../services/rental.service';
 import { UserService } from '../services/user.service';
@@ -30,6 +32,8 @@ export class CreateRentalComponent implements OnInit {
               private userService: UserService,
               private vehicleService: VehicleService,
               private messageService: MessageService,
+              private spinnerService: Ng4LoadingSpinnerService,
+              private router:Router,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -48,6 +52,7 @@ export class CreateRentalComponent implements OnInit {
 
 
   createRental() {
+    this.spinnerService.show();
     const starTime = (<HTMLInputElement>document.getElementById('begin-time')).value;
     const endTime = (<HTMLInputElement>document.getElementById('finish-time')).value;
     this.calculateRentalCost();
@@ -63,11 +68,12 @@ export class CreateRentalComponent implements OnInit {
     this.rentalService.addRental(res).subscribe(
       rental => {
         console.log(rental);
+        this.spinnerService.hide();
+        this.router.navigate(['/rental-client'])
       });
     }
 
     calculateDiffDays(dateEnd, dateBegin) {
-      console.log(dateEnd);
       const timeDiff = dateEnd - dateBegin;
       const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       return daysDiff;
