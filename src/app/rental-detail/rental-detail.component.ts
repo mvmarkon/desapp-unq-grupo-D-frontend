@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input,TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
@@ -19,6 +19,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 export class RentalDetailComponent implements OnInit {
   operationFunction;
   selectedRental;
+  scoreValue: number;
   isScored: boolean;
   isReturned: boolean;
   isIn_USE: boolean;
@@ -36,8 +37,9 @@ export class RentalDetailComponent implements OnInit {
     private rentalService: RentalService,
     private userService: UserService,
     private vehicleService: VehicleService,
-    private location: Location,
-    private modalService: BsModalService
+
+    private modalService: BsModalService,
+    private location: Location
   ) {}
 
 
@@ -46,7 +48,6 @@ export class RentalDetailComponent implements OnInit {
   }
 
   confirm(rental) {
-    console.log(this.rentalCost);
     this.transaction = {
       id: rental.id,
       cost: this.rentalCost,
@@ -102,24 +103,41 @@ export class RentalDetailComponent implements OnInit {
   returnVehicle(rental) {
     this.rentalService.getTransaction(rental.id)
     .subscribe(transaction => {
-      console.log(transaction);
        this.rentalService.returnedVehicleRental(transaction)
       .subscribe(transactionEnd => {
          console.log(transactionEnd);
+         this.scoredUser(rental)
+         this.scoreValue=null
        });
     });
   }
 
   scoredUser(rental) {
+    let self=this;
     this.rentalService.getTransaction(rental.id)
     .subscribe(transaction => {
       console.log(transaction);
-       this.rentalService.payRental(transaction)
-      .subscribe(transactionEnd => {
-         console.log(transactionEnd);
+      let score = {
+        id:"",
+        value:self.scoreValue,
+        comment:'',
+        transactionID:transaction.id,
+        userCuil:transaction.rental.ownerCuil,
+        creator:transaction.rental.clientCuil
+      }
+      console.log(score)
+       this.rentalService.createScore(score)
+      .subscribe(score => {
+         console.log(score);
        })
     ;
  });
+  }
+
+  openModal() {
+  }
+  setScore(): void {
+    console.log(this.scoreValue)
   }
 
 
@@ -128,11 +146,10 @@ export class RentalDetailComponent implements OnInit {
     this.rentalView = this.rental;
     this.setButtonShowDependsState();
     this.vehicleService.getVehicle(this.rental.vehicleID).subscribe(fetchedVehicle => {
-      console.log('entre');
-      console.log(fetchedVehicle);
       this.rentalCost = fetchedVehicle.cost * this.calculateDiffDays(this.rentalView.endDate, this.rentalView.startDate);
       console.log(this.rentalCost);
   });
+
 }
 
   setButtonShowDependsState() {

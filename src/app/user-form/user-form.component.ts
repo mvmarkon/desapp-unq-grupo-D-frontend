@@ -30,7 +30,8 @@ export class UserFormComponent implements OnInit {
       email: '',
       surname: '',
       address: '',
-      vehicles: []
+      vehicles: [],
+      puntuations :[]
     };
   }
 

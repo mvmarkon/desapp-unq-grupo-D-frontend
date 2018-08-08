@@ -25,7 +25,8 @@ export class UsersComponent implements OnInit {
     email: '',
     surname: '',
     address: '',
-    vehicles: []
+    vehicles: [],
+    puntuations: []
   };
 
   constructor(

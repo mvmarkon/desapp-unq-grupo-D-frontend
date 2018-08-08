@@ -9,6 +9,7 @@ import { Rental } from '../models/rental';
 import { environment } from '../../environments/environment';
 import { MessageService } from '../services/message.service';
 import { Transaction } from '../models/transaction';
+import { Score } from '../models/score';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -106,6 +107,15 @@ export class RentalService {
       catchError(this.handleError<any>('returnedVehicleRental'))
     );
   }
+
+  createScore (score: Score): Observable<any> {
+     const url = `${this.rentalUrl}/score`;
+     return this.http.post(url, score, httpOptions).pipe(
+       tap(_ => this.log('Success', `updated Rental id=${score.id}`)),
+       catchError(this.handleError<any>('returnedVehicleRental'))
+     );
+   }
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
