@@ -6,6 +6,7 @@ import { Rental } from '../models/rental';
 import { Transaction } from '../models/transaction';
 import { RentalService } from '../services/rental.service';
 import { UserService } from '../services/user.service';
+import { VehicleService } from '../services/vehicle.service';
 
 @Component({
   selector: 'app-rental-detail',
@@ -17,17 +18,18 @@ export class RentalDetailComponent implements OnInit {
   isReturned: boolean;
   isIn_USE: boolean;
   isDone: boolean;
-
   @Input() rental: Rental;
   rentalView;
   transaction: Transaction;
   isOwner;
   isConfirm;
   isWaitConfirm;
+  rentalCost;
   constructor(
     private route: ActivatedRoute,
     private rentalService: RentalService,
     private userService: UserService,
+    private vehicleService: VehicleService,
     private location: Location
   ) {}
 
@@ -36,10 +38,11 @@ export class RentalDetailComponent implements OnInit {
     this.location.back();
   }
 
-  confirm(rental, cost) {
+  confirm(rental) {
+    console.log(this.rentalCost)
     this.transaction = {
       id: rental.id,
-      cost: cost,
+      cost: this.rentalCost,
       create: null,
       lastUpdate: null,
       state: null   ,
@@ -118,8 +121,13 @@ export class RentalDetailComponent implements OnInit {
   ngOnInit() {
     this.rentalView = this.rental;
     this.setButtonShowDependsState();
-  }
-
+    this.vehicleService.getVehicle(this.rental.vehicleID).subscribe(fetchedVehicle => {
+      console.log("entre")
+      console.log(fetchedVehicle)
+      this.rentalCost = fetchedVehicle.cost * this.calculateDiffDays(this.rentalView.endDate,this.rentalView.startDate);
+      console.log(this.rentalCost)
+  })
+}
 
   setButtonShowDependsState() {
 
@@ -130,5 +138,11 @@ export class RentalDetailComponent implements OnInit {
     this.isIn_USE = this.rentalView.state === 'IN_USE';
     this.isReturned = this.rentalView.state === 'RETURNED';
     this.isScored = this.rentalView.state === 'SCORED';
+  }
+
+  calculateDiffDays(dateEnd, dateBegin) {
+    const timeDiff = dateEnd - dateBegin;
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    return daysDiff;
   }
 }

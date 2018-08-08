@@ -25,7 +25,7 @@
         <input type="date" id="finish-time"  (blur)="calculateRentalCost()" >
       </div>
 
-      <div>
+      <div *ngIf="rentalCost">
         <label> Total Cost: </label>
           {{rentalCost}}
       </div>
